@@ -87,28 +87,19 @@ export default async function LearnPage({
 
       {/* ===== HERO ===== */}
       <section className="border-b border-line bg-[#f5f3ec]">
-        <div className={`${container} py-20 sm:py-24`}>
+        <div className={`${container} py-16 sm:py-20`}>
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 text-forest-mid">
               <Sparkles className="size-5" strokeWidth={1.6} aria-hidden />
               <p className={`${kicker}`}>Knowledge hub</p>
             </div>
-            <h1 className="mt-5 text-[clamp(2.6rem,5vw,4.6rem)] font-[430] leading-[1] tracking-[-0.05em] text-ink">
+            <h1 className="mt-5 text-[clamp(1.8rem,3.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
               Pet Supplement Formulation &amp; Sourcing Guides
             </h1>
-            <p className="mt-6 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
+            <p className="mt-5 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
               Vet-reviewed, source-cited guides for brand owners, distributors and retail teams —
               covering ingredient evidence, dosage forms, OEM/ODM development and GMP/SQF compliance.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="/shop#catalog" className={btn.primary}>
-                Review market-ready products
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link href="/private-label#inquiry" className={btn.outline}>
-                Start a product brief
-              </Link>
-            </div>
           </div>
         </div>
       </section>

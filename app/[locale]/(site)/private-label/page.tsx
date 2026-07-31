@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Factory,
   FlaskConical,
+  Layers,
   Mail,
   MessageSquare,
   PackageCheck,
@@ -68,47 +69,19 @@ export default async function PrivateLabelPage({
         }}
       />
 
-      <section className="relative min-h-[700px] overflow-hidden border-b border-line bg-forest-deep">
-        <Image
-          src="/images/b2b/oem-technical-review.png"
-          alt="Illustrative technical OEM meeting for a pet supplement development project"
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0e2419]/95 via-[#0e2419]/76 to-[#0e2419]/20" />
-        <div className="relative mx-auto flex min-h-[700px] max-w-7xl items-center px-5 py-24 sm:px-8 lg:px-10">
-          <div className="max-w-3xl text-white">
-            <p className="b2b-kicker text-amber-soft">{t.hero.kicker}</p>
-            <h1 className="mt-5 text-[clamp(3rem,6.4vw,6rem)] font-[430] leading-[0.96] tracking-[-0.055em]">
+      <section className="border-b border-line bg-[#f5f3ec]">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-3 text-forest-mid">
+              <Layers className="size-5" strokeWidth={1.6} aria-hidden />
+              <p className="b2b-kicker">{t.hero.kicker}</p>
+            </div>
+            <h1 className="mt-5 text-[clamp(1.8rem,3.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
               {t.hero.title}
             </h1>
-            <p className="mt-7 max-w-2xl text-[1.05rem] leading-8 text-white/72">
+            <p className="mt-5 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
               {t.hero.subtitle}
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="#inquiry" className="b2b-btn-light">
-                {t.hero.ctaSubmit}
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link href="/shop#catalog" className="b2b-btn-dark-outline">
-                {t.hero.ctaReview}
-              </Link>
-            </div>
-            <dl className="mt-12 grid max-w-2xl grid-cols-2 border-l border-t border-white/20 sm:grid-cols-4">
-              {[
-                [t.hero.stat1Value, t.hero.stat1Label],
-                [t.hero.stat2Value, t.hero.stat2Label],
-                [t.hero.stat3Value, t.hero.stat3Label],
-                [t.hero.stat4Value, t.hero.stat4Label],
-              ].map(([value, label]) => (
-                <div key={label} className="border-b border-r border-white/20 p-4">
-                  <dd className="text-lg font-semibold">{value}</dd>
-                  <dt className="mt-1 text-[0.68rem] leading-4 text-white/50">{label}</dt>
-                </div>
-              ))}
-            </dl>
           </div>
         </div>
       </section>

@@ -178,57 +178,20 @@ export default async function QualityPage({
       />
 
       <section className="border-b border-line bg-[#f5f3ec]">
-        <div className="mx-auto grid max-w-[1480px] lg:grid-cols-[0.84fr_1.16fr]">
-          <div className="flex flex-col justify-center px-5 py-20 sm:px-8 lg:px-12 xl:px-16">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <div className="max-w-3xl">
             <div className="flex items-center gap-3 text-forest-mid">
               <ShieldCheck className="size-5" strokeWidth={1.6} aria-hidden />
-              <p className="b2b-kicker">Quality & certification evidence</p>
+              <p className="b2b-kicker">Quality &amp; certification evidence</p>
             </div>
-            <h1 className="mt-5 text-[clamp(2.8rem,5.6vw,5.5rem)] font-[430] leading-[0.98] tracking-[-0.052em] text-ink">
+            <h1 className="mt-5 text-[clamp(1.8rem,3.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
               Quality claims backed by records buyers can verify.
             </h1>
-            <p className="mt-6 text-[1.02rem] leading-8 text-ink-soft">
+            <p className="mt-5 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
               Review the current GMP audit recognition and SQF Pet Food Manufacturing certificate
               issued for Taizhou Beno Biotech Co., Ltd., then use the quality framework below to
               plan project-specific due diligence.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="#certificates" className="b2b-btn-primary">
-                Open the certificate registry
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link href="/factory" className="b2b-btn-secondary">
-                Review the factory
-              </Link>
-            </div>
-          </div>
-
-          <div className="relative min-h-[470px] border-l border-line lg:min-h-[700px]">
-            <Image
-              src="/images/b2b/quality-audit-review.png"
-              alt="Illustrative quality auditor reviewing manufacturing records in a pet supplement facility"
-              fill
-              priority
-              className="object-cover"
-              sizes="(min-width: 1024px) 58vw, 100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#10271d]/50 via-transparent to-transparent" />
-            <div className="absolute inset-x-5 bottom-5 grid grid-cols-2 border border-white/25 bg-[#10271d]/90 text-white backdrop-blur-sm sm:inset-x-8">
-              <div className="border-r border-white/20 p-5">
-                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-white/50">
-                  GMP audit
-                </p>
-                <p className="mt-2 text-xl font-semibold">86% score</p>
-                <p className="mt-1 text-xs text-white/55">Valid to 14 Jun 2027</p>
-              </div>
-              <div className="p-5">
-                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-white/50">
-                  SQF
-                </p>
-                <p className="mt-2 text-xl font-semibold">Edition 9</p>
-                <p className="mt-1 text-xs text-white/55">Valid to 28 Aug 2027</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>

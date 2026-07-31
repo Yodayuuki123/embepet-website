@@ -78,48 +78,18 @@ export default async function FactoryPage({
       />
 
       <section className="border-b border-line bg-[#f5f3ec]">
-        <div className="mx-auto grid max-w-[1480px] lg:grid-cols-[0.72fr_1.28fr]">
-          <div className="flex flex-col justify-center px-5 py-20 sm:px-8 lg:px-12 xl:px-16">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <div className="max-w-3xl">
             <div className="flex items-center gap-3 text-forest-mid">
               <Factory className="size-5" strokeWidth={1.6} aria-hidden />
               <p className="b2b-kicker">{t.hero.kicker}</p>
             </div>
-            <h1 className="mt-5 text-[clamp(2.8rem,5.4vw,5.4rem)] font-[430] leading-[0.98] tracking-[-0.052em] text-ink">
+            <h1 className="mt-5 text-[clamp(1.8rem,3.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
               {t.hero.title}
             </h1>
-            <p className="mt-6 text-[1.02rem] leading-8 text-ink-soft">
+            <p className="mt-5 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
               {t.hero.subtitle}
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="/private-label#inquiry" className="b2b-btn-primary">
-                {t.hero.ctaDiscuss}
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link href="/science" className="b2b-btn-secondary">
-                {t.hero.ctaQuality}
-              </Link>
-            </div>
-          </div>
-          <div className="relative min-h-[470px] border-l border-line lg:min-h-[700px]">
-            <Image
-              src="/images/b2b/factory-extrusion-line.png"
-              alt="Illustrative view of industrial pet supplement extrusion equipment"
-              fill
-              priority
-              className="object-cover"
-              sizes="(min-width: 1024px) 64vw, 100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#10271d]/45 via-transparent to-transparent" />
-            <div className="absolute bottom-0 right-0 grid grid-cols-2 border-l border-t border-white/25 bg-forest-deep/92 text-white backdrop-blur-sm">
-              <div className="border-r border-white/20 p-5 sm:p-6">
-                <p className="text-2xl font-semibold">3,000 m²</p>
-                <p className="mt-1 text-[0.68rem] text-white/55">{t.hero.badge1Label}</p>
-              </div>
-              <div className="p-5 sm:p-6">
-                <p className="text-2xl font-semibold">3 lines</p>
-                <p className="mt-1 text-[0.68rem] text-white/55">{t.hero.badge2Label}</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>

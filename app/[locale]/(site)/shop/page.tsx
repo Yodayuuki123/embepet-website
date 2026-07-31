@@ -8,6 +8,7 @@ import {
   FileInput,
   PackageCheck,
   Search,
+  ShoppingBag,
 } from "lucide-react";
 import { absoluteUrl, metaWithLocale, faqJsonLd } from "@/lib/seo";
 import { B2B_CATALOG, USD_CNY_RATE } from "@/lib/b2b-catalog";
@@ -163,41 +164,18 @@ export default async function ProductPortfolioPage({
       />
 
       <section className="border-b border-line bg-[#f5f3ec]">
-        <div className="mx-auto grid max-w-[1480px] lg:grid-cols-[1.08fr_0.92fr]">
-          <div className="relative min-h-[430px] border-r border-line lg:min-h-[610px]">
-            <Image
-              src="/images/b2b/wholesale-buyer-review.png"
-              alt="Illustrative B2B buyer reviewing a pet supplement sourcing range"
-              fill
-              priority
-              className="object-cover"
-              sizes="(min-width: 1024px) 56vw, 100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#10271d]/25" />
-            <div className="absolute bottom-0 left-0 border-r border-t border-white/25 bg-forest-deep px-6 py-5 text-white">
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-white/50">
-                {t.hero.badgeLabel}
-              </p>
-              <p className="mt-1 text-2xl font-semibold">{t.hero.badgeValue}</p>
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-3 text-forest-mid">
+              <ShoppingBag className="size-5" strokeWidth={1.6} aria-hidden />
+              <p className="b2b-kicker">{t.hero.kicker}</p>
             </div>
-          </div>
-          <div className="flex flex-col justify-center px-5 py-16 sm:px-8 lg:px-12 xl:px-16">
-            <p className="b2b-kicker text-forest-mid">{t.hero.kicker}</p>
-            <h1 className="mt-5 text-[clamp(2.7rem,5.2vw,5rem)] font-[440] leading-[0.98] tracking-[-0.05em] text-ink">
+            <h1 className="mt-5 text-[clamp(1.8rem,3.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
               {t.hero.title}
             </h1>
-            <p className="mt-6 text-[1.02rem] leading-8 text-ink-soft">
+            <p className="mt-5 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
               {t.hero.subtitle}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="#catalog" className="b2b-btn-primary">
-                {t.hero.ctaBrowse}
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link href="/private-label#inquiry" className="b2b-btn-secondary">
-                {t.hero.ctaQuote}
-              </Link>
-            </div>
           </div>
         </div>
       </section>
