@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "@/components/site/A";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { metaWithLocale, breadcrumbJsonLd, absoluteUrl } from "@/lib/seo";
 import JsonLd from "@/components/site/JsonLd";
 import { articlesByDate } from "@/lib/news";
-import { container, section, kicker, btn, cardHover } from "@/components/b2b/kit";
+import { container, section, kicker, btn } from "@/components/b2b/kit";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   return metaWithLocale(params, {
@@ -17,7 +17,11 @@ export function generateMetadata({ params }: { params: Promise<{ locale: string 
 }
 
 function dateLabel(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  const d = new Date(iso);
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const yyyy = d.getFullYear();
+  return `${dd}.${mm}.${yyyy}`;
 }
 
 const COVER_IMAGES: Record<string, string> = {
@@ -56,7 +60,7 @@ export default function NewsPage() {
       {/* ===== HERO ===== */}
       <section className="border-b border-line bg-[#f5f3ec]">
         <div className={`${container} py-12 sm:py-16`}>
-          <p className={`${kicker} text-forest-mid`}>News &amp; Insights</p>
+          <p className={`${kicker} text-ink-soft`}>News &amp; Insights</p>
           <h1 className="mt-4 text-[clamp(1.7rem,3vw,2.6rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
             Industry Insights &amp; Manufacturing Updates
           </h1>
@@ -66,52 +70,46 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* ===== ARTICLES — 3-column equal grid ===== */}
+      {/* ===== ARTICLES ===== */}
       <section className={`${container} ${section}`}>
         {articles.length > 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {articles.map((a) => (
               <Link
                 key={a.slug}
                 href={`/news/${a.slug}`}
-                className={`${cardHover} group flex flex-col overflow-hidden border border-line bg-white`}
+                className="group flex flex-col"
               >
-                {/* Cover image — fixed 16:9 ratio */}
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  {COVER_IMAGES[a.slug] ? (
+                {/* Cover image — square-ish, no border radius */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#eaeee5]">
+                  {COVER_IMAGES[a.slug] && (
                     <Image
                       src={COVER_IMAGES[a.slug]}
                       alt={a.title}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
-                  ) : (
-                    <div className="absolute inset-0 bg-[#eaeee5]" />
                   )}
-                  {/* Category badge */}
-                  <span className="absolute left-4 top-4 bg-forest px-2.5 py-1 text-[0.6rem] font-bold uppercase tracking-[0.14em] text-white">
+                </div>
+
+                {/* Meta row: date + category tag */}
+                <div className="mt-4 flex items-center justify-between gap-3">
+                  <span className="text-[0.82rem] tabular-nums text-ink-soft">{dateLabel(a.date)}</span>
+                  <span className="border border-ink/20 px-2.5 py-0.5 text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-ink-soft">
                     {a.category}
                   </span>
                 </div>
 
-                {/* Text body */}
-                <div className="flex flex-1 flex-col border-t border-line p-6">
-                  <div className="flex items-center gap-2 text-[0.67rem] text-ink-soft">
-                    <Clock className="size-3" aria-hidden />
-                    <span>{a.readMinutes} min read</span>
-                    <span className="text-ink-soft/40">·</span>
-                    <span>{dateLabel(a.date)}</span>
-                  </div>
-                  <h2 className="mt-3 text-[1rem] font-semibold leading-snug tracking-[-0.015em] text-ink transition-colors group-hover:text-forest">
-                    {a.title}
-                  </h2>
-                  <p className="mt-2.5 line-clamp-3 text-[0.875rem] leading-6 text-ink-soft">{a.excerpt}</p>
-                  <span className="mt-auto flex items-center gap-1.5 pt-5 text-xs font-semibold text-forest">
-                    Read article
-                    <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" aria-hidden />
-                  </span>
-                </div>
+                {/* Title */}
+                <h2 className="mt-2.5 line-clamp-2 text-[1rem] font-semibold leading-snug tracking-[-0.01em] text-ink transition-colors group-hover:text-ink/70">
+                  {a.title}
+                </h2>
+
+                {/* Excerpt */}
+                <p className="mt-2 line-clamp-3 text-[0.875rem] leading-6 text-ink-soft">
+                  {a.excerpt}
+                </p>
               </Link>
             ))}
           </div>
