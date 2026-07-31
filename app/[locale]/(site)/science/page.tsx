@@ -264,22 +264,25 @@ export default async function QualityPage({
             </p>
           </div>
 
-          {/* 4 cert badge row */}
-          <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {/* 7 cert badge grid — 4 cols on lg, 3 on md, 2 on sm */}
+          <div className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
             {[
               { short: "GMP", name: "Eurofins GMP", score: "Score: 86%", valid: "Valid to Jun 2027", image: "/images/science/cert-gmp.jpg" },
               { short: "SQF", name: "SQF Food Safety", score: "Score: 88 — Good", valid: "Valid to Aug 2027", image: "/images/science/cert-sqf-food.jpg" },
               { short: "SQF", name: "SQF Quality Code", score: "Edition 9", valid: "Valid to Aug 2027", image: "/images/science/cert-sqf-quality.jpg" },
               { short: "FDA", name: "FDA Registration", score: "No. 10222600768", valid: "Valid to Dec 2026", image: "/images/science/cert-fda.png" },
+              { short: "FEED", name: "Feed Production License", score: "苏饲预（2026）12006", valid: "Valid to Apr 2031", image: "/images/science/cert-food-license.png" },
+              { short: "D-U-N-S", name: "D-U-N-S Registration", score: "No. 404129816", valid: "Dun & Bradstreet", image: "/images/science/cert-duns.png" },
+              { short: "FDA", name: "FDA Facility Screenshot", score: "FFR Verified", valid: "Valid to Dec 2026", image: "/images/science/cert-fda-screenshot.png" },
             ].map(({ short, name, score, valid, image }) => (
               <div key={name} className="group overflow-hidden rounded-lg border border-line bg-white shadow-sm transition-shadow hover:shadow-md">
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#f8f7f2]">
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#f8f7f2]">
                   <Image
                     src={image}
                     alt={`${name} certificate`}
                     fill
-                    className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
-                    sizes="(min-width: 640px) 25vw, 50vw"
+                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                   />
                 </div>
                 <div className="border-t border-line p-4">
@@ -294,68 +297,7 @@ export default async function QualityPage({
             ))}
           </div>
 
-          {/* Detailed cert records */}
-          <div className="mt-16 border-t border-line">
-            {certificates.map((certificate) => (
-              <article key={certificate.identifier + certificate.name} className="border-b border-line py-10">
-                <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="flex items-start gap-5">
-                    <div className="grid size-16 shrink-0 place-items-center border border-forest bg-forest text-sm font-bold tracking-[0.08em] text-white">
-                      {certificate.short}
-                    </div>
-                    <div>
-                      <div className="flex flex-wrap items-center gap-3">
-                        <p className="text-[0.66rem] font-semibold uppercase tracking-[0.13em] text-ink-soft">
-                          {certificate.issuer}
-                        </p>
-                        <span className="inline-flex items-center gap-1.5 border border-forest/25 bg-forest/5 px-2 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-forest">
-                          <span className="size-1.5 rounded-full bg-forest-mid" aria-hidden />
-                          {certificate.status}
-                        </span>
-                      </div>
-                      <h3 className="mt-3 text-xl font-semibold tracking-[-0.025em] text-ink">
-                        {certificate.name}
-                      </h3>
-                      <p className="mt-2 text-sm leading-6 text-ink-soft">{certificate.result}</p>
-                    </div>
-                  </div>
-                  <a
-                    href={certificate.pdf}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex min-h-11 shrink-0 items-center gap-2 text-xs font-semibold text-forest hover:underline"
-                  >
-                    View source record
-                    <ExternalLink className="size-3.5" aria-hidden />
-                  </a>
-                </div>
 
-                <p className="mt-5 max-w-3xl text-sm leading-7 text-ink-soft">{certificate.description}</p>
-
-                <dl className="mt-7 grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-4">
-                  {[
-                    ["Registered company", "Taizhou Beno Biotech Co., Ltd."],
-                    [certificate.identifierLabel, certificate.identifier],
-                    ["Audit date", certificate.audit],
-                    ["Valid through", certificate.validTo],
-                    ["Scope", certificate.scope],
-                  ].map(([label, value], index) => (
-                    <div
-                      key={label}
-                      className={`border-b border-r border-line p-4 ${
-                        index === 0 || index === 4 ? "sm:col-span-2" : ""
-                      }`}
-                    >
-                      <dt className="text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-ink-soft">
-                        {label}
-                      </dt>
-                      <dd className="mt-2 text-sm font-semibold leading-6 text-ink">{value}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -574,14 +516,16 @@ export default async function QualityPage({
               ))}
             </div>
           </div>
-          <div className="relative min-h-[480px] lg:min-h-auto">
-            <Image
-              src="/images/science/ai-lab-rd.jpg"
-              alt="Research and development laboratory for pet supplement formulation"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-            />
+          <div className="flex items-center justify-center px-5 py-12 sm:px-8 lg:px-10 lg:py-20">
+            <div className="relative w-full max-w-sm overflow-hidden rounded-xl shadow-lg" style={{aspectRatio: '3/4'}}>
+              <Image
+                src="/images/science/ai-lab-rd.jpg"
+                alt="Research and development laboratory for pet supplement formulation"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 30vw, 80vw"
+              />
+            </div>
           </div>
         </div>
       </section>
