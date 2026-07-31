@@ -347,19 +347,20 @@ export default async function QualityPage({
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
               Soft chews are the fastest-growing format in the global pet supplement market. Our high-speed extrusion line processes one tonne of soft chew mass per hour — unmatched by any comparable facility in China — enabling over 180 million units per month at consistent quality. Batch-to-batch consistency is maintained through precise temperature control, with in-process hardness and moisture checks at defined intervals.
             </p>
-            {/* Production spec table */}
-            <div className="mt-8 border border-line bg-white">
+            <div className="mt-8 space-y-3">
               {[
-                { label: "Line throughput", value: "1 tonne / hour" },
-                { label: "Monthly capacity", value: "180M+ units" },
-                { label: "Available shapes", value: "Heart, bone, paw, custom" },
-                { label: "Batch consistency", value: "Hardness, moisture, weight QC" },
-                { label: "Min. order qty", value: "500 bottles (industry avg: 3,000)" },
-                { label: "Lead time (standard)", value: "25–35 days after spec approval" },
-              ].map(({ label, value }, i) => (
-                <div key={label} className={`flex items-center gap-4 px-5 py-3 text-sm ${i !== 0 ? "border-t border-line" : ""}`}>
-                  <span className="w-44 shrink-0 text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-ink-soft">{label}</span>
-                  <span className="font-medium text-ink">{value}</span>
+                { icon: TrendingUp, title: "1 tonne / hour throughput", desc: "The fastest soft chew line in China, enabling short-run flexibility without cost penalties." },
+                { icon: Layers, title: "Heart, bone, paw & custom shapes", desc: "Multiple mold options available; custom shape development supported for brand differentiation." },
+                { icon: Check, title: "Stable texture across batches", desc: "Hardness, moisture, and weight uniformity tested at every production checkpoint." },
+              ].map(({ icon: Icon, title, desc }) => (
+                <div key={title} className="flex gap-4 rounded-lg border border-line bg-white p-5">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-forest/10">
+                    <Icon className="size-5 text-forest" strokeWidth={1.6} aria-hidden />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-ink">{title}</p>
+                    <p className="mt-1 text-xs leading-5 text-ink-soft">{desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -382,25 +383,18 @@ export default async function QualityPage({
               <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
                 Beyond soft chews, our facility produces the full range of pet supplement formats under the same GMP and SQF-certified quality system — eliminating the complexity of managing multiple contract manufacturers. Each dosage form has dedicated equipment and validated processes with documented SOPs.
               </p>
-              {/* Dosage form table */}
-              <div className="mt-8 border border-line">
-                <div className="grid grid-cols-3 border-b border-line bg-[#f8f7f2] px-5 py-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">
-                  <span>Dosage form</span>
-                  <span>Equipment</span>
-                  <span>Key control</span>
-                </div>
+              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {[
-                  { form: "Soft Chews", equip: "High-speed extrusion", ctrl: "Temp / hardness / moisture" },
-                  { form: "Tablets", equip: "Rotary press", ctrl: "Weight / hardness uniformity" },
-                  { form: "Pastes & Gels", equip: "Tube filling line", ctrl: "Fill weight / viscosity" },
-                  { form: "Liquids", equip: "SS vessel + filler", ctrl: "Mixing time / fill volume" },
-                  { form: "Powders", equip: "Closed blender", ctrl: "Blend uniformity / dust control" },
-                  { form: "Granules", equip: "Granulation system", ctrl: "Particle size / moisture" },
-                ].map(({ form, equip, ctrl }, i) => (
-                  <div key={form} className={`grid grid-cols-3 items-center px-5 py-3 text-sm ${i !== 0 ? "border-t border-line" : ""}`}>
-                    <span className="font-semibold text-ink">{form}</span>
-                    <span className="text-[0.82rem] text-ink-soft">{equip}</span>
-                    <span className="text-[0.82rem] text-ink-soft">{ctrl}</span>
+                  { name: "Soft Chews", note: "Core strength" },
+                  { name: "Tablets", note: "Rotary press" },
+                  { name: "Pastes & Gels", note: "Tube fill" },
+                  { name: "Liquids", note: "Bottle fill" },
+                  { name: "Powders", note: "Closed blend" },
+                  { name: "Granules", note: "Granulation" },
+                ].map(({ name, note }) => (
+                  <div key={name} className="rounded-md border border-line bg-[#f8f7f2] px-4 py-3">
+                    <p className="text-sm font-semibold text-ink">{name}</p>
+                    <p className="mt-0.5 text-xs text-ink-soft">{note}</p>
                   </div>
                 ))}
               </div>
