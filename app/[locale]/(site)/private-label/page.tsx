@@ -1,0 +1,254 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import {
+  ArrowRight,
+  Factory,
+  FlaskConical,
+  Mail,
+  MessageSquare,
+  PackageCheck,
+  Phone,
+  TestTube,
+} from "lucide-react";
+import { absoluteUrl, metaWithLocale } from "@/lib/seo";
+import { getSettings } from "@/lib/settings";
+import InquiryForm from "@/components/site/InquiryForm";
+import Link from "@/components/site/A";
+import JsonLd from "@/components/site/JsonLd";
+import ServiceOrbit, { type OrbitItem } from "@/components/b2b/ServiceOrbit";
+import { isLocale } from "@/lib/i18n/locales";
+import { getDict } from "@/lib/i18n";
+
+export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  return metaWithLocale(params, {
+    title: "Private Label Pet Supplements & OEM/ODM Manufacturing",
+    description:
+      "Build private-label and OEM/ODM pet supplements with stock-formula or custom-development routes, sampling, packaging configuration, controlled production and export coordination.",
+    path: "/private-label",
+  });
+}
+
+export default async function PrivateLabelPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : "en";
+  const dict = getDict(locale);
+  const t = dict.b2bPages.privateLabel;
+  const settings = await getSettings();
+
+  const dosageForms = [
+    { name: t.dosageForms.items[0], src: "/images/b2b/dosage-forms/01-soft-chews.png" },
+    { name: t.dosageForms.items[1], src: "/images/b2b/dosage-forms/03-tablets.png" },
+    { name: t.dosageForms.items[2], src: "/images/b2b/dosage-forms/05-pastes-and-gels.png" },
+    { name: t.dosageForms.items[3], src: "/images/b2b/dosage-forms/04-drops-and-oils.png" },
+    { name: t.dosageForms.items[4], src: "/images/b2b/dosage-forms/02-powders.png" },
+    { name: t.dosageForms.items[5], src: "/images/b2b/dosage-forms/06-freeze-dried.png" },
+  ];
+
+  return (
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Private label and OEM/ODM pet supplement manufacturing",
+          serviceType: "Pet supplement contract manufacturing",
+          url: absoluteUrl("/en/private-label"),
+          provider: { "@id": `${absoluteUrl("/")}#manufacturer` },
+          areaServed: "Worldwide",
+          audience: {
+            "@type": "BusinessAudience",
+            audienceType: "Pet supplement brand owners, distributors and global sellers",
+          },
+          description:
+            "Stock-formula and custom-formula pet supplement manufacturing with sampling, packaging, production, quality review and export coordination.",
+        }}
+      />
+
+      <section className="relative min-h-[700px] overflow-hidden border-b border-line bg-forest-deep">
+        <Image
+          src="/images/b2b/oem-technical-review.png"
+          alt="Illustrative technical OEM meeting for a pet supplement development project"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0e2419]/95 via-[#0e2419]/76 to-[#0e2419]/20" />
+        <div className="relative mx-auto flex min-h-[700px] max-w-7xl items-center px-5 py-24 sm:px-8 lg:px-10">
+          <div className="max-w-3xl text-white">
+            <p className="b2b-kicker text-amber-soft">{t.hero.kicker}</p>
+            <h1 className="mt-5 text-[clamp(3rem,6.4vw,6rem)] font-[430] leading-[0.96] tracking-[-0.055em]">
+              {t.hero.title}
+            </h1>
+            <p className="mt-7 max-w-2xl text-[1.05rem] leading-8 text-white/72">
+              {t.hero.subtitle}
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link href="#inquiry" className="b2b-btn-light">
+                {t.hero.ctaSubmit}
+                <ArrowRight className="size-4" aria-hidden />
+              </Link>
+              <Link href="/shop#catalog" className="b2b-btn-dark-outline">
+                {t.hero.ctaReview}
+              </Link>
+            </div>
+            <dl className="mt-12 grid max-w-2xl grid-cols-2 border-l border-t border-white/20 sm:grid-cols-4">
+              {[
+                [t.hero.stat1Value, t.hero.stat1Label],
+                [t.hero.stat2Value, t.hero.stat2Label],
+                [t.hero.stat3Value, t.hero.stat3Label],
+                [t.hero.stat4Value, t.hero.stat4Label],
+              ].map(([value, label]) => (
+                <div key={label} className="border-b border-r border-white/20 p-4">
+                  <dd className="text-lg font-semibold">{value}</dd>
+                  <dt className="mt-1 text-[0.68rem] leading-4 text-white/50">{label}</dt>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      {/* 2 — Three services */}
+      <section className="border-b border-line bg-white py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+          <div className="text-center">
+            <p className="b2b-kicker text-forest-mid">{t.services.kicker}</p>
+            <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-semibold leading-[1.1] tracking-[-0.025em] text-ink">
+              {t.services.title}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[0.95rem] leading-7 text-ink-soft">
+              {t.services.subtitle}
+            </p>
+          </div>
+
+          <div className="mt-16">
+            <ServiceOrbit
+              items={[
+                { icon: "Factory", title: t.services.oemTitle, body: t.services.oemBody },
+                { icon: "FlaskConical", title: t.services.odmTitle, body: t.services.odmBody },
+                { icon: "Tag", title: t.services.plTitle, body: t.services.plBody },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 3 — Five-step cooperation process */}
+      <section className="border-b border-line bg-[#f8f7f2] py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+          <div className="text-center">
+            <p className="b2b-kicker text-forest-mid">{t.process.kicker}</p>
+            <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-semibold leading-[1.1] tracking-[-0.025em] text-ink">
+              {t.process.title}
+            </h2>
+          </div>
+
+          <ol className="relative mx-auto mt-16 max-w-5xl">
+            <span
+              className="absolute left-6 top-2 bottom-2 w-px bg-line lg:left-1/2 lg:-translate-x-1/2"
+              aria-hidden
+            />
+            {t.process.steps.map((step, index) => {
+              const icons = [MessageSquare, FlaskConical, TestTube, Factory, PackageCheck];
+              const Icon = icons[index] || MessageSquare;
+              const left = index % 2 === 0;
+              return (
+                <li
+                  key={step.title}
+                  className="relative pl-16 pb-10 last:pb-0 lg:grid lg:grid-cols-2 lg:gap-x-16 lg:pl-0"
+                >
+                  <span className="absolute left-6 top-1 z-10 flex size-12 -translate-x-1/2 items-center justify-center rounded-full bg-forest text-base font-bold text-white ring-4 ring-[#f8f7f2] lg:left-1/2">
+                    {index + 1}
+                  </span>
+                  <div
+                    className={`rounded-lg border border-line bg-white p-6 shadow-sm sm:p-7 ${
+                      left ? "lg:col-start-1 lg:text-right" : "lg:col-start-2"
+                    }`}
+                  >
+                    <div
+                      className={`flex items-center gap-2.5 ${
+                        left ? "lg:flex-row-reverse" : ""
+                      }`}
+                    >
+                      <Icon className="size-5 shrink-0 text-forest-mid" strokeWidth={1.6} aria-hidden />
+                      <h3 className="text-lg font-semibold text-ink">{step.title}</h3>
+                    </div>
+                    <p className="mt-3 text-[0.9rem] leading-7 text-ink-soft">{step.body}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </section>
+
+      {/* 4 — Product dosage forms */}
+      <section className="border-b border-line bg-[#f8f7f2] py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+          <div className="text-center">
+            <p className="b2b-kicker text-forest-mid">{t.dosageForms.kicker}</p>
+            <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-semibold leading-[1.1] tracking-[-0.025em] text-ink">
+              {t.dosageForms.title}
+            </h2>
+          </div>
+
+          <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3">
+            {dosageForms.map(({ name, src }) => (
+              <article
+                key={name}
+                className="group flex flex-col items-center rounded-lg border border-line bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              >
+                <div className="relative aspect-square w-full">
+                  <Image
+                    src={src}
+                    alt={`${name} pet supplement dosage form`}
+                    fill
+                    className="object-contain transition-transform duration-500 group-hover:scale-105"
+                    sizes="(min-width: 640px) 33vw, 50vw"
+                  />
+                </div>
+                <h3 className="mt-4 text-[0.95rem] font-semibold text-ink">{name}</h3>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="inquiry" className="scroll-mt-24 border-t border-line bg-[#e9eeea]">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-8 lg:grid-cols-[0.7fr_1.3fr] lg:px-10">
+          <div>
+            <p className="b2b-kicker text-forest-mid">{t.inquiry.kicker}</p>
+            <h2 className="b2b-heading mt-4">{t.inquiry.title}</h2>
+            <p className="mt-5 text-sm leading-7 text-ink-soft">
+              {t.inquiry.subtitle}
+            </p>
+            <div className="mt-8 border-t border-line">
+              <a
+                href={`mailto:${settings.b2bEmail}`}
+                className="flex min-h-14 items-center gap-3 border-b border-line py-3 text-sm font-semibold text-forest"
+              >
+                <Mail className="size-4" aria-hidden />
+                {settings.b2bEmail}
+              </a>
+              <a
+                href={`tel:${settings.phone}`}
+                className="flex min-h-14 items-center gap-3 border-b border-line py-3 text-sm font-semibold text-forest"
+              >
+                <Phone className="size-4" aria-hidden />
+                {settings.phone}
+              </a>
+            </div>
+          </div>
+          <div className="border border-line bg-white p-6 sm:p-9">
+            <InquiryForm defaultType="private_label" />
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

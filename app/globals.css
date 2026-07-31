@@ -1,0 +1,574 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---------- 品牌色板：自然科学感 ---------- */
+  --color-cream: #faf6ec;
+  --color-parchment: #f3ecdb;
+  --color-sand: #e9dfc8;
+  --color-ink: #182720;
+  --color-ink-soft: #3d4a42;
+  --color-forest: #1f3d2b;
+  --color-forest-deep: #14291d;
+  --color-forest-mid: #3d7458;
+  --color-moss: #6c7f3b;
+  --color-amber: #c98a2d;
+  --color-amber-soft: #e8b95c;
+  --color-gold: #e0af5a;
+  --color-clay: #b4552d;
+  --color-plum: #6c4a72;
+  --color-sage: #7b8f6f;
+  --color-oat: #a8875a;
+  --color-cream-warm: #f3ecdb;
+  --color-line: rgb(24 39 32 / 0.12);
+
+  /* ---------- 字体 ---------- */
+  --font-display: "Fraunces Variable", "Georgia", serif;
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+
+  /* ---------- 动效缓动 ---------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-marquee-slow: marquee 70s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-late: float 8.5s ease-in-out -3s infinite;
+  --animate-aurora: aurora 24s ease-in-out infinite alternate;
+  --animate-pulse-soft: pulseSoft 2.4s ease-in-out infinite;
+  --animate-spin-slow: spin 28s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-1.2deg);
+    }
+    50% {
+      transform: translateY(-16px) rotate(1.2deg);
+    }
+  }
+  @keyframes aurora {
+    0% {
+      transform: translate(-6%, -4%) scale(1) rotate(0deg);
+    }
+    50% {
+      transform: translate(5%, 6%) scale(1.15) rotate(8deg);
+    }
+    100% {
+      transform: translate(-3%, 4%) scale(1.05) rotate(-6deg);
+    }
+  }
+  @keyframes pulseSoft {
+    0%,
+    100% {
+      opacity: 0.9;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 0.4;
+      transform: translateY(6px);
+    }
+  }
+}
+
+/* ---------- 基础 ---------- */
+
+html {
+  scroll-behavior: auto; /* Lenis 接管 */
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-amber-soft);
+  color: var(--color-forest-deep);
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+}
+
+/* Lenis 推荐样式 */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---------- 展示级排版（流式字号） ---------- */
+
+.display-hero {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6.2vw, 4.9rem);
+  line-height: 1.04;
+  font-weight: 590;
+  letter-spacing: -0.015em;
+  color: var(--color-ink);
+  font-variation-settings: "opsz" 96;
+}
+
+.display-1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  line-height: 1.08;
+  font-weight: 580;
+  letter-spacing: -0.012em;
+  color: var(--color-ink);
+  font-variation-settings: "opsz" 80;
+}
+
+.display-2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  line-height: 1.14;
+  font-weight: 570;
+  letter-spacing: -0.008em;
+  font-variation-settings: "opsz" 60;
+}
+
+.display-3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  line-height: 1.25;
+  font-weight: 580;
+}
+
+.eyebrow {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ---------- 质感层 ---------- */
+
+/* 胶片颗粒：SVG feTurbulence，几乎零成本 */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  opacity: 0.05;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.texture-lines {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 5px,
+    rgb(31 61 43 / 0.035) 5px,
+    rgb(31 61 43 / 0.035) 6px
+  );
+}
+
+/* 亮色区域颗粒（更淡） */
+.grain-light::after {
+  opacity: 0.035;
+}
+
+/* 横向渐隐遮罩（跑马灯两端） */
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* 卡片悬浮 */
+.card-lift {
+  transition: transform 0.55s var(--ease-out-expo), box-shadow 0.55s var(--ease-out-expo);
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -24px rgb(20 41 29 / 0.28);
+}
+
+/* 液态填充按钮：--liquid 定义填充色 */
+.btn-liquid {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.3s var(--ease-out-expo), color 0.4s var(--ease-out-expo);
+}
+.btn-liquid::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  background: var(--liquid, var(--color-amber));
+  border-radius: inherit;
+  transform: translateY(102%);
+  transition: transform 0.55s var(--ease-out-expo);
+}
+.btn-liquid:hover::before {
+  transform: translateY(0);
+}
+.btn-liquid:active {
+  transform: scale(0.97);
+}
+
+/* 文字下划线动效（正文内链接） */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-position: left calc(100% - 1px);
+  background-repeat: no-repeat;
+  transition: background-size 0.45s var(--ease-out-expo);
+}
+.link-underline:hover {
+  background-size: 100% 1.5px;
+}
+
+/* ---------- 按钮 ---------- */
+
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 9999px;
+  background: var(--color-forest);
+  color: var(--color-cream);
+  font-weight: 600;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.45s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
+}
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-amber);
+  border-radius: 9999px;
+  transform: translateY(101%);
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.btn-primary:hover {
+  color: var(--color-forest-deep);
+}
+.btn-primary:hover::before {
+  transform: translateY(0);
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 9999px;
+  border: 1.5px solid rgb(24 39 32 / 0.25);
+  color: var(--color-ink);
+  font-weight: 600;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s var(--ease-out-expo);
+}
+.btn-outline:hover {
+  border-color: var(--color-forest);
+  background: rgb(31 61 43 / 0.06);
+}
+.btn-outline:active {
+  transform: scale(0.97);
+}
+
+/* ---------- 链接下划线动效 ---------- */
+
+.link-lift {
+  position: relative;
+}
+.link-lift::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s var(--ease-out-expo);
+}
+.link-lift:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------- 首页序章遮罩 ---------- */
+
+.overture {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ---------- 滚动条 ---------- */
+
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-parchment);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-forest);
+  border-radius: 8px;
+  border: 3px solid var(--color-parchment);
+}
+
+/* ---------- 表单 ---------- */
+
+.field {
+  width: 100%;
+  border-radius: 0.9rem;
+  border: 1.5px solid rgb(24 39 32 / 0.16);
+  background: #fffdf7;
+  padding: 0.78rem 1rem;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--color-forest);
+  box-shadow: 0 0 0 4px rgb(31 61 43 / 0.1);
+}
+.field::placeholder {
+  color: rgb(61 74 66 / 0.5);
+}
+
+/* ---------- 文章排版 ---------- */
+
+.prose-pet {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--color-ink-soft);
+}
+.prose-pet h2 {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  font-size: 1.7rem;
+  line-height: 1.25;
+  font-weight: 600;
+  margin: 2.4rem 0 1rem;
+}
+.prose-pet h3 {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.8rem 0 0.7rem;
+}
+.prose-pet p {
+  margin: 1rem 0;
+}
+.prose-pet ul,
+.prose-pet ol {
+  margin: 1rem 0 1rem 1.4rem;
+  display: grid;
+  gap: 0.45rem;
+}
+.prose-pet ul {
+  list-style: disc;
+}
+.prose-pet ol {
+  list-style: decimal;
+}
+.prose-pet strong {
+  color: var(--color-ink);
+  font-weight: 650;
+}
+.prose-pet em {
+  font-style: italic;
+}
+.prose-pet a {
+  color: var(--color-clay);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-pet blockquote {
+  border-left: 3px solid var(--color-amber);
+  padding-left: 1.2rem;
+  margin: 1.6rem 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-ink);
+}
+.prose-pet table {
+  width: 100%;
+  margin: 1.4rem 0;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.prose-pet th {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  background: var(--color-parchment);
+  font-weight: 650;
+  color: var(--color-ink);
+}
+.prose-pet td {
+  padding: 0.6rem 0.8rem;
+  border-top: 1px solid rgb(24 39 32 / 0.08);
+}
+
+/* ---------- 减少动态偏好：全部动画退场 ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- B2B manufacturing storefront ---------- */
+
+.b2b-site {
+  background: #f8f7f2;
+  color: var(--color-ink);
+}
+
+.b2b-site h1,
+.b2b-site h2,
+.b2b-site h3,
+.b2b-site .font-display {
+  font-family: var(--font-sans);
+  font-variation-settings: normal;
+}
+
+.b2b-hero-title {
+  font-family: var(--font-sans);
+  font-size: clamp(2.6rem, 5.7vw, 5.65rem);
+  font-weight: 430;
+  line-height: 0.99;
+  letter-spacing: -0.052em;
+}
+
+.b2b-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-weight: 450;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.b2b-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.b2b-card {
+  border: 1px solid var(--color-line);
+  background: #fff;
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+.b2b-card:hover {
+  border-color: rgb(31 61 43 / 0.48);
+  background: #f1f4ef;
+}
+
+.b2b-btn-primary,
+.b2b-btn-secondary,
+.b2b-btn-light,
+.b2b-btn-dark-outline {
+  display: inline-flex;
+  min-height: 48px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border-radius: 2px;
+  padding: 0.75rem 1.15rem;
+  font-size: 0.88rem;
+  font-weight: 650;
+  line-height: 1.2;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.b2b-btn-primary {
+  border: 1px solid var(--color-forest);
+  background: var(--color-forest);
+  color: #fff;
+}
+
+.b2b-btn-primary:hover {
+  border-color: var(--color-forest-mid);
+  background: var(--color-forest-mid);
+}
+
+.b2b-btn-secondary {
+  border: 1px solid rgb(24 39 32 / 0.34);
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.b2b-btn-secondary:hover {
+  border-color: var(--color-forest);
+  background: rgb(31 61 43 / 0.06);
+}
+
+.b2b-btn-light {
+  border: 1px solid var(--color-amber-soft);
+  background: var(--color-amber-soft);
+  color: var(--color-forest-deep);
+}
+
+.b2b-btn-light:hover {
+  border-color: #f0c979;
+  background: #f0c979;
+}
+
+.b2b-btn-dark-outline {
+  border: 1px solid rgb(255 255 255 / 0.35);
+  background: transparent;
+  color: #fff;
+}
+
+.b2b-btn-dark-outline:hover {
+  border-color: #fff;
+  background: rgb(255 255 255 / 0.08);
+}
+
+.b2b-site :focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .b2b-hero-title {
+    font-size: clamp(2.45rem, 12.5vw, 4rem);
+  }
+}
