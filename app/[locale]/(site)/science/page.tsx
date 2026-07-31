@@ -17,6 +17,9 @@ import {
   Users,
   Star,
   Clock,
+  FileText,
+  Download,
+  ChevronRight,
 } from "lucide-react";
 import { absoluteUrl, metaWithLocale, faqJsonLd } from "@/lib/seo";
 import Link from "@/components/site/A";
@@ -38,14 +41,14 @@ const certificates = [
     short: "GMP",
     name: "Eurofins GMP Audit Recognition",
     pdf: "/certificates/taizhou-beno-gmp-2026.pdf",
-    issuer: "Eurofins",
+    issuer: "Eurofins Food Assurance Certification US, LLC",
     status: "Current",
     scope: "Good Manufacturing Practice audit recognition",
-    audit: "12–14 June 2026",
-    validTo: "14 June 2027",
+    audit: "12–14 Jun 2026",
+    validTo: "14 Jun 2027",
     identifierLabel: "Certificate ID",
     identifier: "ACCB8AAA422_1",
-    result: "Audit score: 86%",
+    result: "Score: 86%",
     image: "/images/science/cert-gmp.jpg",
     description: "Eurofins GMP audit recognition confirms that our facility meets Good Manufacturing Practice standards for pet supplement production. The on-site audit covered facility layout, equipment qualification, personnel hygiene, raw material controls, in-process monitoring, and documentation integrity. An 86% score on the first attempt reflects a mature quality management system that was already operating at international standards before the formal audit.",
   },
@@ -56,11 +59,11 @@ const certificates = [
     issuer: "SQFI / Eurofins Food Assurance Certification US, LLC",
     status: "Current",
     scope: "FSC 32 – Pet Premix food",
-    audit: "12–14 June 2026",
-    validTo: "28 August 2027",
+    audit: "12–14 Jun 2026",
+    validTo: "28 Aug 2027",
     identifierLabel: "Certificate / SIN",
     identifier: "105690",
-    result: "Edition 9 — Audit score: 88 — Rated: Good",
+    result: "Edition 9 — Score: 88 — Good",
     image: "/images/science/cert-sqf-food.jpg",
     description: "The SQF Food Safety Code Edition 9 is one of the most rigorous third-party food safety standards globally, recognized by the Global Food Safety Initiative (GFSI). Our certification under FSC 32 (Pet Premix food) was awarded after a three-day on-site audit by Eurofins Food Assurance Certification US, LLC. The 88-point score and 'Good' rating on an initial certification audit demonstrates that our HACCP plan, allergen management, foreign matter controls, and sanitation programs are fully operational and documented.",
   },
@@ -71,8 +74,8 @@ const certificates = [
     issuer: "SQFI / Eurofins Food Assurance Certification US, LLC",
     status: "Current",
     scope: "FSC 00 – Quality Management",
-    audit: "12–14 June 2026",
-    validTo: "28 August 2027",
+    audit: "12–14 Jun 2026",
+    validTo: "28 Aug 2027",
     identifierLabel: "Certificate / SIN",
     identifier: "105690",
     result: "Edition 9 — Quality Management System",
@@ -160,23 +163,23 @@ export default async function QualityPage({
         </div>
       </section>
 
-      {/* ─── MODULE 1: KEY STATS BAR ─── */}
+      {/* ─── MODULE 1: KEY SPECS BAR ─── */}
       <section className="border-b border-line bg-white">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <dl className="grid grid-cols-2 divide-x divide-y divide-line sm:grid-cols-3 lg:grid-cols-5 lg:divide-y-0">
             {[
-              { value: "2016", label: "Year Founded", sub: "Jiangsu, China" },
-              { value: "3,000 m²", label: "GMP Facility", sub: "Dedicated production" },
+              { value: "2016", label: "Year Founded", sub: "Taixing, Jiangsu" },
+              { value: "3,000 m²", label: "GMP Facility", sub: "2,000 m² production" },
               { value: "180M+", label: "Units / Month", sub: "Soft chew capacity" },
-              { value: "11 Yrs", label: "Safe Production", sub: "Zero incidents" },
-              { value: "500", label: "MOQ (bottles)", sub: "Industry avg: 3,000" },
+              { value: "11 Yrs", label: "Zero Incidents", sub: "Safe production record" },
+              { value: "500 MOQ", label: "Min. Order Qty", sub: "Industry avg: 3,000" },
             ].map(({ value, label, sub }) => (
-              <div key={label} className="flex flex-col items-center justify-center px-6 py-10 text-center">
-                <dd className="text-[clamp(1.8rem,3vw,2.6rem)] font-bold leading-none tracking-[-0.03em] text-forest">
+              <div key={label} className="flex flex-col justify-center px-6 py-8 text-left">
+                <dd className="text-[clamp(1.4rem,2.2vw,1.9rem)] font-bold leading-none tracking-[-0.03em] text-forest">
                   {value}
                 </dd>
-                <dt className="mt-3 text-sm font-semibold text-ink">{label}</dt>
-                <span className="mt-1 text-xs text-ink-soft">{sub}</span>
+                <dt className="mt-2 text-xs font-semibold uppercase tracking-[0.08em] text-ink">{label}</dt>
+                <span className="mt-1 text-[0.72rem] text-ink-soft">{sub}</span>
               </div>
             ))}
           </dl>
@@ -186,32 +189,36 @@ export default async function QualityPage({
       {/* ─── MODULE 2: FACILITY OVERVIEW ─── */}
       <section className="border-b border-line bg-[#f8f7f2]">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
-          <div className="px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+          <div className="px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
             <div className="flex items-center gap-3 text-forest-mid">
-              <Factory className="size-5" strokeWidth={1.6} aria-hidden />
-              <p className="b2b-kicker">Our facility</p>
+              <Factory className="size-4" strokeWidth={1.6} aria-hidden />
+              <p className="b2b-kicker">Facility overview</p>
             </div>
-            <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink">
+            <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
               A Purpose-Built GMP Factory in Jiangsu, China
             </h2>
-            <p className="mt-5 text-[0.97rem] leading-8 text-ink-soft">
+            <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
               Taizhou Beno Biotech Co., Ltd. was established in August 2016 in Taixing City, Jiangsu Province — one of China&apos;s most developed pharmaceutical and nutraceutical manufacturing corridors. Our 3,000 m² facility was designed from the ground up for pet supplement production, with 2,000 m² dedicated to GMP-compliant manufacturing and warehousing.
             </p>
-            <p className="mt-4 text-[0.97rem] leading-8 text-ink-soft">
-              The factory operates three independent production lines under a single-shift schedule of 30 trained production staff, six days per week. Physical separation between raw material receipt, ingredient preparation, mixing, forming, filling, packaging, and finished goods storage ensures that cross-contamination risks are controlled at the facility design level — not just through procedural controls.
+            <p className="mt-3 text-[0.93rem] leading-7 text-ink-soft">
+              The factory operates three independent production lines under a single-shift schedule of 30 trained production staff, six days per week. Physical separation between raw material receipt, ingredient preparation, mixing, forming, filling, packaging, and finished goods storage ensures cross-contamination risks are controlled at the facility design level.
             </p>
-            <p className="mt-4 text-[0.97rem] leading-8 text-ink-soft">
-              A second facility is currently under construction in Guangzhou to support growing demand from international OEM partners, with an operations center already established in Shenzhen to serve cross-border trade logistics and customer service.
+            <p className="mt-3 text-[0.93rem] leading-7 text-ink-soft">
+              A second facility is currently under construction in Guangzhou to support growing international OEM demand, with an operations center already established in Shenzhen for cross-border trade logistics.
             </p>
-            <div className="mt-10 grid grid-cols-3 gap-4 border-t border-line pt-8">
+            {/* Spec table */}
+            <div className="mt-8 border border-line bg-white">
               {[
-                { value: "3", label: "Production Lines" },
-                { value: "30", label: "Production Staff" },
-                { value: "3,000 m²", label: "Total Facility" },
-              ].map(({ value, label }) => (
-                <div key={label}>
-                  <p className="text-2xl font-bold tracking-[-0.02em] text-forest">{value}</p>
-                  <p className="mt-1 text-xs text-ink-soft">{label}</p>
+                { label: "Production lines", value: "3 independent lines" },
+                { label: "Production staff", value: "30 personnel (single shift)" },
+                { label: "Total facility area", value: "3,000 m²" },
+                { label: "GMP production area", value: "2,000 m²" },
+                { label: "Operating schedule", value: "6 days / week" },
+                { label: "Second facility", value: "Guangzhou (under construction)" },
+              ].map(({ label, value }, i) => (
+                <div key={label} className={`flex items-center gap-4 px-5 py-3 text-sm ${i !== 0 ? "border-t border-line" : ""}`}>
+                  <span className="w-44 shrink-0 text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-ink-soft">{label}</span>
+                  <span className="font-medium text-ink">{value}</span>
                 </div>
               ))}
             </div>
@@ -249,62 +256,78 @@ export default async function QualityPage({
       </section>
 
       {/* ─── MODULE 3: CERTIFICATIONS ─── */}
-      <section id="certificates" className="scroll-mt-24 border-b border-line bg-white py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-3 text-forest-mid">
-              <Award className="size-5" strokeWidth={1.6} aria-hidden />
-              <p className="b2b-kicker">International certifications</p>
+      <section id="certificates" className="scroll-mt-24 border-b border-line bg-white">
+        {/* Header bar — dark */}
+        <div className="border-b border-line bg-forest-deep px-5 py-10 sm:px-8 lg:px-10">
+          <div className="mx-auto max-w-7xl flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div className="flex items-center gap-3 text-amber-soft">
+                <Award className="size-4" strokeWidth={1.6} aria-hidden />
+                <p className="b2b-kicker text-amber-soft">Compliance &amp; certification records</p>
+              </div>
+              <h2 className="mt-3 text-[clamp(1.4rem,2.4vw,2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-white">
+                7 Independent Third-Party Certifications
+              </h2>
+              <p className="mt-2 max-w-2xl text-[0.88rem] leading-6 text-white/65">
+                All primary certifications issued by Eurofins Food Assurance Certification US, LLC following on-site audits in June 2026. Each record is independently verifiable through the issuing body&apos;s registry. Original PDFs available on request for procurement and regulatory teams.
+              </p>
             </div>
-            <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink">
-              Four Independent Third-Party Certifications
-            </h2>
-            <p className="mt-5 text-[0.97rem] leading-8 text-ink-soft">
-              All certifications were issued by Eurofins Food Assurance Certification US, LLC following on-site audits conducted in June 2026. Each certificate is independently verifiable through the issuing body&apos;s registry. Original PDF documents are available for download below and can be provided in full to procurement and regulatory teams on request.
-            </p>
+            <Link
+              href="/private-label#inquiry"
+              className="inline-flex shrink-0 cursor-pointer items-center gap-2 border border-white/25 bg-white/10 px-5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-white/20"
+            >
+              <Download className="size-3.5" aria-hidden />
+              Request document package
+            </Link>
           </div>
+        </div>
 
-          {/* 7 cert badge grid — 4 cols on lg, 3 on md, 2 on sm */}
-          <div className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+        {/* Cert grid */}
+        <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {[
-              { short: "GMP", name: "Eurofins GMP", score: "Score: 86%", valid: "Valid to Jun 2027", image: "/images/science/cert-gmp.jpg" },
-              { short: "SQF", name: "SQF Food Safety", score: "Score: 88 — Good", valid: "Valid to Aug 2027", image: "/images/science/cert-sqf-food.jpg" },
-              { short: "SQF", name: "SQF Quality Code", score: "Edition 9", valid: "Valid to Aug 2027", image: "/images/science/cert-sqf-quality.jpg" },
-              { short: "FDA", name: "FDA Registration", score: "No. 10222600768", valid: "Valid to Dec 2026", image: "/images/science/cert-fda.png" },
-              { short: "FEED", name: "Feed Production License", score: "苏饲预（2026）12006", valid: "Valid to Apr 2031", image: "/images/science/cert-food-license.png" },
-              { short: "D-U-N-S", name: "D-U-N-S Registration", score: "No. 404129816", valid: "Dun & Bradstreet", image: "/images/science/cert-duns.png" },
-              { short: "FDA", name: "FDA Facility Screenshot", score: "FFR Verified", valid: "Valid to Dec 2026", image: "/images/science/cert-fda-screenshot.png" },
-            ].map(({ short, name, score, valid, image }) => (
-              <div key={name} className="group overflow-hidden rounded-lg border border-line bg-white shadow-sm transition-shadow hover:shadow-md">
+              { short: "GMP", name: "Eurofins GMP", id: "ACCB8AAA422_1", valid: "Valid to Jun 2027", score: "Score: 86%", image: "/images/science/cert-gmp.jpg" },
+              { short: "SQF", name: "SQF Food Safety", id: "SIN 105690", valid: "Valid to Aug 2027", score: "Score: 88 — Good", image: "/images/science/cert-sqf-food.jpg" },
+              { short: "SQF", name: "SQF Quality Code", id: "SIN 105690", valid: "Valid to Aug 2027", score: "Edition 9", image: "/images/science/cert-sqf-quality.jpg" },
+              { short: "FDA", name: "FDA Registration", id: "No. 10222600768", valid: "Valid to Dec 2026", score: "FFR Verified", image: "/images/science/cert-fda.png" },
+              { short: "FEED", name: "Feed Production License", id: "苏饲预（2026）12006", valid: "Valid to Apr 2031", score: "Jiangsu Authority", image: "/images/science/cert-food-license.png" },
+              { short: "D-U-N-S", name: "D-U-N-S Registration", id: "No. 404129816", valid: "Dun & Bradstreet", score: "Global registry", image: "/images/science/cert-duns.png" },
+              { short: "FDA", name: "FDA Facility Record", id: "No. 10222600768", valid: "Valid to Dec 2026", score: "FFR Screenshot", image: "/images/science/cert-fda-screenshot.png" },
+            ].map(({ short, name, id, valid, score, image }) => (
+              <div key={name} className="group flex flex-col overflow-hidden border border-line bg-white transition-shadow hover:shadow-md">
                 <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#f8f7f2]">
                   <Image
                     src={image}
                     alt={`${name} certificate`}
                     fill
-                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                   />
                 </div>
                 <div className="border-t border-line p-4">
-                  <div className="inline-flex items-center rounded-sm bg-forest px-2 py-0.5 text-[0.6rem] font-bold tracking-[0.1em] text-white">
-                    {short}
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center bg-forest px-2 py-0.5 text-[0.6rem] font-bold tracking-[0.1em] text-white">
+                      {short}
+                    </span>
+                    <span className="flex size-1.5 rounded-full bg-forest-mid" title="Current" />
                   </div>
-                  <h3 className="mt-2 text-sm font-semibold text-ink">{name}</h3>
-                  <p className="mt-1 text-xs text-ink-soft">{score}</p>
-                  <p className="mt-0.5 text-xs text-forest-mid">{valid}</p>
+                  <p className="mt-2 text-[0.82rem] font-semibold text-ink">{name}</p>
+                  <p className="mt-1 font-mono text-[0.68rem] text-ink-soft">{id}</p>
+                  <div className="mt-2 flex items-center justify-between border-t border-line pt-2">
+                    <span className="text-[0.68rem] text-forest-mid">{valid}</span>
+                    <span className="text-[0.68rem] text-ink-soft">{score}</span>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-
-
         </div>
       </section>
 
       {/* ─── MODULE 4: SOFT CHEW ADVANTAGE ─── */}
       <section className="border-b border-line bg-[#f8f7f2]">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
-          <div className="relative min-h-[440px] lg:min-h-auto lg:order-last">
+          <div className="relative min-h-[400px] lg:min-h-auto lg:order-last">
             <Image
               src="/images/science/soft-chews-product.png"
               alt="Heart-shaped soft chew pet supplements produced at Beno Biotech"
@@ -313,34 +336,30 @@ export default async function QualityPage({
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
           </div>
-          <div className="px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+          <div className="px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
             <div className="flex items-center gap-3 text-forest-mid">
-              <Star className="size-5" strokeWidth={1.6} aria-hidden />
-              <p className="b2b-kicker">Core product advantage</p>
+              <TrendingUp className="size-4" strokeWidth={1.6} aria-hidden />
+              <p className="b2b-kicker">Production capability</p>
             </div>
-            <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink">
+            <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
               China&apos;s Fastest Soft Chew Production Line
             </h2>
-            <p className="mt-5 text-[0.97rem] leading-8 text-ink-soft">
-              Soft chews are the fastest-growing format in the global pet supplement market, driven by high palatability and ease of administration. Our high-speed production line processes one tonne of soft chew mass per hour — a throughput that is unmatched by any comparable facility in China — enabling us to produce over 180 million units per month at consistent quality.
+            <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
+              Soft chews are the fastest-growing format in the global pet supplement market. Our high-speed extrusion line processes one tonne of soft chew mass per hour — unmatched by any comparable facility in China — enabling over 180 million units per month at consistent quality. Batch-to-batch consistency is maintained through precise temperature control, with in-process hardness and moisture checks at defined intervals.
             </p>
-            <p className="mt-4 text-[0.97rem] leading-8 text-ink-soft">
-              Batch-to-batch consistency is maintained through precise temperature control during the extrusion and forming stages, with in-process hardness and moisture checks at defined intervals. The result is a product with stable texture, accurate active ingredient distribution, and reliable shelf life — critical requirements for brands selling into regulated markets such as the US, EU, and Australia.
-            </p>
-            <div className="mt-10 space-y-4">
+            {/* Production spec table */}
+            <div className="mt-8 border border-line bg-white">
               {[
-                { icon: TrendingUp, title: "1 tonne / hour throughput", desc: "The fastest soft chew line in China, enabling short-run flexibility without cost penalties." },
-                { icon: Layers, title: "Heart, bone, paw & custom shapes", desc: "Multiple mold options available; custom shape development supported for brand differentiation." },
-                { icon: Check, title: "Stable texture across batches", desc: "Hardness, moisture, and weight uniformity tested at every production checkpoint." },
-              ].map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="flex gap-4 rounded-lg border border-line bg-white p-5">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-forest/10">
-                    <Icon className="size-5 text-forest" strokeWidth={1.6} aria-hidden />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-ink">{title}</p>
-                    <p className="mt-1 text-xs leading-5 text-ink-soft">{desc}</p>
-                  </div>
+                { label: "Line throughput", value: "1 tonne / hour" },
+                { label: "Monthly capacity", value: "180M+ units" },
+                { label: "Available shapes", value: "Heart, bone, paw, custom" },
+                { label: "Batch consistency", value: "Hardness, moisture, weight QC" },
+                { label: "Min. order qty", value: "500 bottles (industry avg: 3,000)" },
+                { label: "Lead time (standard)", value: "25–35 days after spec approval" },
+              ].map(({ label, value }, i) => (
+                <div key={label} className={`flex items-center gap-4 px-5 py-3 text-sm ${i !== 0 ? "border-t border-line" : ""}`}>
+                  <span className="w-44 shrink-0 text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-ink-soft">{label}</span>
+                  <span className="font-medium text-ink">{value}</span>
                 </div>
               ))}
             </div>
@@ -349,40 +368,44 @@ export default async function QualityPage({
       </section>
 
       {/* ─── MODULE 5: DOSAGE FORMS ─── */}
-      <section className="border-b border-line bg-white py-20 sm:py-28">
+      <section className="border-b border-line bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-          <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr] lg:gap-20 lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:items-start">
             <div>
               <div className="flex items-center gap-3 text-forest-mid">
-                <Layers className="size-5" strokeWidth={1.6} aria-hidden />
+                <Layers className="size-4" strokeWidth={1.6} aria-hidden />
                 <p className="b2b-kicker">Production scope</p>
               </div>
-              <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink">
+              <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
                 Five Dosage Forms, One Manufacturing Partner
               </h2>
-              <p className="mt-5 text-[0.97rem] leading-8 text-ink-soft">
-                Beyond soft chews, our facility is equipped to produce the full range of pet supplement formats that modern brands require. Whether you are launching a joint-health paste, a probiotic powder, or a calming liquid, we can manufacture it under the same GMP and SQF-certified quality system — eliminating the complexity and risk of managing multiple contract manufacturers.
+              <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
+                Beyond soft chews, our facility produces the full range of pet supplement formats under the same GMP and SQF-certified quality system — eliminating the complexity of managing multiple contract manufacturers. Each dosage form has dedicated equipment and validated processes with documented SOPs.
               </p>
-              <p className="mt-4 text-[0.97rem] leading-8 text-ink-soft">
-                Each dosage form has dedicated equipment and validated processes. Tablets are produced on rotary press equipment with weight and hardness monitoring. Pastes and gels are filled under controlled temperature conditions. Liquids are processed in stainless steel vessels with validated mixing and filling procedures. Powders and granules are blended in closed systems to prevent dust exposure and cross-contamination.
-              </p>
-              <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {/* Dosage form table */}
+              <div className="mt-8 border border-line">
+                <div className="grid grid-cols-3 border-b border-line bg-[#f8f7f2] px-5 py-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">
+                  <span>Dosage form</span>
+                  <span>Equipment</span>
+                  <span>Key control</span>
+                </div>
                 {[
-                  { name: "Soft Chews", note: "Core strength" },
-                  { name: "Tablets", note: "Rotary press" },
-                  { name: "Pastes & Gels", note: "Tube fill" },
-                  { name: "Liquids", note: "Bottle fill" },
-                  { name: "Powders", note: "Closed blend" },
-                  { name: "Granules", note: "Granulation" },
-                ].map(({ name, note }) => (
-                  <div key={name} className="rounded-md border border-line bg-[#f8f7f2] px-4 py-3">
-                    <p className="text-sm font-semibold text-ink">{name}</p>
-                    <p className="mt-0.5 text-xs text-ink-soft">{note}</p>
+                  { form: "Soft Chews", equip: "High-speed extrusion", ctrl: "Temp / hardness / moisture" },
+                  { form: "Tablets", equip: "Rotary press", ctrl: "Weight / hardness uniformity" },
+                  { form: "Pastes & Gels", equip: "Tube filling line", ctrl: "Fill weight / viscosity" },
+                  { form: "Liquids", equip: "SS vessel + filler", ctrl: "Mixing time / fill volume" },
+                  { form: "Powders", equip: "Closed blender", ctrl: "Blend uniformity / dust control" },
+                  { form: "Granules", equip: "Granulation system", ctrl: "Particle size / moisture" },
+                ].map(({ form, equip, ctrl }, i) => (
+                  <div key={form} className={`grid grid-cols-3 items-center px-5 py-3 text-sm ${i !== 0 ? "border-t border-line" : ""}`}>
+                    <span className="font-semibold text-ink">{form}</span>
+                    <span className="text-[0.82rem] text-ink-soft">{equip}</span>
+                    <span className="text-[0.82rem] text-ink-soft">{ctrl}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
               <Image
                 src="/images/science/ai-dosage-forms.jpg"
                 alt="Various pet supplement dosage forms: soft chews, tablets, paste, liquid, powder"
@@ -396,85 +419,87 @@ export default async function QualityPage({
       </section>
 
       {/* ─── MODULE 6: QUALITY CONTROL PROCESS ─── */}
-      <section className="border-b border-line bg-[#f8f7f2] py-20 sm:py-28">
+      <section className="border-b border-line bg-[#f8f7f2] py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 text-forest-mid">
-              <ClipboardCheck className="size-5" strokeWidth={1.6} aria-hidden />
-              <p className="b2b-kicker">Quality system</p>
+              <ClipboardCheck className="size-4" strokeWidth={1.6} aria-hidden />
+              <p className="b2b-kicker">Quality control system</p>
             </div>
-            <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink">
-              A Four-Stage Quality Control System, Audited and Verified
+            <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
+              Four-Stage QC — Audited and Verified by Eurofins
             </h2>
-            <p className="mt-5 text-[0.97rem] leading-8 text-ink-soft">
-              Our quality control system is structured around four mandatory checkpoints that every batch must pass before it can advance to the next production stage. This is not a paper-based system — each checkpoint generates physical records that are retained for a minimum of three years and are available for buyer review. The system was independently verified during the June 2026 Eurofins GMP and SQF audits.
+            <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
+              Every batch passes four mandatory checkpoints before shipment. Each checkpoint generates physical records retained for a minimum of three years, available for buyer review. The system was independently verified during the June 2026 Eurofins GMP and SQF audits (HACCP plan: BN-HACCP01, Rev A/0).
             </p>
           </div>
 
-          <div className="mt-16 grid gap-1 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                icon: TestTube,
-                step: "01",
-                title: "Raw Material Inspection",
-                desc: "Every incoming raw material is tested against a pre-approved specification before it is accepted into the warehouse. Supplier certificates of analysis are reviewed and retained. Materials that fail specification are quarantined and returned. Critical raw materials — including active ingredients and food-grade additives — are subject to double-check verification by two QC personnel before release to production.",
-              },
-              {
-                icon: ClipboardCheck,
-                step: "02",
-                title: "In-Process Monitoring",
-                desc: "Production checkpoints are defined in the HACCP plan (BN-HACCP01, Rev A/0, updated January 2026). Critical Control Points include ingredient weighing (CCP1) and sterilization (CCP2). In-process parameters such as mixing time, temperature, moisture content, and forming weight are recorded at defined intervals. Any deviation triggers an immediate hold and corrective action review.",
-              },
-              {
-                icon: PackageCheck,
-                step: "03",
-                title: "Finished Product Testing",
-                desc: "Finished products are tested against the approved specification before release. Tests include physical parameters (weight, hardness, moisture), microbiological counts, and active ingredient assay where required. Products are held in quarantine until the QC manager issues a formal release decision. Certificate of analysis is generated for every batch and provided to the buyer with the shipment.",
-              },
-              {
-                icon: ShieldCheck,
-                step: "04",
-                title: "Batch Retention & Traceability",
-                desc: "A retain sample from every batch is stored under controlled conditions for the duration of the product shelf life plus six months. Bidirectional traceability is maintained from raw material lot numbers through to finished goods batch codes and shipping records. In a documented exercise, 2,000 tubes from Batch 20260122 were fully traced within 90 minutes — demonstrating the practical effectiveness of the traceability system.",
-              },
-            ].map(({ icon: Icon, step, title, desc }) => (
-              <article key={title} className="flex flex-col rounded-lg border border-line bg-white p-7">
-                <div className="flex items-center justify-between">
-                  <div className="flex size-12 items-center justify-center rounded-full bg-forest/10">
-                    <Icon className="size-6 text-forest" strokeWidth={1.6} aria-hidden />
+          {/* Horizontal step flow */}
+          <div className="mt-12 hidden lg:block">
+            <div className="relative flex items-start gap-0">
+              {/* connecting line */}
+              <div className="absolute left-[calc(12.5%)] right-[calc(12.5%)] top-[22px] h-px bg-line" aria-hidden />
+              {[
+                { icon: TestTube, step: "01", title: "Raw Material Inspection", desc: "CoA review, dual QC sign-off, quarantine for non-conforming lots. Critical actives double-verified before warehouse release." },
+                { icon: ClipboardCheck, step: "02", title: "In-Process Monitoring", desc: "HACCP CCPs: ingredient weighing (CCP1) and sterilization (CCP2). Mixing time, temperature, moisture and weight logged at defined intervals." },
+                { icon: PackageCheck, step: "03", title: "Finished Product Testing", desc: "Physical (weight, hardness, moisture), microbiological, and active assay testing. QC manager formal release required before any shipment." },
+                { icon: ShieldCheck, step: "04", title: "Batch Retention & Traceability", desc: "Retain samples held for shelf life + 6 months. Bidirectional traceability: raw material lots → finished goods → shipping records." },
+              ].map(({ icon: Icon, step, title, desc }) => (
+                <div key={step} className="relative flex flex-1 flex-col items-center px-4 text-center">
+                  <div className="relative z-10 flex size-11 items-center justify-center rounded-full border-2 border-forest bg-white">
+                    <Icon className="size-5 text-forest" strokeWidth={1.6} aria-hidden />
                   </div>
-                  <span className="text-[2.2rem] font-bold leading-none tracking-[-0.04em] text-forest/10">
-                    {step}
-                  </span>
+                  <span className="mt-3 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-forest-mid">{step}</span>
+                  <h3 className="mt-1 text-[0.82rem] font-semibold text-ink">{title}</h3>
+                  <p className="mt-2 text-[0.75rem] leading-5 text-ink-soft">{desc}</p>
                 </div>
-                <h3 className="mt-5 text-base font-semibold text-ink">{title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-7 text-ink-soft">{desc}</p>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile: vertical cards */}
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:hidden">
+            {[
+              { icon: TestTube, step: "01", title: "Raw Material Inspection", desc: "CoA review, dual QC sign-off, quarantine for non-conforming lots. Critical actives double-verified before warehouse release." },
+              { icon: ClipboardCheck, step: "02", title: "In-Process Monitoring", desc: "HACCP CCPs: ingredient weighing (CCP1) and sterilization (CCP2). Mixing time, temperature, moisture and weight logged at defined intervals." },
+              { icon: PackageCheck, step: "03", title: "Finished Product Testing", desc: "Physical (weight, hardness, moisture), microbiological, and active assay testing. QC manager formal release required before any shipment." },
+              { icon: ShieldCheck, step: "04", title: "Batch Retention & Traceability", desc: "Retain samples held for shelf life + 6 months. Bidirectional traceability: raw material lots → finished goods → shipping records." },
+            ].map(({ icon: Icon, step, title, desc }) => (
+              <article key={step} className="flex gap-4 border border-line bg-white p-5">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full border border-forest/30 bg-forest/5">
+                  <Icon className="size-5 text-forest" strokeWidth={1.6} aria-hidden />
+                </div>
+                <div>
+                  <span className="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-forest-mid">{step}</span>
+                  <h3 className="mt-0.5 text-sm font-semibold text-ink">{title}</h3>
+                  <p className="mt-2 text-[0.78rem] leading-5 text-ink-soft">{desc}</p>
+                </div>
               </article>
             ))}
           </div>
 
-          {/* Traceability proof */}
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            <div className="flex items-center gap-6 rounded-lg border border-forest/20 bg-white p-6">
-              <div className="text-center">
-                <p className="text-[2.4rem] font-bold leading-none tracking-[-0.03em] text-forest">2,000</p>
-                <p className="mt-1 text-xs text-ink-soft">tubes</p>
+          {/* Traceability evidence */}
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <div className="flex items-center gap-5 border border-forest/20 bg-white px-6 py-5">
+              <div className="shrink-0 text-center">
+                <p className="text-[1.9rem] font-bold leading-none tracking-[-0.03em] text-forest">2,000</p>
+                <p className="mt-0.5 text-[0.68rem] text-ink-soft">tubes</p>
               </div>
-              <div className="border-l border-line pl-6">
+              <div className="border-l border-line pl-5">
                 <p className="text-sm font-semibold text-ink">Fully traced in 90 minutes</p>
-                <p className="mt-1 text-xs text-ink-soft">Pet nutrition paste — Batch 20260122</p>
-                <p className="mt-1 text-xs text-forest-mid">Bidirectional: raw material → finished goods → shipment</p>
+                <p className="mt-1 text-[0.75rem] text-ink-soft">Pet nutrition paste — Batch 20260122</p>
+                <p className="mt-0.5 text-[0.72rem] text-forest-mid">Bidirectional: raw material → finished goods → shipment</p>
               </div>
             </div>
-            <div className="flex items-center gap-6 rounded-lg border border-forest/20 bg-white p-6">
-              <div className="text-center">
-                <p className="text-[2.4rem] font-bold leading-none tracking-[-0.03em] text-forest">4,000</p>
-                <p className="mt-1 text-xs text-ink-soft">bottles</p>
+            <div className="flex items-center gap-5 border border-forest/20 bg-white px-6 py-5">
+              <div className="shrink-0 text-center">
+                <p className="text-[1.9rem] font-bold leading-none tracking-[-0.03em] text-forest">4,000</p>
+                <p className="mt-0.5 text-[0.68rem] text-ink-soft">bottles</p>
               </div>
-              <div className="border-l border-line pl-6">
+              <div className="border-l border-line pl-5">
                 <p className="text-sm font-semibold text-ink">Fully traced in 1.5 hours</p>
-                <p className="mt-1 text-xs text-ink-soft">Pet nutrition tablet — Batch 20260520</p>
-                <p className="mt-1 text-xs text-forest-mid">Bidirectional: raw material → finished goods → shipment</p>
+                <p className="mt-1 text-[0.75rem] text-ink-soft">Pet nutrition tablet — Batch 20260520</p>
+                <p className="mt-0.5 text-[0.72rem] text-forest-mid">Bidirectional: raw material → finished goods → shipment</p>
               </div>
             </div>
           </div>
@@ -483,47 +508,50 @@ export default async function QualityPage({
 
       {/* ─── MODULE 7: R&D TEAM & FORMULATIONS ─── */}
       <section className="border-b border-line bg-white">
-        <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
-          <div className="px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+        <div className="mx-auto grid max-w-7xl lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
             <div className="flex items-center gap-3 text-forest-mid">
-              <Microscope className="size-5" strokeWidth={1.6} aria-hidden />
-              <p className="b2b-kicker">R&amp;D &amp; formulation</p>
+              <Microscope className="size-4" strokeWidth={1.6} aria-hidden />
+              <p className="b2b-kicker">R&amp;D &amp; formulation library</p>
             </div>
-            <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink">
+            <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
               Academic Research Expertise, Applied to Commercial Formulation
             </h2>
-            <p className="mt-5 text-[0.97rem] leading-8 text-ink-soft">
-              Our technical advisory team is led by Professor Wang Kai, a researcher at the Chinese Academy of Agricultural Sciences, doctoral supervisor, National Outstanding Youth Fund recipient, and Beijing Science and Technology Rising Star. This academic partnership gives us direct access to the latest peer-reviewed research in animal nutrition, allowing us to formulate products that are grounded in evidence rather than marketing trends.
+            <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
+              Our technical advisory team is led by Professor Wang Kai — researcher at the Chinese Academy of Agricultural Sciences, doctoral supervisor, National Outstanding Youth Fund recipient, and Beijing Science and Technology Rising Star. This partnership gives us direct access to the latest peer-reviewed animal nutrition research, allowing us to formulate products grounded in evidence rather than marketing trends.
             </p>
-            <p className="mt-4 text-[0.97rem] leading-8 text-ink-soft">
-              Our existing formulation library covers the five highest-demand categories in the global pet supplement market: joint health (MSM, glucosamine, chondroitin, green-lipped mussel, Vitamin C/E, fish oil), probiotics, omega-3 fish oil, anti-itch and allergy support (Omega-3, turmeric, grape seed, quercetin, pumpkin, bromelain), and calming supplements (chamomile, valerian root, L-tryptophan, melatonin, L-theanine, passionflower). All active ingredients are sourced from verified suppliers with full traceability documentation.
+            <p className="mt-3 text-[0.93rem] leading-7 text-ink-soft">
+              Custom formulation development is available for brands that require proprietary recipes. Our team will develop, prototype, and validate a formula that meets your target market&apos;s regulatory requirements and brand efficacy claims.
             </p>
-            <p className="mt-4 text-[0.97rem] leading-8 text-ink-soft">
-              Custom formulation development is available for brands that require proprietary recipes. Our team will work with your specifications to develop, prototype, and validate a formula that meets your target market&apos;s regulatory requirements and your brand&apos;s efficacy claims.
-            </p>
-            <div className="mt-10 space-y-3">
+            {/* Formulation table */}
+            <div className="mt-8 border border-line">
+              <div className="grid grid-cols-[1fr_2fr] border-b border-line bg-[#f8f7f2] px-5 py-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">
+                <span>Category</span>
+                <span>Key Active Ingredients</span>
+              </div>
               {[
-                { name: "Joint Health", ingredients: "MSM · Glucosamine · Chondroitin · Green-Lipped Mussel · Fish Oil" },
+                { name: "Joint Health", ingredients: "MSM · Glucosamine · Chondroitin · Green-Lipped Mussel · Vitamin C/E · Fish Oil" },
                 { name: "Probiotic Support", ingredients: "Multi-strain probiotics · Prebiotic fiber · Digestive enzymes" },
-                { name: "Anti-Itch & Allergy", ingredients: "Omega-3 · Turmeric · Quercetin · Grape Seed · Bromelain" },
-                { name: "Calming & Anxiety", ingredients: "Chamomile · Valerian Root · L-Tryptophan · Melatonin · L-Theanine" },
-                { name: "Omega-3 Fish Oil", ingredients: "EPA · DHA · Natural fish oil · Vitamin E (antioxidant)" },
-              ].map(({ name, ingredients }) => (
-                <div key={name} className="rounded-md border border-line bg-[#f8f7f2] px-5 py-4">
-                  <p className="text-sm font-semibold text-ink">{name}</p>
-                  <p className="mt-1 text-xs leading-5 text-ink-soft">{ingredients}</p>
+                { name: "Anti-Itch & Allergy", ingredients: "Omega-3 · Turmeric · Quercetin · Grape Seed · Pumpkin · Bromelain" },
+                { name: "Calming & Anxiety", ingredients: "Chamomile · Valerian Root · L-Tryptophan · Melatonin · L-Theanine · Passionflower" },
+                { name: "Omega-3 / Fish Oil", ingredients: "EPA · DHA · Vitamin E (antioxidant stabiliser)" },
+              ].map(({ name, ingredients }, i) => (
+                <div key={name} className={`grid grid-cols-[1fr_2fr] items-start gap-4 px-5 py-3 text-sm ${i !== 0 ? "border-t border-line" : ""}`}>
+                  <span className="font-semibold text-ink">{name}</span>
+                  <span className="text-[0.8rem] leading-5 text-ink-soft">{ingredients}</span>
                 </div>
               ))}
             </div>
+            <p className="mt-3 text-[0.72rem] text-ink-soft">All active ingredients sourced from verified suppliers with full traceability documentation.</p>
           </div>
-          <div className="flex items-center justify-center px-5 py-12 sm:px-8 lg:px-10 lg:py-20">
-            <div className="relative w-full max-w-sm overflow-hidden rounded-xl shadow-lg" style={{aspectRatio: '3/4'}}>
+          <div className="flex items-center justify-center bg-[#f8f7f2] px-5 py-12 sm:px-8 lg:px-10 lg:py-20">
+            <div className="relative w-full max-w-xs overflow-hidden rounded-lg shadow-md" style={{ aspectRatio: "3/4" }}>
               <Image
                 src="/images/science/ai-lab-rd.jpg"
                 alt="Research and development laboratory for pet supplement formulation"
                 fill
                 className="object-cover"
-                sizes="(min-width: 1024px) 30vw, 80vw"
+                sizes="(min-width: 1024px) 28vw, 80vw"
               />
             </div>
           </div>
@@ -531,21 +559,21 @@ export default async function QualityPage({
       </section>
 
       {/* ─── MODULE 8: LEADERSHIP TEAM ─── */}
-      <section className="border-b border-line bg-[#f8f7f2] py-20 sm:py-28">
+      <section className="border-b border-line bg-[#f8f7f2] py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 text-forest-mid">
-              <Users className="size-5" strokeWidth={1.6} aria-hidden />
+              <Users className="size-4" strokeWidth={1.6} aria-hidden />
               <p className="b2b-kicker">Leadership &amp; expertise</p>
             </div>
-            <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink">
+            <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
               The Team Behind the Certifications
             </h2>
-            <p className="mt-5 text-[0.97rem] leading-8 text-ink-soft">
-              Certifications reflect the quality of the people who design, implement, and maintain the systems behind them. Our leadership team combines deep manufacturing experience, academic research expertise, and international trade knowledge — the three capabilities that matter most to brands building global pet supplement businesses.
+            <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
+              Certifications reflect the quality of the people who design, implement, and maintain the systems behind them. Our leadership team combines deep manufacturing experience, academic research expertise, and international trade knowledge.
             </p>
           </div>
-          <div className="mt-14 grid gap-6 sm:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
               {
                 name: "Li Wang",
@@ -555,21 +583,25 @@ export default async function QualityPage({
               {
                 name: "Prof. Wang Kai",
                 title: "Technical Advisor",
-                desc: "Researcher at the Chinese Academy of Agricultural Sciences, doctoral supervisor, National Outstanding Youth Fund recipient, and Beijing Science and Technology Rising Star. Prof. Wang Kai provides scientific oversight of formulation development and ensures that our products are aligned with current evidence in animal nutrition research.",
+                desc: "Researcher at the Chinese Academy of Agricultural Sciences, doctoral supervisor, National Outstanding Youth Fund recipient, and Beijing Science and Technology Rising Star. Provides scientific oversight of formulation development and ensures products are aligned with current evidence in animal nutrition research.",
               },
               {
                 name: "Jing Hang",
                 title: "Operations Director",
-                desc: "Former City General Manager at Alibaba International, with 12 years of B2B enterprise service experience. Jing Hang leads the Shenzhen operations center, managing cross-border logistics, customer onboarding, and international partner relationships. His background in digital trade ensures that our OEM process is efficient and transparent for overseas buyers.",
+                desc: "Former City General Manager at Alibaba International, with 12 years of B2B enterprise service experience. Leads the Shenzhen operations center, managing cross-border logistics, customer onboarding, and international partner relationships.",
               },
             ].map(({ name, title, desc }) => (
-              <article key={name} className="rounded-lg border border-line bg-white p-7">
-                <div className="flex size-12 items-center justify-center rounded-full bg-forest/10">
-                  <Users className="size-6 text-forest" strokeWidth={1.6} aria-hidden />
+              <article key={name} className="border border-line bg-white p-6">
+                <div className="flex items-center gap-3 border-b border-line pb-4">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-forest/10">
+                    <Users className="size-5 text-forest" strokeWidth={1.6} aria-hidden />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold text-ink">{name}</h3>
+                    <p className="text-[0.7rem] font-medium uppercase tracking-[0.09em] text-forest-mid">{title}</p>
+                  </div>
                 </div>
-                <h3 className="mt-5 text-base font-semibold text-ink">{name}</h3>
-                <p className="mt-1 text-xs font-medium uppercase tracking-[0.1em] text-forest-mid">{title}</p>
-                <p className="mt-4 text-sm leading-7 text-ink-soft">{desc}</p>
+                <p className="mt-4 text-[0.82rem] leading-6 text-ink-soft">{desc}</p>
               </article>
             ))}
           </div>
@@ -577,21 +609,21 @@ export default async function QualityPage({
       </section>
 
       {/* ─── MODULE 9: MILESTONES ─── */}
-      <section className="border-b border-line bg-white py-20 sm:py-28">
+      <section className="border-b border-line bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-          <div className="grid gap-16 lg:grid-cols-[1fr_1.5fr] lg:gap-20 lg:items-start">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16 lg:items-start">
             <div>
               <div className="flex items-center gap-3 text-forest-mid">
-                <Clock className="size-5" strokeWidth={1.6} aria-hidden />
+                <Clock className="size-4" strokeWidth={1.6} aria-hidden />
                 <p className="b2b-kicker">Company milestones</p>
               </div>
-              <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink">
+              <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
                 Ten Years of Continuous Investment in Quality
               </h2>
-              <p className="mt-5 text-[0.97rem] leading-8 text-ink-soft">
-                From a small formulation team in 2016 to a GMP and SQF-certified manufacturer with international brand partners, every milestone in our history reflects a deliberate investment in the infrastructure and systems that global buyers require. The timeline below shows the key events that have shaped our current capabilities.
+              <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
+                From a small formulation team in 2016 to a GMP and SQF-certified manufacturer with international brand partners, every milestone reflects a deliberate investment in the infrastructure and systems that global buyers require.
               </p>
-              <div className="mt-8 overflow-hidden rounded-lg border border-line">
+              <div className="mt-6 overflow-hidden rounded-lg border border-line">
                 <Image
                   src="/images/science/trade-show.png"
                   alt="Beno Biotech exhibition booth at China pet industry trade show, showcasing OEM partner brands"
@@ -614,11 +646,11 @@ export default async function QualityPage({
                   { year: "Jul 2026", event: "SQF certifications formally issued", detail: "Certificate SIN 105690 formally issued by SQFI on July 20, 2026. Valid through August 28, 2027. FDA Food Facility Registration No. 10222600768 active and current." },
                   { year: "2026–", event: "Guangzhou facility under construction", detail: "Second production facility under construction in Guangzhou to support growing international OEM demand. Shenzhen operations center already operational for cross-border trade management." },
                 ].map(({ year, event, detail }) => (
-                  <li key={year} className="relative pl-8 pb-10 last:pb-0">
+                  <li key={year} className="relative pl-8 pb-8 last:pb-0">
                     <div className="absolute left-0 top-1.5 size-3.5 rounded-full border-2 border-forest bg-white" aria-hidden />
-                    <p className="text-xs font-bold uppercase tracking-[0.1em] text-forest-mid">{year}</p>
-                    <p className="mt-1 text-sm font-semibold text-ink">{event}</p>
-                    <p className="mt-2 text-sm leading-7 text-ink-soft">{detail}</p>
+                    <p className="text-[0.65rem] font-bold uppercase tracking-[0.1em] text-forest-mid">{year}</p>
+                    <p className="mt-0.5 text-sm font-semibold text-ink">{event}</p>
+                    <p className="mt-1.5 text-[0.82rem] leading-6 text-ink-soft">{detail}</p>
                   </li>
                 ))}
               </ol>
@@ -628,44 +660,42 @@ export default async function QualityPage({
       </section>
 
       {/* ─── MODULE 10: 2026 PARTNER COMMITMENTS ─── */}
-      <section className="border-b border-line bg-forest-deep py-20 sm:py-28">
+      <section className="border-b border-line bg-forest-deep py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 text-amber-soft">
-              <FlaskConical className="size-5" strokeWidth={1.6} aria-hidden />
+              <FlaskConical className="size-4" strokeWidth={1.6} aria-hidden />
               <p className="b2b-kicker text-amber-soft">2026 partner program</p>
             </div>
-            <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-white">
+            <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-white">
               Three Commitments to Our 2026 International Partners
             </h2>
-            <p className="mt-5 text-[0.97rem] leading-8 text-white/70">
-              As we expand our international OEM business in 2026, we are making three specific commitments to brands that choose to work with us. These are not marketing statements — they are operational policies that are built into how we allocate production capacity and price our services.
+            <p className="mt-4 text-[0.93rem] leading-7 text-white/65">
+              As we expand our international OEM business in 2026, we are making three specific commitments to brands that choose to work with us. These are operational policies built into how we allocate production capacity and price our services.
             </p>
           </div>
-          <div className="mt-14 grid gap-6 sm:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
               {
                 number: "01",
                 title: "Quality at a Competitive Price",
-                desc: "We believe that GMP and SQF-certified manufacturing should not carry a premium that makes it inaccessible to emerging brands. Our commitment is to offer the same quality standards as larger contract manufacturers at a price point that reflects our operational efficiency — not our certification costs. For equivalent specifications, our pricing will be competitive with non-certified alternatives.",
+                desc: "We believe that GMP and SQF-certified manufacturing should not carry a premium that makes it inaccessible to emerging brands. Our commitment is to offer the same quality standards as larger contract manufacturers at a price point that reflects our operational efficiency — not our certification costs.",
               },
               {
                 number: "02",
                 title: "Priority Fulfillment for Early Partners",
-                desc: "Production capacity is finite, and we allocate it deliberately. Brands that commit to a partnership in 2026 will receive priority scheduling for production slots, particularly during peak demand periods. This means that when you need to respond to a sales spike or a retail listing requirement, your order will not be delayed by later-arriving customers.",
+                desc: "Production capacity is finite, and we allocate it deliberately. Brands that commit to a partnership in 2026 will receive priority scheduling for production slots, particularly during peak demand periods — ensuring your order is not delayed by later-arriving customers.",
               },
               {
                 number: "03",
                 title: "Low MOQ, No Compromise on Quality",
-                desc: "Our minimum order quantity of 500 bottles for soft chews is the lowest offered by any GMP-certified pet supplement manufacturer in China. The industry average is 3,000 bottles. This low MOQ is made possible by our high-speed production line and is a permanent feature of our service offering — not a promotional concession. It allows you to launch new SKUs, test new markets, and manage inventory risk without committing to volumes that exceed your demand.",
+                desc: "Our MOQ of 500 bottles for soft chews is the lowest offered by any GMP-certified pet supplement manufacturer in China. The industry average is 3,000 bottles. This low MOQ is a permanent feature of our service — not a promotional concession — enabled by our high-speed production line.",
               },
             ].map(({ number, title, desc }) => (
-              <article key={number} className="rounded-lg border border-white/15 bg-white/[0.05] p-7 backdrop-blur-sm">
-                <span className="text-[2.8rem] font-bold leading-none tracking-[-0.04em] text-white/15">
-                  {number}
-                </span>
-                <h3 className="mt-4 text-base font-semibold text-white">{title}</h3>
-                <p className="mt-3 text-sm leading-7 text-white/70">{desc}</p>
+              <article key={number} className="border border-white/15 bg-white/[0.05] p-6 backdrop-blur-sm">
+                <span className="text-[0.65rem] font-bold uppercase tracking-[0.12em] text-amber-soft">{number}</span>
+                <h3 className="mt-2 text-sm font-semibold text-white">{title}</h3>
+                <p className="mt-3 text-[0.82rem] leading-6 text-white/65">{desc}</p>
               </article>
             ))}
           </div>
@@ -675,29 +705,29 @@ export default async function QualityPage({
       {/* ─── MODULE 11: FAQ ─── */}
       <section className="border-b border-line bg-white">
         <JsonLd data={faqJsonLd(faqs)} />
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.34fr_0.66fr] lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.34fr_0.66fr] lg:px-10">
           <div>
             <p className="b2b-kicker text-forest-mid">Quality FAQ</p>
-            <h2 className="mt-4 text-3xl font-medium tracking-[-0.035em] text-ink">
+            <h2 className="mt-3 text-[clamp(1.4rem,2.2vw,1.9rem)] font-semibold tracking-[-0.03em] text-ink">
               Pet Supplement Quality &amp; Certification FAQ
             </h2>
-            <p className="mt-4 text-sm leading-7 text-ink-soft">
+            <p className="mt-3 text-[0.88rem] leading-6 text-ink-soft">
               Common questions from procurement managers, regulatory affairs teams, and brand owners evaluating Taizhou Beno Biotech as a manufacturing partner.
             </p>
           </div>
           <div className="border-t border-line">
             {faqs.map((item, index) => (
               <details key={item.q} className="group border-b border-line">
-                <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-4 text-left">
+                <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-6 py-3 text-left">
                   <span className="flex items-start gap-4">
-                    <span className="mt-1 text-[0.65rem] font-semibold text-forest-mid">0{index + 1}</span>
-                    <span className="text-sm font-semibold text-ink">{item.q}</span>
+                    <span className="mt-0.5 text-[0.62rem] font-bold uppercase tracking-[0.1em] text-forest-mid">0{index + 1}</span>
+                    <span className="text-[0.88rem] font-semibold text-ink">{item.q}</span>
                   </span>
                   <span className="text-xl font-light text-forest transition-transform group-open:rotate-45" aria-hidden>
                     +
                   </span>
                 </summary>
-                <p className="pb-6 pl-10 pr-8 text-sm leading-7 text-ink-soft">{item.a}</p>
+                <p className="pb-5 pl-10 pr-8 text-[0.85rem] leading-7 text-ink-soft">{item.a}</p>
               </details>
             ))}
           </div>
@@ -706,15 +736,15 @@ export default async function QualityPage({
 
       {/* ─── BOTTOM CTA ─── */}
       <section className="border-b border-line bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-16 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-14 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
           <div className="flex items-start gap-4">
-            <Check className="mt-1 size-6 shrink-0 text-forest-mid" aria-hidden />
+            <FileText className="mt-1 size-5 shrink-0 text-forest-mid" aria-hidden />
             <div>
-              <h2 className="text-2xl font-semibold tracking-[-0.025em] text-ink">
+              <h2 className="text-xl font-semibold tracking-[-0.025em] text-ink">
                 Need a vendor-approval document package?
               </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-soft">
-                Send the product, target market, requested evidence and expected order volume. We will respond within 24 hours with a complete document checklist and timeline.
+              <p className="mt-1.5 max-w-2xl text-[0.88rem] leading-6 text-ink-soft">
+                Send the product, target market, requested evidence and expected order volume. We will respond within 24 hours with a complete document checklist and timeline. Available documents: CoA · GMP Report · SQF Certificate · FDA Registration · HACCP Summary · Allergen Statement.
               </p>
             </div>
           </div>
