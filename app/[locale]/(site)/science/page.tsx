@@ -155,9 +155,7 @@ export default async function QualityPage({
               Quality claims backed by records buyers can verify.
             </h1>
             <p className="mt-5 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
-              Review the current GMP audit recognition and SQF Pet Food Manufacturing certificate
-              issued for Taizhou Beno Biotech Co., Ltd., then use the quality framework below to
-              plan project-specific due diligence.
+              GMP audit recognition and SQF Pet Food Manufacturing certificate issued for Taizhou Beno Biotech Co., Ltd. — independently verifiable through each issuing body&apos;s registry.
             </p>
           </div>
         </div>
@@ -198,13 +196,10 @@ export default async function QualityPage({
               A Purpose-Built GMP Factory in Jiangsu, China
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-              Taizhou Beno Biotech Co., Ltd. was established in August 2016 in Taixing City, Jiangsu Province — one of China&apos;s most developed pharmaceutical and nutraceutical manufacturing corridors. Our 3,000 m² facility was designed from the ground up for pet supplement production, with 2,000 m² dedicated to GMP-compliant manufacturing and warehousing.
+              Founded in 2016 in Taixing, Jiangsu, our 3,000 m² facility was purpose-built for pet supplement production — 2,000 m² dedicated to GMP-compliant manufacturing. Three independent production lines operate under strict physical separation across all production stages.
             </p>
             <p className="mt-3 text-[0.93rem] leading-7 text-ink-soft">
-              The factory operates three independent production lines under a single-shift schedule of 30 trained production staff, six days per week. Physical separation between raw material receipt, ingredient preparation, mixing, forming, filling, packaging, and finished goods storage ensures cross-contamination risks are controlled at the facility design level.
-            </p>
-            <p className="mt-3 text-[0.93rem] leading-7 text-ink-soft">
-              A second facility is currently under construction in Guangzhou to support growing international OEM demand, with an operations center already established in Shenzhen for cross-border trade logistics.
+              A second facility is under construction in Guangzhou; our Shenzhen operations center manages cross-border logistics for international partners.
             </p>
             {/* Spec table */}
             <div className="mt-8 border border-line bg-white">
@@ -272,13 +267,7 @@ export default async function QualityPage({
                 All primary certifications issued by Eurofins Food Assurance Certification US, LLC following on-site audits in June 2026. Each record is independently verifiable through the issuing body&apos;s registry. Original PDFs available on request for procurement and regulatory teams.
               </p>
             </div>
-            <Link
-              href="/private-label#inquiry"
-              className="b2b-btn-secondary shrink-0"
-            >
-              <Download className="size-3.5" aria-hidden />
-              Request document package
-            </Link>
+
           </div>
         </div>
 
@@ -344,7 +333,7 @@ export default async function QualityPage({
               China&apos;s Fastest Soft Chew Production Line
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-              Soft chews are the fastest-growing format in the global pet supplement market. Our high-speed extrusion line processes one tonne of soft chew mass per hour — unmatched by any comparable facility in China — enabling over 180 million units per month at consistent quality. Batch-to-batch consistency is maintained through precise temperature control, with in-process hardness and moisture checks at defined intervals.
+              Our high-speed extrusion line processes 1 tonne/hour — unmatched by any comparable facility in China — delivering 180M+ units per month. Hardness, moisture, and weight are checked at every production interval to ensure batch-to-batch consistency.
             </p>
             <div className="mt-8 space-y-3">
               {[
@@ -380,7 +369,7 @@ export default async function QualityPage({
                 Five Dosage Forms, One Manufacturing Partner
               </h2>
               <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-                Beyond soft chews, our facility produces the full range of pet supplement formats under the same GMP and SQF-certified quality system — eliminating the complexity of managing multiple contract manufacturers. Each dosage form has dedicated equipment and validated processes with documented SOPs.
+                All six dosage forms are produced under the same GMP and SQF-certified quality system, with dedicated equipment and validated SOPs for each format.
               </p>
               {/* Dosage form table */}
               <div className="mt-8 border border-line">
@@ -430,7 +419,7 @@ export default async function QualityPage({
               Four-Stage QC — Audited and Verified by Eurofins
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-              Every batch passes four mandatory checkpoints before shipment. Each checkpoint generates physical records retained for a minimum of three years, available for buyer review. The system was independently verified during the June 2026 Eurofins GMP and SQF audits (HACCP plan: BN-HACCP01, Rev A/0).
+              Every batch passes four mandatory checkpoints before shipment, generating physical records retained for a minimum of three years. Independently verified during the June 2026 Eurofins GMP and SQF audits (HACCP plan: BN-HACCP01, Rev A/0).
             </p>
           </div>
 
@@ -518,10 +507,7 @@ export default async function QualityPage({
               Academic Research Expertise, Applied to Commercial Formulation
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-              Our technical advisory team is led by Professor Wang Kai — researcher at the Chinese Academy of Agricultural Sciences, doctoral supervisor, National Outstanding Youth Fund recipient, and Beijing Science and Technology Rising Star. This partnership gives us direct access to the latest peer-reviewed animal nutrition research, allowing us to formulate products grounded in evidence rather than marketing trends.
-            </p>
-            <p className="mt-3 text-[0.93rem] leading-7 text-ink-soft">
-              Custom formulation development is available for brands that require proprietary recipes. Our team will develop, prototype, and validate a formula that meets your target market&apos;s regulatory requirements and brand efficacy claims.
+              Led by Prof. Wang Kai (Chinese Academy of Agricultural Sciences, National Outstanding Youth Fund), our advisory team translates peer-reviewed animal nutrition research into commercial formulations. Custom formula development — from prototype to validated spec — is available for brands requiring proprietary recipes.
             </p>
             {/* Formulation table */}
             <div className="mt-8 border border-line">
@@ -570,7 +556,7 @@ export default async function QualityPage({
               The Team Behind the Certifications
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-              Certifications reflect the quality of the people who design, implement, and maintain the systems behind them. Our leadership team combines deep manufacturing experience, academic research expertise, and international trade knowledge.
+              Manufacturing experience, academic research, and international trade expertise — the team behind the certifications.
             </p>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -578,17 +564,17 @@ export default async function QualityPage({
               {
                 name: "Li Wang",
                 title: "General Manager",
-                desc: "Over ten years of focused experience in pet nutrition manufacturing. Previously managed OEM production for Wanpy, Bernate, and Kairisi — three of China's most recognized pet supplement brands. Li Wang leads the factory's quality culture and is the primary contact for vendor qualification audits.",
+                desc: "10+ years in pet nutrition manufacturing. Previously managed OEM production for Wanpy, Bernate, and Kairisi. Primary contact for vendor qualification audits.",
               },
               {
                 name: "Prof. Wang Kai",
                 title: "Technical Advisor",
-                desc: "Researcher at the Chinese Academy of Agricultural Sciences, doctoral supervisor, National Outstanding Youth Fund recipient, and Beijing Science and Technology Rising Star. Provides scientific oversight of formulation development and ensures products are aligned with current evidence in animal nutrition research.",
+                desc: "Researcher at the Chinese Academy of Agricultural Sciences, doctoral supervisor, National Outstanding Youth Fund recipient. Oversees formulation development and scientific alignment.",
               },
               {
                 name: "Jing Hang",
                 title: "Operations Director",
-                desc: "Former City General Manager at Alibaba International, with 12 years of B2B enterprise service experience. Leads the Shenzhen operations center, managing cross-border logistics, customer onboarding, and international partner relationships.",
+                desc: "Former City GM at Alibaba International, 12 years of B2B enterprise experience. Leads the Shenzhen operations center for cross-border logistics and partner onboarding.",
               },
             ].map(({ name, title, desc }) => (
               <article key={name} className="border border-line bg-white p-6">
@@ -621,7 +607,7 @@ export default async function QualityPage({
                 Ten Years of Continuous Investment in Quality
               </h2>
               <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-                From a small formulation team in 2016 to a GMP and SQF-certified manufacturer with international brand partners, every milestone reflects a deliberate investment in the infrastructure and systems that global buyers require.
+                From a small formulation team in 2016 to a GMP and SQF-certified manufacturer — every milestone reflects a deliberate investment in the systems global buyers require.
               </p>
               <div className="mt-6 overflow-hidden rounded-lg border border-line">
                 <Image
@@ -671,25 +657,25 @@ export default async function QualityPage({
               Three Commitments to Our 2026 International Partners
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-white/65">
-              As we expand our international OEM business in 2026, we are making three specific commitments to brands that choose to work with us. These are operational policies built into how we allocate production capacity and price our services.
+              Three operational commitments to brands partnering with us in 2026 — built into how we price and allocate production capacity.
             </p>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {[
+                          {[
               {
                 number: "01",
                 title: "Quality at a Competitive Price",
-                desc: "We believe that GMP and SQF-certified manufacturing should not carry a premium that makes it inaccessible to emerging brands. Our commitment is to offer the same quality standards as larger contract manufacturers at a price point that reflects our operational efficiency — not our certification costs.",
+                desc: "GMP and SQF-certified manufacturing priced to reflect our operational efficiency — not our certification costs. Same quality standards as larger CMOs, accessible to emerging brands.",
               },
               {
                 number: "02",
                 title: "Priority Fulfillment for Early Partners",
-                desc: "Production capacity is finite, and we allocate it deliberately. Brands that commit to a partnership in 2026 will receive priority scheduling for production slots, particularly during peak demand periods — ensuring your order is not delayed by later-arriving customers.",
+                desc: "Brands committing in 2026 receive priority production scheduling — ensuring your order is not displaced during peak demand periods.",
               },
               {
                 number: "03",
-                title: "Low MOQ, No Compromise on Quality",
-                desc: "Our MOQ of 500 bottles for soft chews is the lowest offered by any GMP-certified pet supplement manufacturer in China. The industry average is 3,000 bottles. This low MOQ is a permanent feature of our service — not a promotional concession — enabled by our high-speed production line.",
+                title: "500 MOQ — Lowest in China",
+                desc: "500 bottles minimum for soft chews (industry avg: 3,000). A permanent feature enabled by our high-speed line — not a promotional concession.",
               },
             ].map(({ number, title, desc }) => (
               <article key={number} className="border border-white/15 bg-white/[0.05] p-6 backdrop-blur-sm">
