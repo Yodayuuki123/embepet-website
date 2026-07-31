@@ -530,14 +530,14 @@ export default async function QualityPage({
             </div>
             <p className="mt-3 text-[0.72rem] text-ink-soft">All active ingredients sourced from verified suppliers with full traceability documentation.</p>
           </div>
-          <div className="flex items-start justify-center bg-[#f8f7f2] px-8 py-14 lg:py-20">
-            <div className="relative w-full max-w-[260px] overflow-hidden" style={{ aspectRatio: '3/4' }}>
+          <div className="flex items-center justify-center bg-white px-8 py-14 lg:py-20">
+            <div className="relative w-full max-w-[200px] overflow-hidden" style={{ aspectRatio: '3/4' }}>
               <Image
                 src="/images/science/ai-lab-rd.jpg"
                 alt="Pet supplement formulation ingredients and specification sheet"
                 fill
                 className="object-cover"
-                sizes="(min-width: 1024px) 20vw, 60vw"
+                sizes="(min-width: 1024px) 16vw, 50vw"
               />
             </div>
           </div>
