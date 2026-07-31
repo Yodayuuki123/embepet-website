@@ -257,24 +257,24 @@ export default async function QualityPage({
 
       {/* ─── MODULE 3: CERTIFICATIONS ─── */}
       <section id="certificates" className="scroll-mt-24 border-b border-line bg-white">
-        {/* Header bar — dark */}
-        <div className="border-b border-line bg-forest-deep px-5 py-10 sm:px-8 lg:px-10">
+        {/* Header */}
+        <div className="border-b border-line bg-[#f8f7f2] px-5 py-10 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-7xl flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <div className="flex items-center gap-3 text-amber-soft">
+              <div className="flex items-center gap-3 text-forest-mid">
                 <Award className="size-4" strokeWidth={1.6} aria-hidden />
-                <p className="b2b-kicker text-amber-soft">Compliance &amp; certification records</p>
+                <p className="b2b-kicker">Compliance &amp; certification records</p>
               </div>
-              <h2 className="mt-3 text-[clamp(1.4rem,2.4vw,2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-white">
-                7 Independent Third-Party Certifications
+              <h2 className="mt-3 text-[clamp(1.4rem,2.4vw,2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
+                8 Independent Third-Party Certifications
               </h2>
-              <p className="mt-2 max-w-2xl text-[0.88rem] leading-6 text-white/65">
+              <p className="mt-2 max-w-2xl text-[0.88rem] leading-6 text-ink-soft">
                 All primary certifications issued by Eurofins Food Assurance Certification US, LLC following on-site audits in June 2026. Each record is independently verifiable through the issuing body&apos;s registry. Original PDFs available on request for procurement and regulatory teams.
               </p>
             </div>
             <Link
               href="/private-label#inquiry"
-              className="inline-flex shrink-0 cursor-pointer items-center gap-2 border border-white/25 bg-white/10 px-5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-white/20"
+              className="b2b-btn-secondary shrink-0"
             >
               <Download className="size-3.5" aria-hidden />
               Request document package
@@ -293,29 +293,28 @@ export default async function QualityPage({
               { short: "FEED", name: "Feed Production License", id: "苏饲预（2026）12006", valid: "Valid to Apr 2031", score: "Jiangsu Authority", image: "/images/science/cert-food-license.png" },
               { short: "D-U-N-S", name: "D-U-N-S Registration", id: "No. 404129816", valid: "Dun & Bradstreet", score: "Global registry", image: "/images/science/cert-duns.png" },
               { short: "FDA", name: "FDA Facility Record", id: "No. 10222600768", valid: "Valid to Dec 2026", score: "FFR Screenshot", image: "/images/science/cert-fda-screenshot.png" },
+              { short: "SQF", name: "SQF Confirmation Letter", id: "SIN 105690", valid: "Issued Jul 2026", score: "Official letter", image: "/images/science/cert-sqf-letter.jpg" },
             ].map(({ short, name, id, valid, score, image }) => (
-              <div key={name} className="group flex flex-col overflow-hidden border border-line bg-white transition-shadow hover:shadow-md">
+              <div key={name} className="group relative overflow-hidden border border-line bg-white transition-shadow hover:shadow-md">
                 <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#f8f7f2]">
                   <Image
                     src={image}
                     alt={`${name} certificate`}
                     fill
-                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.04]"
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                   />
-                </div>
-                <div className="border-t border-line p-4">
-                  <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center bg-forest px-2 py-0.5 text-[0.6rem] font-bold tracking-[0.1em] text-white">
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-forest/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-4">
+                    <span className="inline-flex items-center bg-white px-2.5 py-0.5 text-[0.62rem] font-bold tracking-[0.1em] text-forest">
                       {short}
                     </span>
-                    <span className="flex size-1.5 rounded-full bg-forest-mid" title="Current" />
-                  </div>
-                  <p className="mt-2 text-[0.82rem] font-semibold text-ink">{name}</p>
-                  <p className="mt-1 font-mono text-[0.68rem] text-ink-soft">{id}</p>
-                  <div className="mt-2 flex items-center justify-between border-t border-line pt-2">
-                    <span className="text-[0.68rem] text-forest-mid">{valid}</span>
-                    <span className="text-[0.68rem] text-ink-soft">{score}</span>
+                    <p className="text-center text-sm font-semibold text-white leading-5">{name}</p>
+                    <p className="font-mono text-center text-[0.68rem] text-white/75">{id}</p>
+                    <div className="mt-1 border-t border-white/25 pt-2 text-center">
+                      <p className="text-[0.7rem] text-white/90">{valid}</p>
+                      <p className="text-[0.68rem] text-white/65">{score}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -383,18 +382,25 @@ export default async function QualityPage({
               <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
                 Beyond soft chews, our facility produces the full range of pet supplement formats under the same GMP and SQF-certified quality system — eliminating the complexity of managing multiple contract manufacturers. Each dosage form has dedicated equipment and validated processes with documented SOPs.
               </p>
-              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {/* Dosage form table */}
+              <div className="mt-8 border border-line">
+                <div className="grid grid-cols-3 border-b border-line bg-[#f8f7f2] px-5 py-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">
+                  <span>Dosage form</span>
+                  <span>Equipment</span>
+                  <span>Key control</span>
+                </div>
                 {[
-                  { name: "Soft Chews", note: "Core strength" },
-                  { name: "Tablets", note: "Rotary press" },
-                  { name: "Pastes & Gels", note: "Tube fill" },
-                  { name: "Liquids", note: "Bottle fill" },
-                  { name: "Powders", note: "Closed blend" },
-                  { name: "Granules", note: "Granulation" },
-                ].map(({ name, note }) => (
-                  <div key={name} className="rounded-md border border-line bg-[#f8f7f2] px-4 py-3">
-                    <p className="text-sm font-semibold text-ink">{name}</p>
-                    <p className="mt-0.5 text-xs text-ink-soft">{note}</p>
+                  { form: "Soft Chews", equip: "High-speed extrusion", ctrl: "Temp / hardness / moisture" },
+                  { form: "Tablets", equip: "Rotary press", ctrl: "Weight / hardness uniformity" },
+                  { form: "Pastes & Gels", equip: "Tube filling line", ctrl: "Fill weight / viscosity" },
+                  { form: "Liquids", equip: "SS vessel + filler", ctrl: "Mixing time / fill volume" },
+                  { form: "Powders", equip: "Closed blender", ctrl: "Blend uniformity / dust control" },
+                  { form: "Granules", equip: "Granulation system", ctrl: "Particle size / moisture" },
+                ].map(({ form, equip, ctrl }, i) => (
+                  <div key={form} className={`grid grid-cols-3 items-center px-5 py-3 text-sm ${i !== 0 ? "border-t border-line" : ""}`}>
+                    <span className="font-semibold text-ink">{form}</span>
+                    <span className="text-[0.82rem] text-ink-soft">{equip}</span>
+                    <span className="text-[0.82rem] text-ink-soft">{ctrl}</span>
                   </div>
                 ))}
               </div>
