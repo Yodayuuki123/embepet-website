@@ -497,7 +497,7 @@ export default async function QualityPage({
 
       {/* ─── MODULE 7: R&D TEAM & FORMULATIONS ─── */}
       <section className="border-b border-line bg-white">
-        <div className="mx-auto grid max-w-7xl lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="mx-auto grid max-w-7xl lg:grid-cols-[1.4fr_0.6fr]">
           <div className="px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
             <div className="flex items-center gap-3 text-forest-mid">
               <Microscope className="size-4" strokeWidth={1.6} aria-hidden />
@@ -530,14 +530,16 @@ export default async function QualityPage({
             </div>
             <p className="mt-3 text-[0.72rem] text-ink-soft">All active ingredients sourced from verified suppliers with full traceability documentation.</p>
           </div>
-          <div className="relative min-h-[400px] lg:min-h-auto">
-            <Image
-              src="/images/science/ai-lab-rd.jpg"
-              alt="Research and development laboratory for pet supplement formulation"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-            />
+          <div className="flex items-start justify-center bg-[#f8f7f2] px-8 py-14 lg:py-20">
+            <div className="relative w-full max-w-[260px] overflow-hidden" style={{ aspectRatio: '3/4' }}>
+              <Image
+                src="/images/science/ai-lab-rd.jpg"
+                alt="Pet supplement formulation ingredients and specification sheet"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 20vw, 60vw"
+              />
+            </div>
           </div>
         </div>
       </section>
