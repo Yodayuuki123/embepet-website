@@ -6,29 +6,42 @@ import { db } from "@/lib/db";
 import { buildMetadata, articleJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { getSettings } from "@/lib/settings";
 import { parseJson, dateLong } from "@/lib/format";
-import type { Faq, Source } from "@/lib/json";
+import { enrichSources, type Faq, type Source } from "@/lib/json";
 import JsonLd from "@/components/site/JsonLd";
 import Markdown from "@/components/site/Markdown";
 import FaqAccordion from "@/components/site/FaqAccordion";
+import { isLocale } from "@/lib/i18n/locales";
 
 export async function generateStaticParams() {
   const posts = await db.post.findMany({ where: { published: true }, select: { slug: true } });
   return posts.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale, slug } = await params;
   const post = await db.post.findUnique({ where: { slug } });
   if (!post) return {};
+  const keywords = post.tags.split(",").map((tag) => tag.trim()).filter(Boolean);
   return buildMetadata({
     title: post.seoTitle ?? post.title,
     description: post.seoDescription ?? post.excerpt,
     path: `/learn/${slug}`,
+    locale: isLocale(rawLocale) ? rawLocale : "en",
     ogType: "article",
+    keywords,
+    category: post.category,
+    publishedTime: post.publishedAt.toISOString(),
+    modifiedTime: post.updatedAt.toISOString(),
+    images: [`/api/og?title=${encodeURIComponent(post.title)}&kind=article`],
+    imageAlt: `${post.title} — source-cited pet supplement guide`,
   });
 }
 
-export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ArticlePage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { slug } = await params;
   const [post, settings] = await Promise.all([
     db.post.findUnique({ where: { slug } }),
@@ -37,7 +50,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!post || !post.published) notFound();
 
   const faqs = parseJson<Faq[]>(post.faqs, []);
-  const sources = parseJson<Source[]>(post.sources, []);
+  const sources = enrichSources(parseJson<Source[]>(post.sources, []));
+  const keywords = post.tags.split(",").map((tag) => tag.trim()).filter(Boolean);
 
   const related = await db.post.findMany({
     where: { published: true, slug: { not: slug }, OR: [{ category: post.category }, { species: post.species }] },
@@ -47,7 +61,21 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   });
 
   const jsonLd: object[] = [
-    articleJsonLd(post, settings.brandName),
+    articleJsonLd(
+      {
+        slug: post.slug,
+        title: post.title,
+        excerpt: post.excerpt,
+        authorName: "EMBEPET Content Team",
+        publishedAt: post.publishedAt,
+        updatedAt: post.updatedAt,
+        path: `/learn/${post.slug}`,
+        section: post.category,
+        keywords,
+        citations: sources,
+      },
+      settings.brandName,
+    ),
     breadcrumbJsonLd([
       { name: "Home", path: "/" },
       { name: "Learn", path: "/learn" },
@@ -91,14 +119,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-line py-4 text-sm">
             <p>
               <span className="text-ink-soft">By </span>
-              <span className="font-semibold text-ink">{post.authorName}</span>
-              {post.authorTitle ? <span className="text-ink-soft">, {post.authorTitle}</span> : null}
+              <span className="font-semibold text-ink">EMBEPET Content Team</span>
+              <span className="text-ink-soft">, Evidence &amp; Product Education</span>
             </p>
-            {post.reviewedBy ? (
-              <p className="text-ink-soft">
-                Reviewed by <span className="font-medium text-ink">{post.reviewedBy}</span>
-              </p>
-            ) : null}
+            <p className="text-ink-soft">Evidence links are listed below for independent review.</p>
           </div>
         </div>
       </header>
@@ -137,18 +161,24 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </section>
         ) : null}
 
-        {post.authorBio ? (
-          <section className="mt-10 flex gap-4 border border-line bg-white p-6">
-            <span className="grid size-12 shrink-0 place-items-center border border-forest bg-forest text-lg font-bold text-white">
-              {post.authorName.charAt(0)}
-            </span>
-            <div>
-              <p className="font-semibold text-ink">{post.authorName}</p>
-              {post.authorTitle ? <p className="text-xs text-ink-soft">{post.authorTitle}</p> : null}
-              <p className="mt-2 text-sm leading-relaxed text-ink-soft">{post.authorBio}</p>
-            </div>
-          </section>
-        ) : null}
+        <p className="mt-6 text-xs leading-5 text-ink-soft">
+          This guide is general educational information and is not veterinary, regulatory or legal advice.
+          Product suitability, claims and requirements must be evaluated for the intended animal, formula and market.
+        </p>
+
+        <section className="mt-10 flex gap-4 border border-line bg-white p-6">
+          <span className="grid size-12 shrink-0 place-items-center border border-forest bg-forest text-lg font-bold text-white">
+            E
+          </span>
+          <div>
+            <p className="font-semibold text-ink">EMBEPET Content Team</p>
+            <p className="text-xs text-ink-soft">Evidence &amp; Product Education</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+              The team summarizes published and professional sources for product and procurement
+              education. It does not replace veterinary, regulatory or legal review.
+            </p>
+          </div>
+        </section>
       </div>
 
       {/* ===== RELATED ===== */}

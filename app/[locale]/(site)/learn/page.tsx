@@ -1,17 +1,32 @@
-import type { Metadata } from "next";
 import Link from "@/components/site/A";
 import { ArrowRight, Bone, Brain, Clock, Heart, Sparkles, Star } from "lucide-react";
 import { db } from "@/lib/db";
-import { metaWithLocale, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { metaWithLocale, breadcrumbJsonLd, faqJsonLd, absoluteUrl } from "@/lib/seo";
 import JsonLd from "@/components/site/JsonLd";
-import { container, section, kicker, h2, body, btn, cardHover } from "@/components/b2b/kit";
+import { container, section, kicker, h2, btn, cardHover } from "@/components/b2b/kit";
 
-export function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ category?: string }>;
+}) {
+  const { category } = await searchParams;
   return metaWithLocale(params, {
-    title: "Pet Supplement Guides & Insights for Brands | EMBEPET",
+    title: "Pet Supplement Formulation & Sourcing Guides",
     description:
-      "Vet-reviewed guides on pet supplement formulation, dosage forms, OEM sourcing, and GMP/SQF compliance — practical insights for brand owners, distributors, and retailers.",
+      "Source-cited guides on pet supplement ingredients, dosage forms, OEM sourcing and quality evidence for brand owners, distributors and retail teams.",
     path: "/learn",
+    keywords: [
+      "pet supplement formulation guides",
+      "pet supplement ingredient research",
+      "pet supplement sourcing",
+      "pet supplement quality guide",
+    ],
+    images: ["/images/b2b/news/news-dosage-form.png"],
+    imageAlt: "Source-cited pet supplement formulation and sourcing guides",
+    noIndex: Boolean(category && category !== "all"),
   });
 }
 
@@ -52,7 +67,7 @@ const topics = [
 const learnFaqs = [
   {
     q: "Who writes the pet supplement guides on this site?",
-    a: "Guides are drafted from peer-reviewed veterinary research and reviewed for clinical accuracy before publication. Each guide cites its sources so brand and procurement teams can verify claims independently.",
+    a: "Guides are prepared by the EMBEPET content team using the research and professional sources listed on each page. They are general educational material, not veterinary or legal advice, and brand teams should verify market-specific claims independently.",
   },
   {
     q: "How can brand owners use these guides for product development?",
@@ -81,9 +96,32 @@ export default async function LearnPage({
   const pillars = posts.filter((p) => p.pillar);
   const rest = posts.filter((p) => !p.pillar);
 
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${absoluteUrl("/en/learn")}#webpage`,
+    name: "Pet Supplement Formulation & Sourcing Guides",
+    description:
+      "Source-cited pet supplement ingredient, formulation, sourcing and quality guides for business teams.",
+    url: absoluteUrl("/en/learn"),
+    inLanguage: "en",
+    isPartOf: { "@id": `${absoluteUrl("/")}#website` },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: posts.length,
+      itemListElement: posts.map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: post.title,
+        url: absoluteUrl(`/en/learn/${post.slug}`),
+      })),
+    },
+  };
+
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Learn", path: "/learn" }])} />
+      <JsonLd data={collectionJsonLd} />
 
       {/* ===== HERO ===== */}
       <section className="border-b border-line bg-[#f5f3ec]">
@@ -97,8 +135,8 @@ export default async function LearnPage({
               Pet Supplement Formulation &amp; Sourcing Guides
             </h1>
             <p className="mt-5 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
-              Vet-reviewed, source-cited guides for brand owners, distributors and retail teams —
-              covering ingredient evidence, dosage forms, OEM/ODM development and GMP/SQF compliance.
+              Source-cited guides for brand owners, distributors and retail teams — covering
+              ingredient evidence, dosage forms, OEM/ODM development and manufacturing quality records.
             </p>
           </div>
         </div>

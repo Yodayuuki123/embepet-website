@@ -8,6 +8,8 @@ export const dynamic = "force-dynamic";
 const PAID_STATUSES = ["PAID", "FULFILLED", "SHIPPED", "DELIVERED"];
 
 export default async function AdminDashboard() {
+  // Server-rendered dashboard range is intentionally based on request time.
+  // eslint-disable-next-line react-hooks/purity
   const since30 = new Date(Date.now() - 30 * 24 * 3600 * 1000);
 
   const [revenueAgg, orderCount, pendingInquiries, pendingReviews, recentOrders, paidOrders, topItems] =
@@ -32,6 +34,7 @@ export default async function AdminDashboard() {
   // 近30天按日聚合
   const days: { date: string; total: number }[] = [];
   for (let i = 29; i >= 0; i--) {
+    // eslint-disable-next-line react-hooks/purity
     const d = new Date(Date.now() - i * 24 * 3600 * 1000);
     const key = `${d.getMonth() + 1}/${d.getDate()}`;
     days.push({ date: key, total: 0 });

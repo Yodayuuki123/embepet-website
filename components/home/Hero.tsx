@@ -3,7 +3,7 @@
 import Link from "@/components/site/A";
 import { useRef } from "react";
 import { ArrowRight, FlaskConical, ShieldCheck, Truck } from "lucide-react";
-import { gsap, ScrollTrigger, SplitText, useGSAP, prefersReducedMotion } from "@/components/motion/gsap";
+import { gsap, SplitText, useGSAP, prefersReducedMotion } from "@/components/motion/gsap";
 import Magnetic from "@/components/motion/Magnetic";
 import ProductVisual from "@/components/site/ProductVisual";
 import Stars from "@/components/site/Stars";
@@ -184,7 +184,7 @@ export default function Hero({ product, secondary, ratingAvg, reviewCount }: Pro
         <div data-hero-copy className="relative z-10 max-w-2xl">
           <p data-hero-fade className="eyebrow mb-5 flex items-center gap-2.5 text-forest-mid opacity-0">
             <span className="inline-block size-1.5 rounded-full bg-amber" />
-            Vet-formulated · Third-party tested
+            B2B pet supplement manufacturing
           </p>
           <h1 data-hero-h1 className="display-hero text-ink" style={{ visibility: "hidden" }}>
             Thriving pets,
@@ -192,8 +192,8 @@ export default function Hero({ product, secondary, ratingAvg, reviewCount }: Pro
             backed by <em className="not-italic text-forest-mid">science</em>.
           </h1>
           <p data-hero-fade className="mt-6 max-w-md text-[1.06rem] leading-relaxed text-ink-soft opacity-0">
-            Daily supplements for dogs and cats — formulated with veterinary nutritionists,
-            produced in GMP-certified facilities, and tested batch by batch.
+            Wholesale, private-label and OEM/ODM pet supplement projects supported through a
+            GMP-audited and SQF-certified manufacturing facility.
           </p>
 
           <div data-hero-fade className="mt-9 flex flex-wrap items-center gap-4 opacity-0">

@@ -1,42 +1,53 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
-import { LOCALES } from "@/lib/i18n/locales";
 import { NEWS_ARTICLES } from "@/lib/news";
+import { db } from "@/lib/db";
 
 type Entry = MetadataRoute.Sitemap[number];
 
-function localized(
+function entry(
   path: string,
   lastModified: Date,
   priority: number,
   changeFrequency: Entry["changeFrequency"]
-): Entry[] {
-  const url = (locale: string) => `${SITE_URL}/${locale}${path === "/" ? "" : path}`;
-  const languages = Object.fromEntries(LOCALES.map((locale) => [locale, url(locale)]));
-  return LOCALES.map((locale) => ({
-    url: url(locale),
+): Entry {
+  const url = `${SITE_URL}/en${path === "/" ? "" : path}`;
+  return {
+    url,
     lastModified,
     priority,
     changeFrequency,
-    alternates: { languages },
-  }));
+    alternates: { languages: { en: url, "x-default": url } },
+  };
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const siteRevision = new Date("2026-08-03T00:00:00.000Z");
   const pages: [string, number, Entry["changeFrequency"]][] = [
     ["/", 1, "weekly"],
-    ["/shop", 0.95, "weekly"],
-    ["/private-label", 0.95, "monthly"],
+    ["/shop", 0.95, "monthly"],
+    ["/private-label", 1, "monthly"],
     ["/factory", 0.9, "monthly"],
     ["/science", 0.9, "monthly"],
-    ["/news", 0.85, "weekly"],
+    ["/about", 0.8, "monthly"],
+    ["/contact", 0.75, "monthly"],
+    ["/news", 0.85, "monthly"],
+    ["/learn", 0.85, "weekly"],
   ];
 
-  const base = pages.flatMap(([path, priority, frequency]) => localized(path, now, priority, frequency));
-  const articles = NEWS_ARTICLES.flatMap((a) =>
-    localized(`/news/${a.slug}`, new Date(a.updated ?? a.date), 0.8, "monthly"),
+  const posts = await db.post.findMany({
+    where: { published: true },
+    select: { slug: true, publishedAt: true, updatedAt: true },
+    orderBy: { publishedAt: "desc" },
+  });
+
+  const base = pages.map(([path, priority, frequency]) => entry(path, siteRevision, priority, frequency));
+  const news = NEWS_ARTICLES.map((article) =>
+    entry(`/news/${article.slug}`, new Date(article.updated ?? article.date), 0.8, "monthly"),
+  );
+  const guides = posts.map((post) =>
+    entry(`/learn/${post.slug}`, post.updatedAt ?? post.publishedAt, post.slug.includes("complete-guide") ? 0.85 : 0.75, "monthly"),
   );
 
-  return [...base, ...articles];
+  return [...base, ...news, ...guides];
 }

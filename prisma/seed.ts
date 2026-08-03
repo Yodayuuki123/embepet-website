@@ -32,11 +32,12 @@ async function main() {
   console.log("🌱 站点设置…");
   const settings: Record<string, string> = {
     brandName: "EMBEPET",
+    brandTagline: "Pet supplement manufacturing for global brands",
     legalName: "Embepet Biotech (Shenzhen) Co., Ltd.",
     contactEmail: "care@embepet.com",
     b2bEmail: "b2b@embepet.com",
-    whatsapp: "+86 138 0000 0000",
-    announcement: "Free US shipping over $49 · 90-day taste guarantee",
+    whatsapp: "+86 178-1827-6837",
+    announcement: "Established 2016 · GMP audit recognition · SQF certified · OEM / ODM",
     instagram: "https://instagram.com/embepet",
     facebook: "https://facebook.com/embepet",
     tiktok: "https://tiktok.com/@embepet",

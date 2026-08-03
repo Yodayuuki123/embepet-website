@@ -14,9 +14,10 @@ import Link from "@/components/site/A";
 import JsonLd from "@/components/site/JsonLd";
 import FeaturedProductsCarousel from "@/components/b2b/FeaturedProductsCarousel";
 import VideoPlayer from "@/components/b2b/VideoPlayer";
-import { buildMetadata, absoluteUrl } from "@/lib/seo";
+import { buildMetadata, webPageJsonLd } from "@/lib/seo";
 import { isLocale } from "@/lib/i18n/locales";
 import { getDict } from "@/lib/i18n";
+import { articlesByDate } from "@/lib/news";
 import {
   SectionHeading,
   container,
@@ -38,11 +39,20 @@ export async function generateMetadata({
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   return buildMetadata({
-    title: "Pet Supplement OEM, Private Label & Wholesale Manufacturer | EMBEPET",
+    title: "Pet Supplement Manufacturer & OEM/ODM Partner | EMBEPET",
     description:
-      "EMBEPET and Beno Bio support global pet supplement brands with wholesale, private label, OEM/ODM development. GMP & SQF certified manufacturing by Taizhou Beno Biotech.",
+      "Beno Bio manufactures wholesale, private-label and custom pet supplements for global brands across soft chews, powders, liquids, oils, tablets and pastes.",
     path: "/",
     locale,
+    keywords: [
+      "pet supplement manufacturer",
+      "private label pet supplements",
+      "pet supplement OEM",
+      "pet supplement ODM",
+      "wholesale pet supplements",
+    ],
+    images: ["/images/b2b/hero-manufacturing-v2.png"],
+    imageAlt: "Beno Bio pet supplement manufacturing facility",
   });
 }
 
@@ -59,14 +69,13 @@ export default async function HomePage({
   return (
     <>
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          name: "EMBEPET — Pet Supplement Manufacturing",
-          url: absoluteUrl("/en"),
+        data={webPageJsonLd({
+          path: "/",
+          name: "EMBEPET pet supplement manufacturing",
           description:
-            "B2B pet supplement manufacturing: wholesale, private label and OEM/ODM. GMP & SQF certified by Taizhou Beno Biotech.",
-        }}
+            "Wholesale, private-label and OEM/ODM pet supplement manufacturing by Taizhou Beno Biotech Co., Ltd.",
+          primaryImage: "/images/b2b/beno-factory-exterior.png",
+        })}
       />
 
       {/* ═══════════════════════════════════════════════
@@ -76,7 +85,7 @@ export default async function HomePage({
         <div className="absolute inset-0">
           <Image
             src="/images/b2b/beno-factory-exterior.png"
-            alt=""
+            alt="Exterior of the Beno Bio pet supplement manufacturing facility in Taixing, Jiangsu"
             fill
             priority
             className="object-cover"
@@ -306,7 +315,7 @@ export default async function HomePage({
                 "/images/b2b/dosage-forms/03-tablets.png",
                 "/images/b2b/dosage-forms/04-drops-and-oils.png",
                 "/images/b2b/dosage-forms/05-pastes-and-gels.png",
-                "/images/b2b/dosage-forms/06-freeze-dried.png",
+                "/images/b2b/portfolio-lineup-v2.png",
               ];
               return (
                 <div
@@ -408,37 +417,10 @@ export default async function HomePage({
           </div>
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {(
-              [
-                {
-                  title: "Pet Supplement OEM: A Complete Guide from Formula to Market Launch",
-                  desc: "Contract-manufacturing timelines, MOQs, and the regulatory steps every brand owner should plan for.",
-                  date: "2025-06-15",
-                  cat: "OEM Guide",
-                  href: "/news/pet-supplement-oem-guide",
-                  image: "/images/b2b/news/news-oem-guide.png",
-                },
-                {
-                  title: "Soft Chews vs Powders vs Drops: Choosing the Right Format",
-                  desc: "A data-driven comparison of dosage forms — palatability, stability, and consumer preference.",
-                  date: "2025-05-22",
-                  cat: "Product Development",
-                  href: "/news/dosage-form-comparison",
-                  image: "/images/b2b/news/news-dosage-form.png",
-                },
-                {
-                  title: "Understanding GMP & SQF Certification for Pet Supplements",
-                  desc: "Why certifications matter for market access, retailer acceptance, and brand credibility.",
-                  date: "2025-04-10",
-                  cat: "Quality",
-                  href: "/news/gmp-sqf-certification",
-                  image: "/images/b2b/news/news-gmp-sqf.png",
-                },
-              ] as const
-            ).map((a) => (
+            {articlesByDate().slice(0, 3).map((a) => (
               <Link
                 key={a.title}
-                href={a.href}
+                href={`/news/${a.slug}`}
                 className={`${cardHover} group flex flex-col overflow-hidden rounded-sm border border-line bg-white`}
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
@@ -453,14 +435,14 @@ export default async function HomePage({
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex items-center gap-3 text-[0.7rem]">
                     <span className="font-bold uppercase tracking-[0.12em] text-forest-mid">
-                      {a.cat}
+                      {a.category}
                     </span>
                     <span className="text-ink-soft/50">{a.date}</span>
                   </div>
                   <h3 className="mt-3 flex-1 text-lg font-semibold leading-[1.3] text-ink">
                     {a.title}
                   </h3>
-                  <p className="mt-2 text-[0.88rem] leading-6 text-ink-soft">{a.desc}</p>
+                  <p className="mt-2 text-[0.88rem] leading-6 text-ink-soft">{a.excerpt}</p>
                   <span className="mt-5 inline-flex items-center gap-1.5 text-[0.82rem] font-semibold text-forest transition-colors group-hover:text-forest-mid">
                     {t.news.readMore}
                     <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />

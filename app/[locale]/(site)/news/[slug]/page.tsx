@@ -1,25 +1,38 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "@/components/site/A";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, BookOpenCheck, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpenCheck, Clock } from "lucide-react";
 import { buildMetadata, articleJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import JsonLd from "@/components/site/JsonLd";
 import { getArticle, articlesByDate } from "@/lib/news";
 import { btn } from "@/components/b2b/kit";
+import { isLocale } from "@/lib/i18n/locales";
 
 export function generateStaticParams() {
   return articlesByDate().map((a) => ({ slug: a.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale, slug } = await params;
   const article = getArticle(slug);
   if (!article) return {};
   return buildMetadata({
     title: article.seoTitle,
     description: article.description,
     path: `/news/${slug}`,
+    locale: isLocale(rawLocale) ? rawLocale : "en",
     ogType: "article",
+    images: [article.image],
+    imageAlt: `${article.title} — EMBEPET source-cited guide`,
+    keywords: article.keywords,
+    category: article.category,
+    publishedTime: new Date(article.date).toISOString(),
+    modifiedTime: new Date(article.updated ?? article.date).toISOString(),
   });
 }
 
@@ -27,7 +40,11 @@ function dateLabel(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 }
 
-export default async function NewsArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function NewsArticlePage({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article) notFound();
@@ -43,6 +60,11 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
         authorName: article.author,
         publishedAt: new Date(article.date),
         updatedAt: new Date(article.updated ?? article.date),
+        path: `/news/${article.slug}`,
+        image: article.image,
+        section: article.category,
+        keywords: article.keywords,
+        citations: article.sources,
       },
       "EMBEPET",
     ),
@@ -77,6 +99,17 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
             {article.title}
           </h1>
 
+          <div className="relative mt-8 aspect-[16/9] overflow-hidden border border-line bg-white">
+            <Image
+              src={article.image}
+              alt={`${article.title} — evidence-based pet supplement manufacturing guide`}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 768px"
+            />
+          </div>
+
           <div className="mt-7 border-l-2 border-forest bg-white p-5 sm:p-6">
             <p className="mb-2 flex items-center gap-2 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-forest-mid">
               <BookOpenCheck className="size-3.5" aria-hidden /> Quick answer
@@ -87,6 +120,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
           <p className="mt-7 border-y border-line py-4 text-sm">
             <span className="text-ink-soft">By </span>
             <span className="font-semibold text-ink">{article.author}</span>
+            <span className="text-ink-soft"> · Evidence checked against the sources below</span>
           </p>
         </div>
       </header>
@@ -132,6 +166,30 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
             </dl>
           </section>
         ) : null}
+
+        <section className="mt-12 border border-line bg-[#f5f3ec] p-6">
+          <h2 className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+            Sources &amp; further reading
+          </h2>
+          <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-6 text-ink-soft">
+            {article.sources.map((source) => (
+              <li key={source.url}>
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-forest-mid hover:underline"
+                >
+                  {source.label} <ArrowUpRight className="size-3" aria-hidden />
+                </a>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-5 text-xs leading-5 text-ink-soft">
+            This article is general product-development information, not legal or veterinary advice.
+            Requirements and suitable formats vary by market, product and intended claim.
+          </p>
+        </section>
 
         <div className="mt-12 border border-line bg-[#f5f3ec] p-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
           <div>

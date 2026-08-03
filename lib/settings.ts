@@ -24,21 +24,21 @@ export type SiteSettings = {
 const DEFAULTS: SiteSettings = {
   brandName: "EMBEPET",
   brandNameCn: "恩贝宠",
-  brandTagline: "Science-first supplements for dogs & cats",
+  brandTagline: "Pet supplement manufacturing for global brands",
   companyLegalName: "Embepet Biotech (Shenzhen) Co., Ltd.",
   supportEmail: "care@embepet.com",
   b2bEmail: "b2b@embepet.com",
   phone: "+86 178-1827-6837",
-  announcement: "10+ Years · Zero Safety Incidents · cGMP & SQF & HACCP · Ships to 150+ Countries",
+  announcement: "Established 2016 · GMP audit recognition · SQF certified · OEM / ODM",
   instagram: "https://instagram.com/embepet",
   facebook: "https://facebook.com/embepet",
   tiktok: "https://tiktok.com/@embepet",
   youtube: "https://youtube.com/@embepet",
   freeShippingThresholdCents: 4900,
   flatShippingCents: 599,
-  seoDefaultTitle: "EMBEPET — Science-First Pet Supplements | OEM/ODM Factory, 10+ Years",
+  seoDefaultTitle: "Pet Supplement Manufacturer & OEM/ODM Partner | EMBEPET",
   seoDefaultDescription:
-    "Vet-informed soft chews, oils and powders for dogs and cats. cGMP & SQF & HACCP certified facility, 10+ years zero-incident manufacturing, MOQ 500 units, ships to 150+ countries.",
+    "Taizhou Beno Biotech manufactures wholesale, private-label and custom pet supplements across soft chews, powders, liquids, oils, tablets and pastes.",
 };
 
 export const getSettings = cache(async (): Promise<SiteSettings> => {
@@ -49,6 +49,8 @@ export const getSettings = cache(async (): Promise<SiteSettings> => {
   if (map.contactEmail && !map.supportEmail) map.supportEmail = map.contactEmail;
   if (map.whatsapp && !map.phone) map.phone = map.whatsapp;
   if (map.legalName && !map.companyLegalName) map.companyLegalName = map.legalName;
+  if (map.phone?.replace(/\D/g, "") === "8613800000000") map.phone = DEFAULTS.phone;
+  if (map.announcement?.includes("Free US shipping")) map.announcement = DEFAULTS.announcement;
   return {
     ...DEFAULTS,
     ...map,

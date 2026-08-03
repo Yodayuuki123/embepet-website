@@ -11,7 +11,7 @@ import {
   ScanLine,
   Warehouse,
 } from "lucide-react";
-import { absoluteUrl, metaWithLocale, faqJsonLd } from "@/lib/seo";
+import { metaWithLocale, faqJsonLd, breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo";
 import Link from "@/components/site/A";
 import JsonLd from "@/components/site/JsonLd";
 import { isLocale } from "@/lib/i18n/locales";
@@ -31,8 +31,8 @@ const factoryFaqs = [
     a: "The facility is licensed to produce solid, semi-solid and liquid pet additive premixed feed. Product forms include soft chews, tablets, pastes, drops/oils, powders and granules using vacuum emulsification, tablet pressing, mixing, sterilization and drying processes.",
   },
   {
-    q: "Is the factory certified for export?",
-    a: "Yes. The manufacturing entity holds Feed Production License No. 苏饲预（2026）12006, SQF Food Safety Code: Pet Food Manufacturing certification (Edition 9, audit score 88), SQF Quality Code certification, Eurofins GMP audit recognition (86% score), and FDA Food Facility Registration (No. 10222600768, valid through December 31, 2026).",
+    q: "Which manufacturing licenses and quality records does the factory hold?",
+    a: "The manufacturing entity holds Feed Production License No. 苏饲预（2026）12006, SQF Food Safety Code: Pet Food Manufacturing certification (Edition 9, audit score 88), SQF Quality Code certification, Eurofins GMP audit recognition (86% score), and FDA Food Facility Registration No. 10222600768. Destination-market requirements are confirmed separately for each project.",
   },
   {
     q: "Can I visit or audit the factory before placing an order?",
@@ -44,8 +44,17 @@ export function generateMetadata({ params }: { params: Promise<{ locale: string 
   return metaWithLocale(params, {
     title: "Pet Supplement Factory & Manufacturing Facility | EMBEPET",
     description:
-      "Review Taizhou Beno Biotech's 30,000 m² pet supplement factory in Jiangsu, including production processes, 101–200 production staff, packaging, warehouse and company details.",
+      "Review Taizhou Beno Biotech's 3,000 m² pet supplement factory in Jiangsu: 3 production lines, 30 production staff, licensed dosage forms, packaging and quality controls.",
     path: "/factory",
+    keywords: [
+      "pet supplement factory",
+      "pet supplement contract manufacturer",
+      "pet supplement manufacturing facility",
+      "pet nutrition manufacturer China",
+      "Taizhou Beno Biotech",
+    ],
+    images: ["/images/b2b/factory-extrusion-line.png"],
+    imageAlt: "Pet supplement production equipment at Taizhou Beno Biotech",
   });
 }
 
@@ -62,19 +71,20 @@ export default async function FactoryPage({
   return (
     <>
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "AboutPage",
-          name: "Taizhou Beno Biotech manufacturing facility and company profile",
-          url: absoluteUrl("/en/factory"),
-          mainEntity: { "@id": `${absoluteUrl("/")}#manufacturer` },
+        data={webPageJsonLd({
+          type: "AboutPage",
+          path: "/factory",
+          name: "Taizhou Beno Biotech pet supplement factory",
           description:
-            "Company and manufacturing profile for Taizhou Beno Biotech Co., Ltd., a pet supplement production facility in Taixing City, Jiangsu, China.",
-          primaryImageOfPage: {
-            "@type": "ImageObject",
-            url: absoluteUrl("/images/b2b/factory-extrusion-line.png"),
-          },
-        }}
+            "Manufacturing profile for a 3,000 m² pet supplement production facility in Taixing City, Jiangsu, China.",
+          primaryImage: "/images/b2b/factory-extrusion-line.png",
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Pet Supplement Factory", path: "/factory" },
+        ])}
       />
 
       <section className="border-b border-line bg-[#f5f3ec]">

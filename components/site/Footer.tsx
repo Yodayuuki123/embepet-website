@@ -50,10 +50,11 @@ export default function Footer({ settings, labels: t }: { settings: SiteSettings
     {
       title: t.businessInfo,
       links: [
-        { href: "/factory#company", label: t.companyProfile },
+        { href: "/about", label: t.companyProfile },
         { href: "/science#certificates", label: t.certificates },
+        { href: "/learn", label: "Knowledge hub" },
         { href: "/news", label: t.newsInsights },
-        { href: "/private-label#inquiry", label: t.requestQuote },
+        { href: "/contact", label: t.requestQuote },
       ],
     },
   ];

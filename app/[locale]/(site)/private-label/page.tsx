@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  ArrowRight,
   Factory,
   FlaskConical,
   Layers,
@@ -11,14 +10,38 @@ import {
   Phone,
   TestTube,
 } from "lucide-react";
-import { absoluteUrl, metaWithLocale } from "@/lib/seo";
+import {
+  metaWithLocale,
+  breadcrumbJsonLd,
+  faqJsonLd,
+  serviceJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo";
 import { getSettings } from "@/lib/settings";
 import InquiryForm from "@/components/site/InquiryForm";
-import Link from "@/components/site/A";
 import JsonLd from "@/components/site/JsonLd";
-import ServiceOrbit, { type OrbitItem } from "@/components/b2b/ServiceOrbit";
+import ServiceOrbit from "@/components/b2b/ServiceOrbit";
 import { isLocale } from "@/lib/i18n/locales";
 import { getDict } from "@/lib/i18n";
+
+const oemFaqs = [
+  {
+    q: "What is the difference between private label, OEM and ODM pet supplements?",
+    a: "Private label starts from an existing formula and applies your brand and agreed packaging. OEM manufactures to an approved customer specification. ODM adds formula and product-development support before manufacturing. The practical route is confirmed after the target market, format, claims and volume are reviewed.",
+  },
+  {
+    q: "What information is needed to quote a pet supplement project?",
+    a: "Provide the destination market, species, target benefit, dosage form, expected order volume, packaging direction, launch timing and any required tests or documents. These inputs determine the sampling route, MOQ basis and formal quotation.",
+  },
+  {
+    q: "Can a brand review samples before production?",
+    a: "Yes. The process includes formula and sample review before small-batch or commercial production. The approved specification and packaging configuration become the basis for production and quality release.",
+  },
+  {
+    q: "Which pet supplement formats are available for OEM/ODM?",
+    a: "The licensed manufacturing scope covers solid, semi-solid and liquid pet additive premixed feed. Project formats include soft chews, tablets, pastes, drops and oils, powders and granules.",
+  },
+];
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   return metaWithLocale(params, {
@@ -26,6 +49,15 @@ export function generateMetadata({ params }: { params: Promise<{ locale: string 
     description:
       "Build private-label and OEM/ODM pet supplements with stock-formula or custom-development routes, sampling, packaging configuration, controlled production and export coordination.",
     path: "/private-label",
+    keywords: [
+      "private label pet supplements",
+      "pet supplement OEM",
+      "pet supplement ODM",
+      "custom pet supplement manufacturer",
+      "pet supplement contract manufacturing",
+    ],
+    images: ["/images/b2b/oem-collaboration-v2.png"],
+    imageAlt: "Private-label pet supplement development and packaging collaboration",
   });
 }
 
@@ -46,27 +78,39 @@ export default async function PrivateLabelPage({
     { name: t.dosageForms.items[2], src: "/images/b2b/dosage-forms/05-pastes-and-gels.png" },
     { name: t.dosageForms.items[3], src: "/images/b2b/dosage-forms/04-drops-and-oils.png" },
     { name: t.dosageForms.items[4], src: "/images/b2b/dosage-forms/02-powders.png" },
-    { name: t.dosageForms.items[5], src: "/images/b2b/dosage-forms/06-freeze-dried.png" },
+    { name: t.dosageForms.items[5], src: "/images/b2b/portfolio-lineup-v2.png" },
   ];
 
   return (
     <>
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Service",
+        data={serviceJsonLd({
           name: "Private label and OEM/ODM pet supplement manufacturing",
-          serviceType: "Pet supplement contract manufacturing",
-          url: absoluteUrl("/en/private-label"),
-          provider: { "@id": `${absoluteUrl("/")}#manufacturer` },
-          areaServed: "Worldwide",
-          audience: {
-            "@type": "BusinessAudience",
-            audienceType: "Pet supplement brand owners, distributors and global sellers",
-          },
           description:
-            "Stock-formula and custom-formula pet supplement manufacturing with sampling, packaging, production, quality review and export coordination.",
-        }}
+            "Stock-formula and custom-development pet supplement manufacturing with sampling, packaging, production, quality review and export coordination.",
+          path: "/private-label",
+          serviceTypes: [
+            "Private label pet supplements",
+            "Pet supplement OEM manufacturing",
+            "Pet supplement ODM development",
+            "Custom pet supplement manufacturing",
+          ],
+        })}
+      />
+      <JsonLd
+        data={webPageJsonLd({
+          path: "/private-label",
+          name: "Private label pet supplements and OEM/ODM manufacturing",
+          description:
+            "Commercial routes, process, dosage forms and inquiry requirements for private-label and custom pet supplement projects.",
+          primaryImage: "/images/b2b/oem-collaboration-v2.png",
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Private Label & OEM/ODM", path: "/private-label" },
+        ])}
       />
 
       <section className="border-b border-line bg-[#f5f3ec]">
@@ -189,6 +233,27 @@ export default async function PrivateLabelPage({
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-line bg-white">
+        <JsonLd data={faqJsonLd(oemFaqs)} />
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.36fr_0.64fr] lg:px-10">
+          <div>
+            <p className="b2b-kicker text-forest-mid">Buyer FAQ</p>
+            <h2 className="b2b-heading mt-4">Private Label Pet Supplement FAQ</h2>
+            <p className="mt-5 text-sm leading-7 text-ink-soft">
+              Direct answers for brand owners comparing private-label, OEM and ODM manufacturing routes.
+            </p>
+          </div>
+          <dl className="border-t border-line">
+            {oemFaqs.map((item) => (
+              <div key={item.q} className="border-b border-line py-6">
+                <dt className="text-lg font-semibold text-ink">{item.q}</dt>
+                <dd className="mt-3 text-sm leading-7 text-ink-soft">{item.a}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

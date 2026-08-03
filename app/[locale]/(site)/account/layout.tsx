@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 
+export const metadata = { title: "Business Inquiry", robots: { index: false, follow: true } };
+
 export default async function AccountRedirectLayout({
   params,
 }: {

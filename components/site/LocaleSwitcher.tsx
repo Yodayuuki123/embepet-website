@@ -22,6 +22,8 @@ export default function LocaleSwitcher({ locale, label }: { locale: Locale; labe
   function switchTo(next: Locale) {
     setOpen(false);
     if (next === locale) return;
+    // The locale preference must persist before navigating to the selected route.
+    // eslint-disable-next-line react-hooks/immutability
     document.cookie = `ep_locale=${next};path=/;max-age=${60 * 60 * 24 * 365}`;
     const segments = pathname.split("/");
     if (segments[1] && isLocale(segments[1])) {
