@@ -9,10 +9,18 @@ import { container, section, kicker, btn } from "@/components/b2b/kit";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   return metaWithLocale(params, {
-    title: "Pet Supplement News & Insights for Brands | EMBEPET",
+    title: "Pet Supplement OEM & Manufacturing Insights",
     description:
-      "News, market trends and formulation insights for pet supplement brands — OEM guidance, dosage-form comparisons and GMP/SQF compliance from EMBEPET's manufacturing team.",
+      "Source-cited guidance for pet supplement brands on OEM projects, dosage-form decisions, animal-food labeling, GMP audits and SQF manufacturing certification.",
     path: "/news",
+    keywords: [
+      "pet supplement OEM guide",
+      "pet supplement manufacturing insights",
+      "private label pet supplements",
+      "SQF pet food manufacturing",
+    ],
+    images: ["/images/b2b/news/news-oem-guide.png"],
+    imageAlt: "Pet supplement OEM planning and manufacturing insights",
   });
 }
 
@@ -23,12 +31,6 @@ function dateLabel(iso: string) {
   const yyyy = d.getFullYear();
   return `${dd}.${mm}.${yyyy}`;
 }
-
-const COVER_IMAGES: Record<string, string> = {
-  "pet-supplement-oem-guide": "/images/b2b/news/news-oem-guide.png",
-  "dosage-form-comparison": "/images/b2b/news/news-dosage-form.png",
-  "gmp-sqf-certification": "/images/b2b/news/news-gmp-sqf.png",
-};
 
 export default function NewsPage() {
   const articles = articlesByDate();
@@ -65,7 +67,7 @@ export default function NewsPage() {
             Industry Insights &amp; Manufacturing Updates
           </h1>
           <p className="mt-4 max-w-2xl text-[0.97rem] leading-7 text-ink-soft">
-            Market trends, formulation guidance and regulatory insights for pet-supplement brand owners — written by our manufacturing and quality teams.
+            Source-cited formulation, sourcing and compliance guidance for pet-supplement brand owners — written by our product and quality teams and linked to the underlying references.
           </p>
         </div>
       </section>
@@ -82,15 +84,13 @@ export default function NewsPage() {
               >
                 {/* Cover image — square-ish, no border radius */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#eaeee5]">
-                  {COVER_IMAGES[a.slug] && (
-                    <Image
-                      src={COVER_IMAGES[a.slug]}
-                      alt={a.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  )}
+                  <Image
+                    src={a.image}
+                    alt={`${a.title} — EMBEPET evidence-based guide`}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
                 </div>
 
                 {/* Meta row: date + category tag */}

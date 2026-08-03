@@ -1,54 +1,49 @@
 # EMBEPET 海外独立站
 
-恩贝宠（深圳）宠物保健品海外独立站：美区 TO C 品牌商城 + 站内 B2B 询盘，Next.js 全栈自建，含中文管理后台，SEO/GEO 全量落地，前台支持 5 种语言。
+EMBEPET 宠物营养补充剂 B2B 官网：面向品牌方、经销商、零售渠道和全球卖家的产品比较、私标与 OEM/ODM 项目询盘站。Next.js 全栈自建，含中文管理后台与英文 SEO/GEO 内容体系。
 
 ## 本地运行
 
 ```bash
-cd web
-npm install
-npx prisma db push      # 初始化 SQLite 数据库（web/dev.db）
+cd embepet-website
+npm ci
+npx prisma db push      # 初始化 SQLite 数据库（prisma/dev.db）
 npx prisma db seed      # 写入产品/文章/评价等种子数据
 npm run dev             # http://localhost:3000
 ```
 
-- 前台商城：http://localhost:3000 （自动跳转到 /en，可切 es/fr/de/ja）
+- B2B 前台：http://localhost:3000 （默认进入 `/en`，可切换其他语言）
 - 管理后台：http://localhost:3000/admin
   - 管理员：`admin@embepet.com` / `admin123`
   - 演示顾客：`demo@embepet.com` / `demo1234`
 
-## 支付
-
-`.env` 中 `STRIPE_SECRET_KEY` 留空时，结账走**开发模拟支付**（订单直接标记已支付，完整跑通订单流）。
-接入真实 Stripe：
-
-1. 填入 `STRIPE_SECRET_KEY`（sk_test_ 开头的测试密钥即可）
-2. 本地转发 webhook：`stripe listen --forward-to localhost:3000/api/webhooks/stripe`，把生成的 `whsec_` 填入 `STRIPE_WEBHOOK_SECRET`
-
 ## 邮件
 
-默认打印到控制台。配置 `RESEND_API_KEY` 与 `EMAIL_FROM` 后自动经 Resend 发送（订单确认、询盘通知）。
+默认打印到控制台。配置 `RESEND_API_KEY` 与 `EMAIL_FROM` 后自动经 Resend 发送询盘通知。
 
 ## 多语言
 
-- URL 结构 `/{locale}/...`，支持 `en / es / fr / de / ja`，中间件按 Cookie 与浏览器语言自动定位
+- URL 结构 `/{locale}/...`，支持 `en / zh / es / fr / de / ja`
 - UI 词典：`lib/i18n/dictionaries/`
-- 产品/集合/文章的营销字段翻译存在各自数据表的 `translations` JSON 字段，可在后台编辑
+- 当前只将英文 `/en` 版本开放搜索索引；其他语言可访问，但统一 canonical 到英文并设为 `noindex`，待独立内容审核后再开放索引
 
 ## SEO / GEO
 
-- 每页独立 title/description/canonical/hreflang/OG（`lib/seo.ts`）
-- JSON-LD：Organization、WebSite、Product+Offer(+运费/退货政策)、AggregateRating、Review、BreadcrumbList、FAQPage、Article
+- 核心页、新闻页与全部知识文章均有独立 title、description、关键词清单、英文 canonical、robots、Open Graph 与 Twitter Card（`lib/seo.ts`）
+- JSON-LD：Organization、WebSite、WebPage、AboutPage、ContactPage、CollectionPage、Service、BreadcrumbList、FAQPage、Article
 - `robots.txt` 显式放行 GPTBot / ClaudeBot / PerplexityBot / Google-Extended 等 AI 爬虫
-- `sitemap.xml` 动态生成（含全语言 alternates）；`llms.txt` 与 `llms-full.txt` 为 AI 引擎提供精选内容索引
-- 内容规范：产品与文章均带"答案胶囊"（40-60 词直接答案）、FAQ 块、来源引用
+- `sitemap.xml` 只提交可索引的英文核心页、新闻与数据库文章，使用真实更新时间；账户、后台、结算、筛选参数页与旧重定向页不进入站点地图
+- `llms.txt` 与 `llms-full.txt` 提供英文实体事实、产品索引、文章摘要和可追溯来源，供支持这些文件的 AI 服务读取
+- 内容规范：直接答案、问题式小标题、FAQ、可见来源、Article Schema citation、清晰作者主体、相关内容内链和非医疗/法律建议声明
+- 筛选参数页使用主集合 canonical 并设为 `noindex`，避免重复内容与抓取浪费
 - 301 重定向可在后台"SEO 工具"里配置
 
 ## 部署（上线时）
 
 1. 数据库换 PostgreSQL：改 `prisma/schema.prisma` 的 `provider = "postgresql"` 与 `DATABASE_URL`，执行 `prisma db push && prisma db seed`
-2. 设置环境变量：`NEXT_PUBLIC_SITE_URL`（正式域名）、`SESSION_SECRET`（随机长字符串）、Stripe 正式密钥
+2. 设置环境变量：`NEXT_PUBLIC_SITE_URL`（正式域名）、`SESSION_SECRET`（随机长字符串）、`GOOGLE_SITE_VERIFICATION`、`BING_SITE_VERIFICATION`
 3. `npm run build && npm start`，或直接部署到 Vercel
+4. 上线后向 Google Search Console 和 Bing Webmaster Tools 提交 `/sitemap.xml`，用真实查询数据监控关键词、展示量、点击率、收录与富媒体结果；代码本身不承诺具体排名
 
 ## 品牌资料替换
 

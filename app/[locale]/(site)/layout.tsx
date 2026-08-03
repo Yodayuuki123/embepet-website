@@ -64,7 +64,7 @@ export default async function SiteLayout({
         <script {...jsonLdScriptProps(websiteJsonLd("EMBEPET"))} />
         <Header
           brandName="EMBEPET"
-          announcement="GMP audit recognition · SQF Pet Food Manufacturing · OEM / ODM · MOQ from 500 units"
+          announcement="GMP audit recognition · SQF Pet Food Manufacturing · OEM / ODM · Project-specific MOQ"
           locale={locale}
           labels={headerLabels}
         />

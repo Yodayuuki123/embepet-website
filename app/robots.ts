@@ -7,7 +7,14 @@ import { SITE_URL } from "@/lib/seo";
  * - 显式放行主流 AI 爬虫（GEO：确保 ChatGPT/Claude/Perplexity/Gemini 能抓取引用）
  */
 export default function robots(): MetadataRoute.Robots {
-  const disallow = ["/admin", "/api/", "/*/account", "/*/cart", "/*/checkout"];
+  const disallow = [
+    "/admin/",
+    "/api/",
+    "/*/account",
+    "/*/account/",
+    "/*/cart",
+    "/*/checkout",
+  ];
 
   const aiBots = [
     "GPTBot",

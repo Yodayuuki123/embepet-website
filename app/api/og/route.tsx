@@ -11,10 +11,10 @@ export async function GET(req: NextRequest) {
 
   const kicker =
     kind === "product"
-      ? "SCIENCE-FIRST PET SUPPLEMENTS"
+      ? "WHOLESALE PET SUPPLEMENT PORTFOLIO"
       : kind === "article"
-        ? "THE LEARN HUB · VET-REVIEWED"
-        : "SUPPLEMENTS FOR DOGS & CATS";
+        ? "SOURCE-CITED PET SUPPLEMENT INSIGHTS"
+        : "PET SUPPLEMENT OEM · ODM · WHOLESALE";
 
   return new ImageResponse(
     (
@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 20, color: "rgba(246,243,234,0.65)" }}>
-          <div>cGMP · SQF · HACCP certified manufacturing</div>
+          <div>GMP audit recognition · SQF certified manufacturing</div>
           <div>embepet.com</div>
         </div>
       </div>

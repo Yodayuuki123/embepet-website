@@ -13,7 +13,7 @@ export default function Logo({ brandName, light = false }: { brandName: string; 
         alt="Beno·Bio"
         width={140}
         height={56}
-        className="h-10 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+        className={`h-10 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80 ${light ? "brightness-0 invert" : ""}`}
         priority
       />
     </NextLink>

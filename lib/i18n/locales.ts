@@ -1,7 +1,9 @@
 export const ALL_LOCALES = ["zh", "en", "es", "fr", "de", "ja"] as const;
 export type Locale = (typeof ALL_LOCALES)[number];
 export const LOCALES = ["zh", "en", "es", "fr", "de", "ja"] as const satisfies readonly Locale[];
-export const DEFAULT_LOCALE: Locale = "zh";
+// English is the primary public/search locale. Visitors can still choose any
+// translated route, and their choice is remembered by the locale cookie.
+export const DEFAULT_LOCALE: Locale = "en";
 
 export const LOCALE_LABELS: Record<Locale, string> = {
   zh: "中文",

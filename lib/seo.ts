@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import { LOCALES, type Locale } from "@/lib/i18n/locales";
+import { LOCALES, LOCALE_OG, type Locale } from "@/lib/i18n/locales";
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+/**
+ * English is the only search-indexed locale for now. Translated routes remain
+ * usable, but canonicalize to English and are excluded from indexing until
+ * they receive a complete, independently reviewed SEO/content pass.
+ */
+export const SEO_LOCALE: Locale = "en";
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://embepet.com").replace(/\/$/, "");
 
 export function absoluteUrl(path: string): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
@@ -34,6 +40,11 @@ type MetaInput = {
   locale?: Locale;
   ogType?: "website" | "article";
   images?: string[];
+  imageAlt?: string;
+  keywords?: string[];
+  category?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
   noIndex?: boolean;
 };
 
@@ -47,30 +58,77 @@ export async function metaWithLocale(
   return buildMetadata({ ...input, locale: safe });
 }
 
-/** 统一元数据构造：title/description/canonical/hreflang/OG/Twitter */
-export function buildMetadata({ title, description, path, locale = "en", ogType = "website", images, noIndex }: MetaInput): Metadata {
-  const url = absoluteUrl(localizedPath(path, locale));
-  const ogImages = images?.length ? images : [absoluteUrl(`/api/og?title=${encodeURIComponent(title)}`)];
-  const languages: Record<string, string> = Object.fromEntries(
-    LOCALES.map((l) => [l, absoluteUrl(localizedPath(path, l))])
+/** 统一元数据构造：英文 canonical、索引控制、OG/Twitter 和搜索摘要。 */
+export function buildMetadata({
+  title,
+  description,
+  path,
+  locale = SEO_LOCALE,
+  ogType = "website",
+  images,
+  imageAlt,
+  keywords,
+  category,
+  publishedTime,
+  modifiedTime,
+  noIndex,
+}: MetaInput): Metadata {
+  const canonicalUrl = absoluteUrl(localizedPath(path, SEO_LOCALE));
+  const shouldNoIndex = Boolean(noIndex || locale !== SEO_LOCALE);
+  const exactTitle = title.includes("EMBEPET") ? title : `${title} | EMBEPET`;
+  const ogImages = (images?.length ? images : [`/api/og?title=${encodeURIComponent(exactTitle)}`]).map(
+    (src) => (src.startsWith("http") ? src : absoluteUrl(src)),
   );
-  languages["x-default"] = absoluteUrl(localizedPath(path, "en"));
+  const languages: Record<string, string> = {
+    en: canonicalUrl,
+    "x-default": canonicalUrl,
+  };
   return {
-    title,
+    title: { absolute: exactTitle },
     description,
-    alternates: { canonical: url, languages },
-    robots: noIndex ? { index: false, follow: false } : undefined,
+    keywords,
+    category,
+    applicationName: "EMBEPET",
+    authors: [{ name: "EMBEPET", url: absoluteUrl("/en/about") }],
+    creator: "EMBEPET",
+    publisher: "Taizhou Beno Biotech Co., Ltd.",
+    alternates: { canonical: canonicalUrl, languages },
+    robots: {
+      index: !shouldNoIndex,
+      follow: true,
+      googleBot: {
+        index: !shouldNoIndex,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     openGraph: {
-      title,
+      title: exactTitle,
       description,
-      url,
+      url: canonicalUrl,
       siteName: "EMBEPET",
       type: ogType,
-      images: ogImages.map((src) => ({ url: src, width: 1200, height: 630 })),
+      locale: LOCALE_OG[SEO_LOCALE],
+      images: ogImages.map((src) => ({
+        url: src,
+        width: 1200,
+        height: 630,
+        alt: imageAlt ?? exactTitle,
+      })),
+      ...(ogType === "article"
+        ? {
+            publishedTime,
+            modifiedTime,
+            section: category,
+            tags: keywords,
+          }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: exactTitle,
       description,
       images: ogImages,
     },
@@ -97,14 +155,25 @@ export function organizationJsonLd(s: {
         "@type": "Organization",
         "@id": `${SITE_URL}/#organization`,
         name: s.brandName,
-        legalName: s.companyLegalName ?? "Embepet Biotech (Shenzhen) Co., Ltd.",
+        legalName: s.companyLegalName || undefined,
         url: SITE_URL,
-        logo: absoluteUrl(`/api/og?title=${encodeURIComponent(s.brandName)}&kind=logo`),
+        logo: {
+          "@type": "ImageObject",
+          url: absoluteUrl("/images/beno-bio-logo-transparent.png"),
+        },
         email: s.b2bEmail ?? s.supportEmail,
         telephone: s.phone,
         description:
           "EMBEPET supports pet supplement wholesale, private label and OEM/ODM projects for brand owners, distributors and global sellers.",
         areaServed: "Worldwide",
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "B2B sales",
+          email: s.b2bEmail ?? s.supportEmail,
+          telephone: s.phone,
+          availableLanguage: ["English", "Chinese"],
+          areaServed: "Worldwide",
+        },
         knowsAbout: [
           "pet supplement manufacturing",
           "private label pet supplements",
@@ -117,6 +186,7 @@ export function organizationJsonLd(s: {
         "@id": `${SITE_URL}/#manufacturer`,
         name: "Taizhou Beno Biotech Co., Ltd.",
         url: absoluteUrl("/en/factory"),
+        foundingDate: "2016-08-11",
         email: s.b2bEmail ?? s.supportEmail,
         telephone: s.phone,
         description:
@@ -143,6 +213,12 @@ export function organizationJsonLd(s: {
             credentialCategory: "Food safety certification",
             url: absoluteUrl("/certificates/taizhou-beno-sqf-2026.pdf"),
           },
+          {
+            "@type": "EducationalOccupationalCredential",
+            name: "SQF Quality Code, Edition 9",
+            credentialCategory: "Quality certification",
+            url: absoluteUrl("/certificates/taizhou-beno-sqf-quality-2026.pdf"),
+          },
         ],
       },
     ],
@@ -159,7 +235,7 @@ export function websiteJsonLd(brandName: string) {
     publisher: { "@id": `${SITE_URL}/#organization` },
     potentialAction: {
       "@type": "SearchAction",
-      target: { "@type": "EntryPoint", urlTemplate: `${SITE_URL}/shop?q={search_term_string}` },
+      target: { "@type": "EntryPoint", urlTemplate: `${SITE_URL}/en/shop?q={search_term_string}` },
       "query-input": "required name=search_term_string",
     },
   };
@@ -276,10 +352,20 @@ type ArticleJsonLdInput = {
   reviewedBy?: string | null;
   publishedAt: Date;
   updatedAt: Date;
+  path?: string;
+  image?: string;
+  section?: string;
+  keywords?: string[];
+  citations?: { label: string; url?: string }[];
 };
 
 export function articleJsonLd(a: ArticleJsonLdInput, brandName = "EMBEPET", locale: Locale = "en") {
-  const url = absoluteUrl(localizedPath(`/learn/${a.slug}`, locale));
+  const url = absoluteUrl(localizedPath(a.path ?? `/learn/${a.slug}`, locale));
+  const image = a.image
+    ? a.image.startsWith("http")
+      ? a.image
+      : absoluteUrl(a.image)
+    : absoluteUrl(`/api/og?title=${encodeURIComponent(a.title)}&kind=article`);
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -287,11 +373,67 @@ export function articleJsonLd(a: ArticleJsonLdInput, brandName = "EMBEPET", loca
     headline: a.title,
     description: a.excerpt,
     url,
-    image: [absoluteUrl(`/api/og?title=${encodeURIComponent(a.title)}&kind=article`)],
-    author: { "@type": "Organization", name: a.authorName || `${brandName} Science Team` },
+    image: [image],
+    author: {
+      "@type": "Organization",
+      name: a.authorName || `${brandName} Science Team`,
+      url: absoluteUrl("/en/about"),
+    },
     publisher: { "@id": `${SITE_URL}/#organization` },
     datePublished: a.publishedAt.toISOString(),
     dateModified: a.updatedAt.toISOString(),
     mainEntityOfPage: url,
+    articleSection: a.section,
+    keywords: a.keywords,
+    citation: a.citations?.map((source) => source.url ?? source.label),
+    isAccessibleForFree: true,
+  };
+}
+
+export function webPageJsonLd(input: {
+  path: string;
+  name: string;
+  description: string;
+  type?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
+  primaryImage?: string;
+}) {
+  const url = absoluteUrl(localizedPath(input.path, SEO_LOCALE));
+  return {
+    "@context": "https://schema.org",
+    "@type": input.type ?? "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: input.name,
+    description: input.description,
+    inLanguage: "en",
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#manufacturer` },
+    primaryImageOfPage: input.primaryImage
+      ? { "@type": "ImageObject", url: absoluteUrl(input.primaryImage) }
+      : undefined,
+  };
+}
+
+export function serviceJsonLd(input: {
+  name: string;
+  description: string;
+  path: string;
+  serviceTypes: string[];
+}) {
+  const url = absoluteUrl(localizedPath(input.path, SEO_LOCALE));
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name: input.name,
+    description: input.description,
+    url,
+    provider: { "@id": `${SITE_URL}/#manufacturer` },
+    areaServed: "Worldwide",
+    audience: {
+      "@type": "BusinessAudience",
+      audienceType: "Pet brands, distributors, retailers and global sellers",
+    },
+    serviceType: input.serviceTypes,
   };
 }

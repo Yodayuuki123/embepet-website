@@ -1,4 +1,5 @@
 import Link from "@/components/site/A";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/motion/Reveal";
 
@@ -31,10 +32,12 @@ export default function SpeciesCTA() {
             className="group relative overflow-hidden rounded-3xl"
           >
             <Link href={`/${s.slug}`} className="block h-full">
-              <img
+              <Image
                 src={s.img}
                 alt={s.label}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.08]"
               />
               <div
                 className="absolute inset-0"

@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Check,
   ShieldCheck,
-  ExternalLink,
   FlaskConical,
   TestTube,
   ClipboardCheck,
@@ -15,17 +14,12 @@ import {
   Layers,
   TrendingUp,
   Users,
-  Star,
   Clock,
   FileText,
-  Download,
-  ChevronRight,
 } from "lucide-react";
-import { absoluteUrl, metaWithLocale, faqJsonLd } from "@/lib/seo";
+import { absoluteUrl, metaWithLocale, faqJsonLd, breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo";
 import Link from "@/components/site/A";
 import JsonLd from "@/components/site/JsonLd";
-import { isLocale } from "@/lib/i18n/locales";
-import { getDict } from "@/lib/i18n";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   return metaWithLocale(params, {
@@ -33,6 +27,15 @@ export function generateMetadata({ params }: { params: Promise<{ locale: string 
     description:
       "Verify Taizhou Beno Biotech's Eurofins GMP audit recognition and SQF Food Safety Code: Pet Food Manufacturing certificate, with IDs, audit dates, scope and validity.",
     path: "/science",
+    keywords: [
+      "pet supplement GMP",
+      "SQF pet food manufacturer",
+      "pet supplement quality control",
+      "pet supplement manufacturing certificates",
+      "Taizhou Beno Biotech certificates",
+    ],
+    images: ["/images/b2b/certifications-display.png"],
+    imageAlt: "Beno Bio pet supplement manufacturing certificates and quality records",
   });
 }
 
@@ -50,7 +53,7 @@ const certificates = [
     identifier: "ACCB8AAA422_1",
     result: "Score: 86%",
     image: "/images/science/cert-gmp.jpg",
-    description: "Eurofins GMP audit recognition confirms that our facility meets Good Manufacturing Practice standards for pet supplement production. The on-site audit covered facility layout, equipment qualification, personnel hygiene, raw material controls, in-process monitoring, and documentation integrity. An 86% score on the first attempt reflects a mature quality management system that was already operating at international standards before the formal audit.",
+    description: "Eurofins issued GMP audit recognition after an on-site audit covering the facility, equipment, personnel hygiene, raw-material controls, in-process monitoring and documentation. The record shows an audit score of 86% and is available here as the original PDF supplied for buyer review.",
   },
   {
     short: "SQF",
@@ -65,7 +68,7 @@ const certificates = [
     identifier: "105690",
     result: "Edition 9 — Score: 88 — Good",
     image: "/images/science/cert-sqf-food.jpg",
-    description: "The SQF Food Safety Code Edition 9 is one of the most rigorous third-party food safety standards globally, recognized by the Global Food Safety Initiative (GFSI). Our certification under FSC 32 (Pet Premix food) was awarded after a three-day on-site audit by Eurofins Food Assurance Certification US, LLC. The 88-point score and 'Good' rating on an initial certification audit demonstrates that our HACCP plan, allergen management, foreign matter controls, and sanitation programs are fully operational and documented.",
+    description: "The SQF Food Safety Code: Pet Food Manufacturing, Edition 9 certificate covers FSC 32 (Pet Premix food). It was issued following the June 2026 Eurofins audit and records a score of 88 with a Good rating. Buyers can review the certificate identifier, audit date, scope and validity in the original PDF.",
   },
   {
     short: "SQF",
@@ -94,8 +97,8 @@ const faqs = [
     a: "Eurofins GMP audit recognition is valid through June 14, 2027. SQF Food Safety and Quality certifications are valid through August 28, 2027, with the re-certification audit scheduled for June 14, 2027. The Feed Production License (苏饲预（2026）12006) is valid from April 26, 2026 to April 25, 2031. FDA Food Facility Registration No. 10222600768 is renewed biennially and is currently valid through December 31, 2026.",
   },
   {
-    q: "What is the minimum order quantity, and why is it lower than industry average?",
-    a: "Our MOQ is 500 bottles for soft chews — compared to the industry average of 3,000 bottles. This is possible because our high-speed production line (1 tonne/hour) allows efficient short runs without the setup cost penalties that affect slower equipment. Low MOQ is a deliberate strategic choice to support new brand launches, market testing, and seasonal SKU expansion for our partners.",
+    q: "What is the minimum order quantity for a pet supplement project?",
+    a: "Starting quantities are shown per catalog SKU for early comparison. The confirmed MOQ depends on the formula, dosage form, packaging configuration and production route, and is stated in the formal project quotation. The website does not apply one universal MOQ to every product.",
   },
   {
     q: "Does the website claim every project receives the same tests?",
@@ -103,24 +106,15 @@ const faqs = [
   },
   {
     q: "Can procurement teams inspect the original files?",
-    a: "Yes. Each certificate registry entry includes a direct link to the original PDF record for vendor review. Additional documentation such as full audit reports, FDA registration confirmation, and the Feed Production License are available upon request. We can also provide a complete vendor qualification package including HACCP plan summary, allergen statement, and country-of-origin documentation.",
+    a: "Yes. Each certificate registry entry includes a direct link to the supplied PDF record for vendor review. Additional project documents can be discussed during supplier qualification, including the applicable audit material, FDA registration confirmation, Feed Production License, specification, allergen statement and country-of-origin information.",
   },
   {
     q: "What should a buyer include in a document request?",
-    a: "Provide the product or formula, target market, sales channel, requested certificates, testing expectations, label responsibility, and shipment terms. For regulatory compliance, specify destination country requirements and any mandatory testing protocols. Our team will respond within 24 hours with a tailored document checklist and timeline.",
+    a: "Provide the product or formula, target market, sales channel, requested certificates, testing expectations, label responsibility and shipment terms. The team then confirms which records are available, which tests are project-specific and the expected document timeline.",
   },
 ];
 
-export default async function QualityPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale: rawLocale } = await params;
-  const locale = isLocale(rawLocale) ? rawLocale : "en";
-  const dict = getDict(locale);
-  const t = dict.b2bPages;
-
+export default function QualityPage() {
   return (
     <>
       <JsonLd
@@ -142,6 +136,22 @@ export default async function QualityPage({
           })),
         }}
       />
+      <JsonLd
+        data={webPageJsonLd({
+          type: "CollectionPage",
+          path: "/science",
+          name: "Pet supplement quality and certification evidence",
+          description:
+            "GMP audit recognition, SQF Food Safety and SQF Quality certificates, identifiers, audit dates, validity and project quality controls.",
+          primaryImage: "/images/b2b/certifications-display.png",
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Quality & Certificates", path: "/science" },
+        ])}
+      />
 
       {/* ─── HERO ─── */}
       <section className="border-b border-line bg-[#f5f3ec]">
@@ -155,7 +165,7 @@ export default async function QualityPage({
               Quality claims backed by records buyers can verify.
             </h1>
             <p className="mt-5 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
-              GMP audit recognition and SQF Pet Food Manufacturing certificate issued for Taizhou Beno Biotech Co., Ltd. — independently verifiable through each issuing body&apos;s registry.
+              GMP audit recognition and SQF Pet Food Manufacturing certificates issued for Taizhou Beno Biotech Co., Ltd., with identifiers, dates, scope and original PDF records for buyer review.
             </p>
           </div>
         </div>
@@ -167,10 +177,10 @@ export default async function QualityPage({
           <dl className="grid grid-cols-2 divide-x divide-y divide-line sm:grid-cols-3 lg:grid-cols-5 lg:divide-y-0">
             {[
               { value: "2016", label: "Year Founded", sub: "Taixing, Jiangsu" },
-              { value: "3,000 m²", label: "GMP Facility", sub: "2,000 m² production" },
-              { value: "180M+", label: "Units / Month", sub: "Soft chew capacity" },
-              { value: "11 Yrs", label: "Zero Incidents", sub: "Safe production record" },
-              { value: "500 MOQ", label: "Min. Order Qty", sub: "Industry avg: 3,000" },
+              { value: "3,000 m²", label: "Facility Area", sub: "2,000 m² production" },
+              { value: "3", label: "Production Lines", sub: "Documented facility total" },
+              { value: "30", label: "Production Staff", sub: "Single-shift schedule" },
+              { value: "6", label: "Product Formats", sub: "Solid, semi-solid & liquid" },
             ].map(({ value, label, sub }) => (
               <div key={label} className="flex flex-col justify-center px-6 py-8 text-left">
                 <dd className="text-[clamp(1.4rem,2.2vw,1.9rem)] font-bold leading-none tracking-[-0.03em] text-forest">
@@ -193,13 +203,13 @@ export default async function QualityPage({
               <p className="b2b-kicker">Facility overview</p>
             </div>
             <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
-              A Purpose-Built GMP Factory in Jiangsu, China
+              Pet Supplement Manufacturing in Jiangsu, China
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-              Founded in 2016 in Taixing, Jiangsu, our 3,000 m² facility was purpose-built for pet supplement production — 2,000 m² dedicated to GMP-compliant manufacturing. Three independent production lines operate under strict physical separation across all production stages.
+              Founded in 2016 in Taixing, Jiangsu, Taizhou Beno Biotech operates a 3,000 m² facility, including 2,000 m² for production and warehousing. Three production lines support solid, semi-solid and liquid pet additive premixed feed within the licensed scope.
             </p>
             <p className="mt-3 text-[0.93rem] leading-7 text-ink-soft">
-              A second facility is under construction in Guangzhou; our Shenzhen operations center manages cross-border logistics for international partners.
+              The facility has Eurofins GMP audit recognition and current SQF Food Safety and SQF Quality certificates. Buyers can compare those records against the approved product, dosage form and documentation requirements for their project.
             </p>
             {/* Spec table */}
             <div className="mt-8 border border-line bg-white">
@@ -209,7 +219,7 @@ export default async function QualityPage({
                 { label: "Total facility area", value: "3,000 m²" },
                 { label: "GMP production area", value: "2,000 m²" },
                 { label: "Operating schedule", value: "6 days / week" },
-                { label: "Second facility", value: "Guangzhou (under construction)" },
+                { label: "Licensed scope", value: "Solid, semi-solid and liquid pet additive premixed feed" },
               ].map(({ label, value }, i) => (
                 <div key={label} className={`flex items-center gap-4 px-5 py-3 text-sm ${i !== 0 ? "border-t border-line" : ""}`}>
                   <span className="w-44 shrink-0 text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-ink-soft">{label}</span>
@@ -264,7 +274,7 @@ export default async function QualityPage({
                 8 Independent Third-Party Certifications
               </h2>
               <p className="mt-2 max-w-2xl text-[0.88rem] leading-6 text-ink-soft">
-                All primary certifications issued by Eurofins Food Assurance Certification US, LLC following on-site audits in June 2026. Each record is independently verifiable through the issuing body&apos;s registry. Original PDFs available on request for procurement and regulatory teams.
+                The records below were supplied for Taizhou Beno Biotech Co., Ltd. following the June 2026 audit. Each entry shows the issuer, identifier, scope, audit date and validity; the supplied PDF can be opened directly for procurement review.
               </p>
             </div>
 
@@ -330,16 +340,16 @@ export default async function QualityPage({
               <p className="b2b-kicker">Production capability</p>
             </div>
             <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
-              China&apos;s Fastest Soft Chew Production Line
+              Soft Chew Production Controls
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-              Our high-speed extrusion line processes 1 tonne/hour — unmatched by any comparable facility in China — delivering 180M+ units per month. Hardness, moisture, and weight are checked at every production interval to ensure batch-to-batch consistency.
+              Soft-chew projects use defined processing, forming and in-process checks matched to the approved product specification. Commercial throughput, shape options and quality checks are confirmed for the formula, pack and order volume rather than presented as one universal claim.
             </p>
             <div className="mt-8 space-y-3">
               {[
-                { icon: TrendingUp, title: "1 tonne / hour throughput", desc: "The fastest soft chew line in China, enabling short-run flexibility without cost penalties." },
-                { icon: Layers, title: "Heart, bone, paw & custom shapes", desc: "Multiple mold options available; custom shape development supported for brand differentiation." },
-                { icon: Check, title: "Stable texture across batches", desc: "Hardness, moisture, and weight uniformity tested at every production checkpoint." },
+                { icon: TrendingUp, title: "Project-specific production planning", desc: "Line allocation and run size are confirmed after formula, packaging and volume review." },
+                { icon: Layers, title: "Shape and size configuration", desc: "Available molds and any custom-shape work are confirmed during sampling." },
+                { icon: Check, title: "Defined in-process checks", desc: "Applicable weight, texture and moisture targets are recorded against the approved specification." },
               ].map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="flex gap-4 rounded-lg border border-line bg-white p-5">
                   <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-forest/10">
@@ -366,10 +376,10 @@ export default async function QualityPage({
                 <p className="b2b-kicker">Production scope</p>
               </div>
               <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
-                Five Dosage Forms, One Manufacturing Partner
+                Six Pet Supplement Product Formats
               </h2>
               <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-                All six dosage forms are produced under the same GMP and SQF-certified quality system, with dedicated equipment and validated SOPs for each format.
+                The production license covers solid, semi-solid and liquid pet additive premixed feed. Project formats include soft chews, tablets, pastes and gels, liquids and oils, powders and granules, with the process route confirmed against the approved specification.
               </p>
               {/* Dosage form table */}
               <div className="mt-8 border border-line">
@@ -416,10 +426,10 @@ export default async function QualityPage({
               <p className="b2b-kicker">Quality control system</p>
             </div>
             <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
-              Four-Stage QC — Audited and Verified by Eurofins
+              Four-Stage Quality Review Framework
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-              Every batch passes four mandatory checkpoints before shipment, generating physical records retained for a minimum of three years. Independently verified during the June 2026 Eurofins GMP and SQF audits (HACCP plan: BN-HACCP01, Rev A/0).
+              Buyer requirements, formula and dosage form determine the applicable inspections and tests. The project specification defines raw-material review, in-process records, finished-product release and traceability evidence before commercial production.
             </p>
           </div>
 
@@ -429,10 +439,10 @@ export default async function QualityPage({
               {/* connecting line */}
               <div className="absolute left-[calc(12.5%)] right-[calc(12.5%)] top-[22px] h-px bg-line" aria-hidden />
               {[
-                { icon: TestTube, step: "01", title: "Raw Material Inspection", desc: "CoA review, dual QC sign-off, quarantine for non-conforming lots. Critical actives double-verified before warehouse release." },
-                { icon: ClipboardCheck, step: "02", title: "In-Process Monitoring", desc: "HACCP CCPs: ingredient weighing (CCP1) and sterilization (CCP2). Mixing time, temperature, moisture and weight logged at defined intervals." },
-                { icon: PackageCheck, step: "03", title: "Finished Product Testing", desc: "Physical (weight, hardness, moisture), microbiological, and active assay testing. QC manager formal release required before any shipment." },
-                { icon: ShieldCheck, step: "04", title: "Batch Retention & Traceability", desc: "Retain samples held for shelf life + 6 months. Bidirectional traceability: raw material lots → finished goods → shipping records." },
+                { icon: TestTube, step: "01", title: "Raw Material Review", desc: "Supplier records, material identity, lot information and receiving status are reviewed before production use." },
+                { icon: ClipboardCheck, step: "02", title: "In-Process Records", desc: "Approved formula, weighing, processing parameters and applicable observations are recorded during production." },
+                { icon: PackageCheck, step: "03", title: "Finished-Product Release", desc: "The agreed physical, microbiological or assay requirements are confirmed by project before release." },
+                { icon: ShieldCheck, step: "04", title: "Batch Traceability", desc: "Lot identification connects approved materials, production records, packed goods and shipment records." },
               ].map(({ icon: Icon, step, title, desc }) => (
                 <div key={step} className="relative flex flex-1 flex-col items-center px-4 text-center">
                   <div className="relative z-10 flex size-11 items-center justify-center rounded-full border-2 border-forest bg-white">
@@ -449,10 +459,10 @@ export default async function QualityPage({
           {/* Mobile: vertical cards */}
           <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:hidden">
             {[
-              { icon: TestTube, step: "01", title: "Raw Material Inspection", desc: "CoA review, dual QC sign-off, quarantine for non-conforming lots. Critical actives double-verified before warehouse release." },
-              { icon: ClipboardCheck, step: "02", title: "In-Process Monitoring", desc: "HACCP CCPs: ingredient weighing (CCP1) and sterilization (CCP2). Mixing time, temperature, moisture and weight logged at defined intervals." },
-              { icon: PackageCheck, step: "03", title: "Finished Product Testing", desc: "Physical (weight, hardness, moisture), microbiological, and active assay testing. QC manager formal release required before any shipment." },
-              { icon: ShieldCheck, step: "04", title: "Batch Retention & Traceability", desc: "Retain samples held for shelf life + 6 months. Bidirectional traceability: raw material lots → finished goods → shipping records." },
+              { icon: TestTube, step: "01", title: "Raw Material Review", desc: "Supplier records, material identity, lot information and receiving status are reviewed before production use." },
+              { icon: ClipboardCheck, step: "02", title: "In-Process Records", desc: "Approved formula, weighing, processing parameters and applicable observations are recorded during production." },
+              { icon: PackageCheck, step: "03", title: "Finished-Product Release", desc: "The agreed physical, microbiological or assay requirements are confirmed by project before release." },
+              { icon: ShieldCheck, step: "04", title: "Batch Traceability", desc: "Lot identification connects approved materials, production records, packed goods and shipment records." },
             ].map(({ icon: Icon, step, title, desc }) => (
               <article key={step} className="flex gap-4 border border-line bg-white p-5">
                 <div className="flex size-10 shrink-0 items-center justify-center rounded-full border border-forest/30 bg-forest/5">
@@ -467,31 +477,9 @@ export default async function QualityPage({
             ))}
           </div>
 
-          {/* Traceability evidence */}
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            <div className="flex items-center gap-5 border border-forest/20 bg-white px-6 py-5">
-              <div className="shrink-0 text-center">
-                <p className="text-[1.9rem] font-bold leading-none tracking-[-0.03em] text-forest">2,000</p>
-                <p className="mt-0.5 text-[0.68rem] text-ink-soft">tubes</p>
-              </div>
-              <div className="border-l border-line pl-5">
-                <p className="text-sm font-semibold text-ink">Fully traced in 90 minutes</p>
-                <p className="mt-1 text-[0.75rem] text-ink-soft">Pet nutrition paste — Batch 20260122</p>
-                <p className="mt-0.5 text-[0.72rem] text-forest-mid">Bidirectional: raw material → finished goods → shipment</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-5 border border-forest/20 bg-white px-6 py-5">
-              <div className="shrink-0 text-center">
-                <p className="text-[1.9rem] font-bold leading-none tracking-[-0.03em] text-forest">4,000</p>
-                <p className="mt-0.5 text-[0.68rem] text-ink-soft">bottles</p>
-              </div>
-              <div className="border-l border-line pl-5">
-                <p className="text-sm font-semibold text-ink">Fully traced in 1.5 hours</p>
-                <p className="mt-1 text-[0.75rem] text-ink-soft">Pet nutrition tablet — Batch 20260520</p>
-                <p className="mt-0.5 text-[0.72rem] text-forest-mid">Bidirectional: raw material → finished goods → shipment</p>
-              </div>
-            </div>
-          </div>
+          <p className="mt-8 border-l-2 border-forest bg-white px-6 py-5 text-sm leading-7 text-ink-soft">
+            The exact certificate of analysis, testing and retention package is agreed before production. Buyers should include destination-market and channel requirements in the product brief so the evidence scope can be quoted accurately.
+          </p>
         </div>
       </section>
 
@@ -504,10 +492,10 @@ export default async function QualityPage({
               <p className="b2b-kicker">R&amp;D &amp; formulation library</p>
             </div>
             <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
-              Academic Research Expertise, Applied to Commercial Formulation
+              Formula Development Aligned to the Product Brief
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-              Led by Prof. Wang Kai (Chinese Academy of Agricultural Sciences, National Outstanding Youth Fund), our advisory team translates peer-reviewed animal nutrition research into commercial formulations. Custom formula development — from prototype to validated spec — is available for brands requiring proprietary recipes.
+              Stock-formula, customer-formula and custom-development routes are available. The team reviews species, intended positioning, dosage form, ingredient compatibility, packaging and destination-market requirements before sampling and specification approval.
             </p>
             {/* Formulation table */}
             <div className="mt-8 border border-line">
@@ -528,7 +516,7 @@ export default async function QualityPage({
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-[0.72rem] text-ink-soft">All active ingredients sourced from verified suppliers with full traceability documentation.</p>
+            <p className="mt-3 text-[0.72rem] text-ink-soft">Ingredient identity, supplier documentation and required testing are confirmed for each approved project specification.</p>
           </div>
           <div className="flex items-center justify-center bg-white px-8 py-14 lg:py-20">
             <div className="relative w-full max-w-[240px] overflow-hidden" style={{ aspectRatio: '3/4' }}>
@@ -553,28 +541,28 @@ export default async function QualityPage({
               <p className="b2b-kicker">Leadership &amp; expertise</p>
             </div>
             <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
-              The Team Behind the Certifications
+              Cross-Functional Project Responsibilities
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-              Manufacturing experience, academic research, and international trade expertise — the team behind the certifications.
+              A commercial pet supplement project moves through product, quality and project-coordination responsibilities with defined handoffs.
             </p>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
               {
-                name: "Li Wang",
-                title: "General Manager",
-                desc: "10+ years in pet nutrition manufacturing. Previously managed OEM production for Wanpy, Bernate, and Kairisi. Primary contact for vendor qualification audits.",
+                name: "Product & Formulation",
+                title: "Specification owner",
+                desc: "Reviews the product brief, dosage form, ingredient compatibility, sample feedback and approved formula specification.",
               },
               {
-                name: "Prof. Wang Kai",
-                title: "Technical Advisor",
-                desc: "Researcher at the Chinese Academy of Agricultural Sciences, doctoral supervisor, National Outstanding Youth Fund recipient. Oversees formulation development and scientific alignment.",
+                name: "Quality & Compliance",
+                title: "Evidence owner",
+                desc: "Confirms the applicable quality records, certificate scope, test requirements and finished-product release package.",
               },
               {
-                name: "Jing Hang",
-                title: "Operations Director",
-                desc: "Former City GM at Alibaba International, 12 years of B2B enterprise experience. Leads the Shenzhen operations center for cross-border logistics and partner onboarding.",
+                name: "Project Coordination",
+                title: "Commercial owner",
+                desc: "Coordinates quotation inputs, sampling milestones, packaging decisions, production timing and shipment documentation.",
               },
             ].map(({ name, title, desc }) => (
               <article key={name} className="border border-line bg-white p-6">
@@ -604,10 +592,10 @@ export default async function QualityPage({
                 <p className="b2b-kicker">Company milestones</p>
               </div>
               <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
-                Ten Years of Continuous Investment in Quality
+              Verified Company and Certification Milestones
               </h2>
               <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
-                From a small formulation team in 2016 to a GMP and SQF-certified manufacturer — every milestone reflects a deliberate investment in the systems global buyers require.
+              The timeline below is limited to dates supported by the supplied business, production-license and certification records.
               </p>
               <div className="mt-6 overflow-hidden rounded-lg border border-line">
                 <Image
@@ -625,12 +613,10 @@ export default async function QualityPage({
               <ol className="space-y-0">
                 {[
                   { year: "Aug 2016", event: "Company founded", detail: "Taizhou Beno Biotech Co., Ltd. established in Taixing, Jiangsu. Business license issued with scope covering pet food R&D, production, processing, and sales." },
-                  { year: "Jun 2019", event: "Business license updated", detail: "Unified Social Credit Code 91321283MA1MR5HB8P confirmed. Registered capital: RMB 1,000,000. Operating period extended to August 10, 2046." },
-                  { year: "2020–2024", event: "High-speed production line installed", detail: "Investment in China's fastest soft chew extrusion and forming line, achieving 1 tonne/hour throughput and monthly capacity exceeding 180 million units." },
+                  { year: "Jun 2019", event: "Company record updated", detail: "Unified Social Credit Code 91321283MA1MR5HB8P and registered capital of RMB 1,000,000 are shown in the supplied company record." },
                   { year: "Apr 2026", event: "Feed Production License issued", detail: "License No. 苏饲预（2026）12006 issued by Jiangsu provincial authority, covering pet additive premixed feed. Valid through April 25, 2031." },
-                  { year: "Jun 2026", event: "GMP & SQF dual certification", detail: "Three-day on-site audit by Eurofins Food Assurance Certification US, LLC. Eurofins GMP recognition (score: 86%), SQF Food Safety Code Edition 9 (score: 88, rated Good), and SQF Quality Code Edition 9 all awarded simultaneously." },
-                  { year: "Jul 2026", event: "SQF certifications formally issued", detail: "Certificate SIN 105690 formally issued by SQFI on July 20, 2026. Valid through August 28, 2027. FDA Food Facility Registration No. 10222600768 active and current." },
-                  { year: "2026–", event: "Guangzhou facility under construction", detail: "Second production facility under construction in Guangzhou to support growing international OEM demand. Shenzhen operations center already operational for cross-border trade management." },
+                  { year: "Jun 2026", event: "GMP and SQF audit completed", detail: "Eurofins GMP recognition records a score of 86%. SQF Food Safety Code Edition 9 records a score of 88 and a Good rating; the SQF Quality Code record uses the same site identifier." },
+                  { year: "Jul 2026", event: "SQF certificates issued", detail: "Certificate SIN 105690 was issued with validity through August 28, 2027. FDA Food Facility Registration No. 10222600768 is listed separately as a registration, not an FDA product approval." },
                 ].map(({ year, event, detail }) => (
                   <li key={year} className="relative pl-8 pb-8 last:pb-0">
                     <div className="absolute left-0 top-1.5 size-3.5 rounded-full border-2 border-forest bg-white" aria-hidden />
@@ -654,28 +640,28 @@ export default async function QualityPage({
               <p className="b2b-kicker text-amber-soft">2026 partner program</p>
             </div>
             <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-white">
-              Three Commitments to Our 2026 International Partners
+              Three Principles for Buyer Qualification
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-white/65">
-              Three operational commitments to brands partnering with us in 2026 — built into how we price and allocate production capacity.
+              The website separates verified facility evidence from project-specific commercial terms so buyers can evaluate the manufacturer without unsupported promises.
             </p>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
                           {[
               {
                 number: "01",
-                title: "Quality at a Competitive Price",
-                desc: "GMP and SQF-certified manufacturing priced to reflect our operational efficiency — not our certification costs. Same quality standards as larger CMOs, accessible to emerging brands.",
+                title: "Verified Facts First",
+                desc: "Facility, license and certificate statements are tied to the supplied records, with original PDFs available for buyer review.",
               },
               {
                 number: "02",
-                title: "Priority Fulfillment for Early Partners",
-                desc: "Brands committing in 2026 receive priority production scheduling — ensuring your order is not displaced during peak demand periods.",
+                title: "Project-Specific Evidence",
+                desc: "Testing, COA, stability and destination-market requirements are confirmed against the approved formula and quotation.",
               },
               {
                 number: "03",
-                title: "500 MOQ — Lowest in China",
-                desc: "500 bottles minimum for soft chews (industry avg: 3,000). A permanent feature enabled by our high-speed line — not a promotional concession.",
+                title: "Formal Commercial Confirmation",
+                desc: "MOQ, pricing, lead time and packaging are confirmed in a formal quotation instead of presented as universal terms.",
               },
             ].map(({ number, title, desc }) => (
               <article key={number} className="border border-white/15 bg-white/[0.05] p-6 backdrop-blur-sm">
@@ -730,7 +716,7 @@ export default async function QualityPage({
                 Need a vendor-approval document package?
               </h2>
               <p className="mt-1.5 max-w-2xl text-[0.88rem] leading-6 text-ink-soft">
-                Send the product, target market, requested evidence and expected order volume. We will respond within 24 hours with a complete document checklist and timeline. Available documents: CoA · GMP Report · SQF Certificate · FDA Registration · HACCP Summary · Allergen Statement.
+                Send the product, target market, requested evidence and expected order volume. The team will confirm which records are available, which documents are project-specific and the expected review timeline.
               </p>
             </div>
           </div>

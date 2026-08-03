@@ -20,11 +20,19 @@ export async function generateMetadata({
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      default: "EMBEPET | Pet Supplement Manufacturer",
+      default: "Pet Supplement Manufacturer & OEM/ODM Partner | EMBEPET",
       template: "%s | EMBEPET",
     },
     description:
-      "Taizhou Beno Biotech manufactures wholesale and private-label pet supplements for global brands and distributors.",
+      "Taizhou Beno Biotech manufactures wholesale, private-label and custom pet supplements for global brands, distributors and retailers.",
+    referrer: "origin-when-cross-origin",
+    formatDetection: { email: false, address: false, telephone: false },
+    verification: {
+      google: process.env.GOOGLE_SITE_VERIFICATION,
+      other: process.env.BING_SITE_VERIFICATION
+        ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+        : undefined,
+    },
   };
 }
 

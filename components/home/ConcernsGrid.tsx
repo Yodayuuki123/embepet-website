@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "@/components/site/A";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/motion/Reveal";
 import SplitHeading from "@/components/motion/SplitHeading";
@@ -33,10 +34,12 @@ function Card({ c }: { c: Collection }) {
       className="group relative shrink-0 overflow-hidden rounded-3xl cursor-pointer"
       style={{ width: "clamp(200px, 28vw, 300px)", height: "clamp(260px, 36vw, 400px)" }}
     >
-      <img
+      <Image
         src={CONCERN_IMAGES[c.slug]}
         alt={c.name}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+        fill
+        sizes="(max-width: 640px) 200px, 300px"
+        className="object-cover transition-transform duration-700 group-hover:scale-[1.08]"
       />
       <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${t.base}88 0%, ${t.base}22 25%, transparent 40%, transparent 100%)` }} />
       <div className="absolute -top-8 -right-8 size-32 rounded-full opacity-25 blur-2xl transition-all duration-700 group-hover:scale-150 group-hover:opacity-50" style={{ background: t.glow }} />

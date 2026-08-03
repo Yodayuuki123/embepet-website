@@ -43,6 +43,8 @@ export default function Navbar({ brandName, announcement, cartCount, loggedIn, c
   }, [menuOpen]);
 
   useEffect(() => {
+    // Route changes intentionally close any navigation panels left open.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMenuOpen(false);
     setShopOpen(false);
   }, [pathname]);

@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import { buildMetadata, metaWithLocale } from "@/lib/seo";
+import { metaWithLocale } from "@/lib/seo";
 import { getSettings } from "@/lib/settings";
 import PolicyPage from "@/components/site/PolicyPage";
 
@@ -7,40 +6,36 @@ export function generateMetadata({ params }: { params: Promise<{ locale: string 
   return metaWithLocale(params, {
   title: "Returns & Refunds",
   description:
-    "EMBEPET 30-day money-back guarantee: if your pet doesn't love it, get a full refund — no need to ship anything back. Here's how it works.",
+    "General notice and documentation process for B2B shipment claims, nonconformity review and returns.",
   path: "/returns",
+  noIndex: true,
   });
 }
 
 export default async function ReturnsPage() {
   const settings = await getSettings();
   const content = `
-Every EMBEPET purchase is covered by a **30-day money-back guarantee**. If your pet won't take it, or you're not seeing what you hoped for, email us within 30 days of delivery for a **full refund of the product price — you don't need to ship anything back**.
+EMBEPET supplies through project-specific B2B commercial terms rather than a consumer checkout. Inspection periods, acceptance criteria, claims, replacement, rework, return and refund rights are defined in the accepted specification, quotation, quality agreement and sales contract.
 
-## How to request a refund
+## How to report a shipment or product issue
 
-1. Email **${settings.supportEmail}** with your order number (starts with EMB-).
-2. Tell us briefly what didn't work — it genuinely helps us improve formulas and flavors.
-3. Refunds are issued to your original payment method within **3–5 business days** of approval.
+1. Notify **${settings.supportEmail}** and the named project contact within the contractual notice period.
+2. Identify the purchase order, shipment, SKU, lot or batch number and quantity affected.
+3. Preserve representative samples, packaging and transport records.
+4. Provide clear photos, inspection or laboratory records and a description of the observed nonconformity.
 
-## What's covered
+## Review process
 
-- First purchase of any product, up to 2 units per SKU per household.
-- Products bought directly from our website. For purchases made through retail partners, please use the retailer's return process.
+The parties compare the evidence with the approved specification, release documents, retained samples and transport conditions. If a nonconformity is confirmed, the applicable remedy is determined under the accepted commercial agreement. No goods should be returned without written return authorization and routing instructions.
 
-## What's not covered
+## Matters requiring separate review
 
-- Original shipping fees (when applicable) are non-refundable.
-- Bulk or wholesale orders — these follow the terms in your wholesale agreement.
-- Repeated refund requests on the same SKU beyond the limits above.
+- Damage or temperature exposure after risk has transferred under the agreed Incoterm.
+- Storage, relabeling, repacking or handling outside the agreed conditions.
+- Customer-supplied artwork, claims, formula inputs or packaging components.
+- Natural sensory variation that remains within the approved specification.
 
-## Damaged, wrong or missing items
-
-Mistakes are on us. If anything arrives damaged, incorrect or incomplete, contact us within 48 hours of delivery and we'll ship a replacement immediately at no cost — photos help us fix it faster.
-
-## Subscription-style reorders
-
-If you set up recurring reorders, you can pause or cancel anytime from your account before the next billing date. Already-shipped renewal orders fall under the standard 30-day guarantee.
+This page is a general process summary and does not replace the signed commercial or quality agreement.
 `;
 
   return (

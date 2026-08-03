@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import {
   ArrowRight,
   Boxes,
@@ -10,7 +9,7 @@ import {
   Search,
   ShoppingBag,
 } from "lucide-react";
-import { absoluteUrl, metaWithLocale, faqJsonLd } from "@/lib/seo";
+import { absoluteUrl, metaWithLocale, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { B2B_CATALOG, USD_CNY_RATE } from "@/lib/b2b-catalog";
 import B2BProductCard from "@/components/b2b/B2BProductCard";
 import Link from "@/components/site/A";
@@ -18,12 +17,29 @@ import JsonLd from "@/components/site/JsonLd";
 import { isLocale } from "@/lib/i18n/locales";
 import { getDict } from "@/lib/i18n";
 
-export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: SearchParams;
+}): Promise<Metadata> {
+  const query = await searchParams;
   return metaWithLocale(params, {
     title: "Wholesale Pet Supplements: 30-Product B2B Catalog",
     description:
       "Compare 30 wholesale pet supplements for dogs and cats by format, category, USD reference price and starting MOQ. Request specifications and a formal B2B quotation.",
     path: "/shop",
+    keywords: [
+      "wholesale pet supplements",
+      "pet supplements bulk",
+      "private label pet supplements",
+      "dog supplement manufacturer",
+      "cat supplement manufacturer",
+    ],
+    images: ["/images/b2b/portfolio-lineup-v2.png"],
+    imageAlt: "Wholesale dog and cat supplement product portfolio",
+    noIndex: Boolean(first(query.q) || first(query.species) || first(query.format)),
   });
 }
 
@@ -130,6 +146,7 @@ export default async function ProductPortfolioPage({
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Wholesale pet supplements", path: "/shop" }])} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -141,8 +158,8 @@ export default async function ProductPortfolioPage({
           about: { "@id": `${absoluteUrl("/")}#manufacturer` },
           mainEntity: {
             "@type": "ItemList",
-            numberOfItems: B2B_CATALOG.length,
-            itemListElement: B2B_CATALOG.map((product, index) => ({
+            numberOfItems: filtered.length,
+            itemListElement: filtered.map((product, index) => ({
               "@type": "ListItem",
               position: index + 1,
               item: {

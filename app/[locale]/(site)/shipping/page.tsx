@@ -1,54 +1,45 @@
-import type { Metadata } from "next";
-import { buildMetadata, metaWithLocale } from "@/lib/seo";
+import { metaWithLocale } from "@/lib/seo";
 import { getSettings } from "@/lib/settings";
-import { money } from "@/lib/format";
 import PolicyPage from "@/components/site/PolicyPage";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   return metaWithLocale(params, {
   title: "Shipping Policy",
   description:
-    "EMBEPET shipping policy: free US standard shipping over $49, flat $5.99 under, 2–5 business day delivery, tracking on every order.",
+    "General B2B shipping information for EMBEPET wholesale, private-label and OEM/ODM projects.",
   path: "/shipping",
+  noIndex: true,
   });
 }
 
 export default async function ShippingPage() {
   const settings = await getSettings();
-  const threshold = money(settings.freeShippingThresholdCents);
-  const flat = money(settings.flatShippingCents);
-
   const content = `
-Orders over **${threshold}** ship free anywhere in the contiguous United States. Orders under ${threshold} ship at a flat rate of **${flat}**. Most orders arrive within **2–5 business days** and every shipment includes tracking.
+EMBEPET is a B2B inquiry website, not a retail checkout. Freight method, shipment window, export documentation, insurance, destination charges and risk transfer are confirmed in the accepted quotation or sales contract for each wholesale, private-label or OEM/ODM project.
 
-## Processing time
+## Before shipment
 
-Orders placed before 2:00 PM ET on business days are processed the same day. Orders placed after the cutoff, on weekends or on US holidays are processed the next business day.
+- The formula, packaging, quantity, release specification and required documents must be approved.
+- Production and packaging lead times begin from the milestone stated in the accepted quotation, which may include deposit, artwork approval or material availability.
+- Shipment is arranged only after the agreed release and payment conditions are satisfied.
 
-## Delivery estimates
+## Freight and Incoterms
 
-| Service | Cost | Delivery estimate |
-| --- | --- | --- |
-| Standard (orders ${threshold}+) | Free | 2–5 business days |
-| Standard (under ${threshold}) | ${flat} | 2–5 business days |
-
-Delivery estimates begin once your order leaves the warehouse, not at checkout. During peak seasons or carrier disruptions, delivery may take 1–2 days longer.
+Available freight routes depend on product, volume, origin, destination and any controlled or animal-origin ingredients. The quotation should state the Incoterm, named place, freight responsibility and which party handles import clearance, duties, taxes and local permits.
 
 ## Tracking your order
 
-You will receive a tracking link by email as soon as your order ships. You can also find tracking in **Account → Orders** at any time.
+Tracking or transport documents are shared through the agreed project contact after dispatch when available.
 
-## Address changes & failed deliveries
+## Changes and delays
 
-Need to fix an address? Contact us within 2 hours of ordering and we will do our best to catch it before it ships. Packages returned to us due to an incorrect address can be reshipped (reshipping fee applies) or refunded minus original shipping.
+Notify the project contact promptly if the consignee, destination, documents or shipping instructions change. Costs or delays caused by post-approval changes, customs, inspections, carrier disruption or force-majeure events are handled under the accepted commercial terms.
 
 ## Damaged or lost packages
 
-If your order arrives damaged, or tracking shows delivered but nothing arrived within 48 hours, email ${settings.supportEmail} with your order number — we will replace or refund it. Every order is covered.
+Inspect the shipment and preserve packaging, photos, transport records and lot information. Report visible damage, shortage or document discrepancies within the notice period stated in the contract to **${settings.supportEmail}** and your named project contact.
 
-## International shipping
-
-We currently ship consumer orders within the US only. For international wholesale and distribution, see our [Wholesale program](/wholesale).
+For a shipping quotation, submit the destination country and city, expected quantity, packaging, preferred Incoterm and any importer requirements through the [B2B inquiry form](/contact).
 `;
 
   return (

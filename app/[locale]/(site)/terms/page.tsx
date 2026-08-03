@@ -1,54 +1,46 @@
-import type { Metadata } from "next";
-import { buildMetadata, metaWithLocale } from "@/lib/seo";
+import { metaWithLocale } from "@/lib/seo";
 import { getSettings } from "@/lib/settings";
 import PolicyPage from "@/components/site/PolicyPage";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   return metaWithLocale(params, {
   title: "Terms of Service",
-  description: "The terms that govern your use of the EMBEPET website and purchases made through it.",
+  description: "Terms governing use of the EMBEPET B2B website and product-inquiry materials.",
   path: "/terms",
+  noIndex: true,
   });
 }
 
 export default async function TermsPage() {
   const settings = await getSettings();
   const content = `
-By using this website or placing an order, you agree to these terms. Please read them — they cover the important stuff about purchases, product use, and your responsibilities.
+These terms govern use of this B2B website. A product brief, sample discussion, catalog reference or website inquiry does not create a purchase contract. Any supply relationship is governed by the formal quotation, specification, quality agreement, purchase order and other commercial documents accepted by the relevant parties.
 
 ## Products & intended use
 
-${settings.brandName} products are **nutritional supplements for dogs and cats**. They support normal body structure and function and are **not intended to diagnose, treat, cure or prevent any disease**. Statements on this site have not been evaluated by the Food and Drug Administration. Always follow label feeding guidelines and consult your veterinarian if your pet is pregnant, nursing, on medication, or has a medical condition.
+Website content describes manufacturing capabilities and product concepts for business evaluation. It is not veterinary, medical, regulatory or legal advice. Product classification, claims, ingredients, labels and market access must be confirmed for the intended destination before sale.
 
-## Orders & payment
+## Catalogs, samples and quotations
 
-- All prices are in US dollars. Applicable taxes are calculated at checkout.
-- We reserve the right to refuse or cancel orders showing signs of fraud, resale abuse or pricing errors; you will be refunded in full if we cancel.
-- Payment is processed by Stripe. By submitting payment you represent that you are authorized to use the payment method.
+- Catalog prices, MOQ figures and currency conversions are non-binding comparison references unless incorporated into an accepted quotation.
+- Formula, packaging, tests, volume, destination and Incoterm can change price, MOQ and lead time.
+- Samples, specifications and documents may be subject to confidentiality, cost, availability and project-qualification requirements.
 
 ## Shipping, returns & guarantees
 
-Shipping timelines are described in our [Shipping Policy](/shipping). Purchases are covered by the 30-day money-back guarantee described in [Returns & Refunds](/returns).
+Shipping, inspection, claims, replacement and refund terms are defined in the accepted commercial documents for each B2B project. General information appears in our [B2B Shipping](/shipping) and [B2B Claims & Returns](/returns) pages.
 
-## Accounts
+## Submitted content
 
-You are responsible for keeping your login credentials confidential and for all activity under your account. We may suspend accounts involved in abuse, fraud or violation of these terms.
-
-## Reviews & submitted content
-
-By submitting reviews or other content you grant us a non-exclusive, royalty-free license to display it on this site and in marketing materials, with your first name and pet's name. We may moderate or remove content that is false, offensive, or unrelated to the product.
+You represent that you are authorized to submit product briefs, artwork, files and other project information. Do not submit confidential third-party material unless you have permission. Separate nondisclosure and intellectual-property terms may be agreed for a qualified project.
 
 ## Intellectual property
 
-All site content — text, formulas descriptions, graphics, logos and product designs — belongs to ${settings.brandName} or its licensors and may not be reproduced without permission.
+Site content, graphics, logos and catalog materials belong to ${settings.brandName} or their respective licensors and may not be reproduced without permission. A website description does not transfer ownership of a formula, design, trademark or other intellectual property.
 
 ## Limitation of liability
 
-To the maximum extent permitted by law, our total liability for any claim related to an order is limited to the amount you paid for that order. We are not liable for indirect or consequential damages.
-
-## Governing law
-
-These terms are governed by the laws of the State of Delaware, USA, without regard to conflict-of-law rules. Disputes will be resolved in the state or federal courts located in Delaware.
+The website is provided for general business information and may be updated without notice. Liability, warranties and remedies for an actual project are governed by the accepted commercial agreement and applicable law.
 
 ## Contact
 

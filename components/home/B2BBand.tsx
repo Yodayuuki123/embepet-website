@@ -21,8 +21,8 @@ export default function B2BBand() {
               </h2>
               <p className="mt-5 max-w-xl leading-relaxed text-cream/70">
                 Wholesale programs for pet retailers and clinics, plus private-label and OEM/ODM
-                manufacturing from our GMP-certified facility. Low MOQs, export documentation,
-                and formulation support included.
+                manufacturing from a GMP-audited and SQF-certified facility. MOQ, documentation
+                and formulation support are confirmed against each project brief.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
@@ -43,9 +43,9 @@ export default function B2BBand() {
             </div>
             <ul className="grid gap-4">
               {[
-                { icon: Factory, title: "GMP manufacturing", body: "Audited facility with full lot traceability and CoA per batch" },
-                { icon: Container, title: "Low MOQs", body: "Start from 500 units per SKU with stock formulas" },
-                { icon: Globe2, title: "Export ready", body: "US labeling guidance and export documentation support" },
+                { icon: Factory, title: "Audited manufacturing", body: "Eurofins GMP audit recognition and SQF Edition 9 certification records" },
+                { icon: Container, title: "Project-specific MOQ", body: "Confirmed after formula, format, packaging and volume review" },
+                { icon: Globe2, title: "Destination review", body: "Label and export-document requirements aligned by project" },
               ].map(({ icon: Icon, title, body }) => (
                 <li key={title} className="flex gap-4 rounded-2xl border border-cream/12 bg-cream/5 p-5 backdrop-blur">
                   <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-gold/15 text-gold">
@@ -61,10 +61,10 @@ export default function B2BBand() {
             {/* 平台标签 — 从原 Global Map 模块合并 */}
             <div className="mt-6">
               <p className="text-[0.68rem] font-semibold tracking-[0.18em] uppercase text-cream/35 mb-3">
-                Supporting 11+ platforms
+                Project planning inputs
               </p>
               <div className="flex flex-wrap gap-1.5">
-                {["Amazon","AliExpress","TikTok","Shopee","Shopify","eBay","Temu","Lazada","SHEIN","Wish","Ozon"].map(p => (
+                {["Destination market", "Sales channel", "Dosage form", "Packaging", "Testing", "Volume"].map(p => (
                   <span key={p} className="rounded-full border border-cream/12 bg-cream/5 px-2.5 py-1 text-[0.7rem] font-medium text-cream/70">
                     {p}
                   </span>

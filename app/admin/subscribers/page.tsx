@@ -15,6 +15,8 @@ export default async function AdminSubscribersPage() {
           <h1 className="text-2xl font-bold">邮件订阅名单</h1>
           <p className="mt-1 text-[0.88rem] text-black/45">共 {subscribers.length} 位订阅者</p>
         </div>
+        {/* A native anchor is required so the CSV route triggers a file download. */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a
           href="/admin/subscribers/export"
           className="inline-flex h-10 items-center gap-2 rounded-xl border border-black/12 bg-white px-4 text-[0.9rem] font-medium hover:bg-black/4"
