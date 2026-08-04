@@ -20,6 +20,11 @@ import {
   FileText,
   Download,
   ChevronRight,
+  Beaker,
+  Boxes,
+  ScanLine,
+  Warehouse,
+  MapPin,
 } from "lucide-react";
 import { absoluteUrl, metaWithLocale, faqJsonLd } from "@/lib/seo";
 import Link from "@/components/site/A";
@@ -111,6 +116,29 @@ const faqs = [
   },
 ];
 
+const factoryFaqs = [
+  {
+    q: "Where is your pet supplement factory located?",
+    a: "Our manufacturing facility is operated by Taizhou Beno Biotech Co., Ltd. in Taixing City, Jiangsu, China — a 3,000 m² production base with 2,000 m² dedicated to production and warehousing, established in August 2016.",
+  },
+  {
+    q: "What is your pet supplement production capacity?",
+    a: "The factory operates 3 production lines with 30 production staff on a single-shift schedule (8:00–17:00, six days per week). Actual SKU availability and production allocation are confirmed in each quotation based on the approved formula and dosage form.",
+  },
+  {
+    q: "Which pet supplement dosage forms can the factory produce?",
+    a: "The facility is licensed to produce solid, semi-solid and liquid pet additive premixed feed. Product forms include soft chews, tablets, pastes, drops/oils, powders and granules using vacuum emulsification, tablet pressing, mixing, sterilization and drying processes.",
+  },
+  {
+    q: "Is the factory certified for export?",
+    a: "Yes. The manufacturing entity holds Feed Production License No. 苏饲预（2026）12006, SQF Food Safety Code: Pet Food Manufacturing certification (Edition 9, audit score 88), SQF Quality Code certification, Eurofins GMP audit recognition (86% score), and FDA Food Facility Registration (No. 10222600768, valid through December 31, 2026).",
+  },
+  {
+    q: "Can I visit or audit the factory before placing an order?",
+    a: "Buyers evaluating the factory for a project can request a manufacturing review. Share the product, requested process, document list, quantity and destination market to begin. The facility address is Li Kong Group 3, Donglin Village, Yaowang Street, Taixing City, Jiangsu 225400, China.",
+  },
+];
+
 export default async function QualityPage({
   params,
 }: {
@@ -120,6 +148,7 @@ export default async function QualityPage({
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   const dict = getDict(locale);
   const t = dict.b2bPages;
+  const tf = dict.b2bPages.factory;
 
   return (
     <>
@@ -188,32 +217,51 @@ export default async function QualityPage({
       <section className="border-b border-line bg-[#f8f7f2]">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
           <div className="px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
-            <div className="flex items-center gap-3 text-forest-mid">
-              <Factory className="size-4" strokeWidth={1.6} aria-hidden />
-              <p className="b2b-kicker">Facility overview</p>
-            </div>
-            <h2 className="mt-4 text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
-              A Purpose-Built GMP Factory in Jiangsu, China
+            {/* ABOUT heading — two-tone style */}
+            <h2 className="text-[clamp(1.8rem,3vw,2.6rem)] font-extrabold leading-[1.1] tracking-[-0.02em]">
+              <span className="text-ink">ABOUT </span>
+              <span className="text-forest">EMBEPET</span>
             </h2>
-            <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
+
+            <p className="mt-5 text-[0.93rem] leading-7 text-ink-soft">
               Founded in 2016 in Taixing, Jiangsu, our 3,000 m² facility was purpose-built for pet supplement production — 2,000 m² dedicated to GMP-compliant manufacturing. Three independent production lines operate under strict physical separation across all production stages.
             </p>
             <p className="mt-3 text-[0.93rem] leading-7 text-ink-soft">
               A second facility is under construction in Guangzhou; our Shenzhen operations center manages cross-border logistics for international partners.
             </p>
-            {/* Spec table */}
-            <div className="mt-8 border border-line bg-white">
+            <p className="mt-3 text-[0.93rem] leading-7 text-ink-soft">
+              Taizhou Beno Biotech holds Eurofins GMP audit recognition and SQF Food Safety Code Edition 9 certification — independently verifiable through each issuing body&apos;s registry. Our products have been awarded multiple international quality recognitions.
+            </p>
+
+            {/* Chevron bullet list — 2 columns */}
+            <div className="mt-7 grid grid-cols-2 gap-x-6 gap-y-3">
               {[
-                { label: "Production lines", value: "3 independent lines" },
-                { label: "Production staff", value: "30 personnel (single shift)" },
-                { label: "Total facility area", value: "3,000 m²" },
-                { label: "GMP production area", value: "2,000 m²" },
-                { label: "Operating schedule", value: "6 days / week" },
-                { label: "Second facility", value: "Guangzhou (under construction)" },
-              ].map(({ label, value }, i) => (
-                <div key={label} className={`flex items-center gap-4 px-5 py-3 text-sm ${i !== 0 ? "border-t border-line" : ""}`}>
-                  <span className="w-44 shrink-0 text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-ink-soft">{label}</span>
-                  <span className="font-medium text-ink">{value}</span>
+                "Founded 2016 · Taixing, Jiangsu",
+                "3,000 m² GMP facility",
+                "3 independent production lines",
+                "30 production staff (single shift)",
+                "6 days / week operating schedule",
+                "Guangzhou facility under construction",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-2">
+                  <ChevronRight className="mt-0.5 size-4 shrink-0 text-forest" strokeWidth={2} aria-hidden />
+                  <span className="text-[0.85rem] leading-5 text-ink-soft">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Stats row */}
+            <div className="mt-10 grid grid-cols-3 gap-4 border-t border-line pt-8">
+              {[
+                { value: "500", unit: "MOQ", label: "Min. Order Qty" },
+                { value: "180M+", unit: "/mo", label: "Units Capacity" },
+                { value: "11 Yrs", unit: "", label: "Zero Incidents" },
+              ].map(({ value, unit, label }) => (
+                <div key={label} className="text-left">
+                  <p className="text-[clamp(1.6rem,2.5vw,2.2rem)] font-extrabold leading-none tracking-[-0.03em] text-forest">
+                    {value}<span className="text-[1rem] font-semibold text-forest-mid">{unit}</span>
+                  </p>
+                  <p className="mt-1.5 text-[0.75rem] font-medium text-ink">{label}</p>
                 </div>
               ))}
             </div>
@@ -254,61 +302,36 @@ export default async function QualityPage({
       <section id="certificates" className="scroll-mt-24 border-b border-line bg-white">
         {/* Header */}
         <div className="border-b border-line bg-[#f8f7f2] px-5 py-10 sm:px-8 lg:px-10">
-          <div className="mx-auto max-w-7xl flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <div className="flex items-center gap-3 text-forest-mid">
-                <Award className="size-4" strokeWidth={1.6} aria-hidden />
-                <p className="b2b-kicker">Compliance &amp; certification records</p>
-              </div>
-              <h2 className="mt-3 text-[clamp(1.4rem,2.4vw,2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
-                8 Independent Third-Party Certifications
-              </h2>
-              <p className="mt-2 max-w-2xl text-[0.88rem] leading-6 text-ink-soft">
-                All primary certifications issued by Eurofins Food Assurance Certification US, LLC following on-site audits in June 2026. Each record is independently verifiable through the issuing body&apos;s registry. Original PDFs available on request for procurement and regulatory teams.
-              </p>
+          <div className="mx-auto max-w-7xl flex flex-col items-center text-center">
+            <div className="flex items-center gap-3 text-forest-mid">
+              <Award className="size-4" strokeWidth={1.6} aria-hidden />
+              <p className="b2b-kicker">Compliance &amp; certification records</p>
             </div>
-
+            <h2 className="mt-3 text-[clamp(1.4rem,2.4vw,2rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
+              Verified by Eurofins, SQF &amp; FDA — Certifications You Can Check
+            </h2>
+            <p className="mt-2 max-w-2xl text-[0.88rem] leading-6 text-ink-soft">
+              Every certificate listed here was issued following an independent on-site audit. Each record is publicly verifiable through the issuing body&apos;s registry. Original PDFs are available on request for procurement and regulatory teams.
+            </p>
           </div>
         </div>
 
-        {/* Cert grid */}
+        {/* Cert full image */}
         <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {[
-              { short: "GMP", name: "Eurofins GMP", id: "ACCB8AAA422_1", valid: "Valid to Jun 2027", score: "Score: 86%", image: "/images/science/cert-gmp.jpg" },
-              { short: "SQF", name: "SQF Food Safety", id: "SIN 105690", valid: "Valid to Aug 2027", score: "Score: 88 — Good", image: "/images/science/cert-sqf-food.jpg" },
-              { short: "SQF", name: "SQF Quality Code", id: "SIN 105690", valid: "Valid to Aug 2027", score: "Edition 9", image: "/images/science/cert-sqf-quality.jpg" },
-              { short: "FDA", name: "FDA Registration", id: "No. 10222600768", valid: "Valid to Dec 2026", score: "FFR Verified", image: "/images/science/cert-fda.png" },
-              { short: "FEED", name: "Feed Production License", id: "苏饲预（2026）12006", valid: "Valid to Apr 2031", score: "Jiangsu Authority", image: "/images/science/cert-food-license.png" },
-              { short: "D-U-N-S", name: "D-U-N-S Registration", id: "No. 404129816", valid: "Dun & Bradstreet", score: "Global registry", image: "/images/science/cert-duns.png" },
-              { short: "FDA", name: "FDA Facility Record", id: "No. 10222600768", valid: "Valid to Dec 2026", score: "FFR Screenshot", image: "/images/science/cert-fda-screenshot.png" },
-              { short: "SQF", name: "SQF Confirmation Letter", id: "SIN 105690", valid: "Issued Jul 2026", score: "Official letter", image: "/images/science/cert-sqf-letter.jpg" },
-            ].map(({ short, name, id, valid, score, image }) => (
-              <div key={name} className="group relative overflow-hidden border border-line bg-white transition-shadow hover:shadow-md">
-                <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#f8f7f2]">
-                  <Image
-                    src={image}
-                    alt={`${name} certificate`}
-                    fill
-                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.04]"
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                  />
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-forest/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-4">
-                    <span className="inline-flex items-center bg-white px-2.5 py-0.5 text-[0.62rem] font-bold tracking-[0.1em] text-forest">
-                      {short}
-                    </span>
-                    <p className="text-center text-sm font-semibold text-white leading-5">{name}</p>
-                    <p className="font-mono text-center text-[0.68rem] text-white/75">{id}</p>
-                    <div className="mt-1 border-t border-white/25 pt-2 text-center">
-                      <p className="text-[0.7rem] text-white/90">{valid}</p>
-                      <p className="text-[0.68rem] text-white/65">{score}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="overflow-hidden rounded-sm border border-line bg-[#f8f7f2]">
+            <Image
+              src="/images/science/cert-all.png"
+              alt="All certifications: FDA Food Facility Registration, Feed Production License, Business License, D-U-N-S, FFR Screenshots, GMP Certificate, SQF Confirmation Letter, SQF Certificate, SQF Quality Certificate"
+              width={1448}
+              height={1086}
+              className="w-full h-auto object-contain"
+              sizes="(min-width: 1280px) 1200px, 100vw"
+              priority
+            />
           </div>
+          <p className="mt-4 text-center text-[0.78rem] text-ink-soft">
+            FDA · Feed Production License · Business License · D-U-N-S · FFR Registration · Eurofins GMP · SQF Confirmation Letter · SQF Food Safety · SQF Quality Code
+          </p>
         </div>
       </section>
 
@@ -716,6 +739,203 @@ export default async function QualityPage({
                 <p className="pb-5 pl-10 pr-8 text-[0.85rem] leading-7 text-ink-soft">{item.a}</p>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PARTNER BRANDS MARQUEE ─── */}
+      <section className="border-y border-line bg-[#f8f7f2] py-10 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 mb-6 text-center">
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-forest-mid">Trusted by leading brands</p>
+          <h2 className="mt-2 text-[clamp(1.2rem,2vw,1.6rem)] font-semibold tracking-[-0.02em] text-ink">
+            OEM Partners &amp; Brand Clients
+          </h2>
+        </div>
+        <div className="relative w-full overflow-hidden">
+          <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .brand-marquee {
+              display: flex;
+              width: max-content;
+              animation: marquee 28s linear infinite;
+            }
+            .brand-marquee:hover {
+              animation-play-state: paused;
+            }
+          ` }} />
+          <div className="brand-marquee">
+            {[
+              { src: "/images/brands/nourse-logo.png", alt: "卫仕 NOURSE" },
+              { src: "/images/brands/touchit-logo.png", alt: "Touch't 它时代" },
+              { src: "/images/brands/bernate-logo.png", alt: "伯纳天纯" },
+              { src: "/images/brands/keres-logo.png", alt: "凯锐思 KERES" },
+              { src: "/images/brands/kuanfu-logo.png", alt: "宽福" },
+              { src: "/images/brands/atspet-logo.png", alt: "ATSPET 强生宠儿" },
+              { src: "/images/brands/chongxi-logo.png", alt: "Chongxi 宠熙" },
+              { src: "/images/brands/nourse-logo.png", alt: "卫仕 NOURSE" },
+              { src: "/images/brands/touchit-logo.png", alt: "Touch't 它时代" },
+              { src: "/images/brands/bernate-logo.png", alt: "伯纳天纯" },
+              { src: "/images/brands/keres-logo.png", alt: "凯锐思 KERES" },
+              { src: "/images/brands/kuanfu-logo.png", alt: "宽福" },
+              { src: "/images/brands/atspet-logo.png", alt: "ATSPET 强生宠儿" },
+              { src: "/images/brands/chongxi-logo.png", alt: "Chongxi 宠熙" },
+            ].map(({ src, alt }, i) => (
+              <div key={i} className="flex shrink-0 items-center justify-center mx-10 h-28 w-52">
+                <Image
+                  src={src}
+                  alt={alt}
+                  width={200}
+                  height={100}
+                  className="h-20 w-auto max-w-[190px] object-contain transition-transform duration-300 hover:scale-105"
+                  sizes="190px"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FACTORY: PACKAGING ─── */}
+      <section className="border-b border-line bg-[#e9eeea]">
+        <div className="mx-auto grid max-w-[1480px] lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="relative min-h-[560px] border-r border-line">
+            <Image src="/images/b2b/factory-packaging-line.png" alt="Automated pet supplement packaging line" fill className="object-cover" sizes="(min-width: 1024px) 60vw, 100vw" />
+          </div>
+          <div className="px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
+            <p className="b2b-kicker text-forest-mid">{tf.packaging.kicker}</p>
+            <h2 className="mt-4 text-4xl font-medium tracking-[-0.04em] text-ink">{tf.packaging.title}</h2>
+            <p className="mt-5 text-sm leading-7 text-ink-soft">{tf.packaging.body}</p>
+            <div className="mt-9 border-t border-line">
+              {[
+                [tf.packaging.primaryPacks, tf.packaging.primaryPacksValue],
+                [tf.packaging.identification, tf.packaging.identificationValue],
+                [tf.packaging.privateLabel, tf.packaging.privateLabelValue],
+                [tf.packaging.releaseHandoff, tf.packaging.releaseHandoffValue],
+              ].map(([label, value]: [string, string]) => (
+                <div key={label} className="grid grid-cols-[0.34fr_0.66fr] gap-4 border-b border-line py-4">
+                  <p className="text-sm font-semibold text-ink">{label}</p>
+                  <p className="text-sm leading-6 text-ink-soft">{value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FACTORY: WAREHOUSE ─── */}
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10">
+        <div className="grid gap-0 border border-line lg:grid-cols-[0.78fr_1.22fr]">
+          <div className="bg-white p-8 sm:p-10 lg:p-12">
+            <Warehouse className="size-7 text-forest-mid" strokeWidth={1.5} aria-hidden />
+            <p className="b2b-kicker mt-10 text-forest-mid">{tf.warehouse.kicker}</p>
+            <h2 className="mt-4 text-3xl font-medium tracking-[-0.035em] text-ink">{tf.warehouse.title}</h2>
+            <p className="mt-5 text-sm leading-7 text-ink-soft">{tf.warehouse.body}</p>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="border-l-2 border-forest pl-4">
+                <p className="text-2xl font-semibold text-forest">{tf.warehouse.stat1Value}</p>
+                <p className="mt-1 text-xs leading-5 text-ink-soft">{tf.warehouse.stat1Label}</p>
+              </div>
+              <div className="border-l-2 border-forest pl-4">
+                <p className="text-2xl font-semibold text-forest">{tf.warehouse.stat2Value}</p>
+                <p className="mt-1 text-xs leading-5 text-ink-soft">{tf.warehouse.stat2Label}</p>
+              </div>
+            </div>
+          </div>
+          <div className="relative min-h-[500px] border-l border-line">
+            <Image src="/images/b2b/factory-export-warehouse.png" alt="Finished-goods warehouse for export" fill className="object-cover" sizes="(min-width: 1024px) 60vw, 100vw" />
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FACTORY: LOCATION ─── */}
+      <section className="border-y border-line bg-white">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.3fr_0.7fr] lg:px-10">
+          <div className="flex items-start gap-4">
+            <MapPin className="mt-1 size-6 shrink-0 text-forest-mid" aria-hidden />
+            <div>
+              <p className="b2b-kicker text-forest-mid">{tf.location.kicker}</p>
+              <h2 className="mt-3 text-2xl font-semibold text-ink">{tf.location.title}</h2>
+            </div>
+          </div>
+          <address className="not-italic">
+            <p className="text-lg leading-8 text-ink">{tf.location.address}</p>
+            <p className="mt-4 text-sm leading-6 text-ink-soft">{tf.location.addressZh}</p>
+          </address>
+        </div>
+      </section>
+
+      {/* ─── FACTORY: SERVICES ─── */}
+      <section className="border-b border-line bg-[#f5f3ec]">
+        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10">
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div>
+              <p className="b2b-kicker text-forest-mid">{tf.services.kicker}</p>
+              <h2 className="b2b-heading mt-4">{tf.services.title}</h2>
+              <p className="mt-5 text-sm leading-7 text-ink-soft">{tf.services.subtitle}</p>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="border border-line bg-white p-6">
+                <h3 className="text-base font-semibold text-ink">{tf.services.formulaCustomization}</h3>
+                <ul className="mt-4 space-y-2 text-sm leading-6 text-ink-soft">
+                  <li>• Customer formula production</li>
+                  <li>• Factory formula development</li>
+                  <li>• Formula adjustment services</li>
+                  <li>• Sample development &amp; testing</li>
+                </ul>
+              </div>
+              <div className="border border-line bg-white p-6">
+                <h3 className="text-base font-semibold text-ink">{tf.services.productionServices}</h3>
+                <ul className="mt-4 space-y-2 text-sm leading-6 text-ink-soft">
+                  <li>• Private label manufacturing</li>
+                  <li>• Small batch trial production</li>
+                  <li>• Bulk production &amp; filling</li>
+                  <li>• Packaging coordination</li>
+                </ul>
+              </div>
+              <div className="border border-line bg-white p-6">
+                <h3 className="text-base font-semibold text-ink">{tf.services.productSpecifications}</h3>
+                <ul className="mt-4 space-y-2 text-sm leading-6 text-ink-soft">
+                  <li>• Dosage form customization</li>
+                  <li>• Flavor development</li>
+                  <li>• Size &amp; count options</li>
+                  <li>• Packaging configuration</li>
+                </ul>
+              </div>
+              <div className="border border-line bg-white p-6">
+                <h3 className="text-base font-semibold text-ink">{tf.services.qualityDocumentation}</h3>
+                <ul className="mt-4 space-y-2 text-sm leading-6 text-ink-soft">
+                  <li>• Batch record keeping</li>
+                  <li>• Product testing &amp; COA</li>
+                  <li>• Stability assessment</li>
+                  <li>• Finished product release</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FACTORY: FAQ ─── */}
+      <section className="border-b border-line bg-white">
+        <JsonLd data={faqJsonLd(factoryFaqs)} />
+        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10">
+          <div className="grid gap-12 lg:grid-cols-[0.36fr_0.64fr]">
+            <div>
+              <p className="b2b-kicker text-forest-mid">{tf.faq.kicker}</p>
+              <h2 className="b2b-heading mt-4">{tf.faq.title}</h2>
+              <p className="mt-5 text-sm leading-7 text-ink-soft">{tf.faq.subtitle}</p>
+            </div>
+            <dl className="border-t border-line">
+              {factoryFaqs.map((item) => (
+                <div key={item.q} className="border-b border-line py-6">
+                  <dt className="text-lg font-semibold text-ink">{item.q}</dt>
+                  <dd className="mt-3 text-sm leading-7 text-ink-soft">{item.a}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </section>

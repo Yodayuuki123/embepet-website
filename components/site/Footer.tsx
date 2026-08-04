@@ -13,6 +13,7 @@ interface FooterLabels {
   oemOdm: string;
   manufacturing: string;
   qualityCompany: string;
+  contact: string;
   completeCatalog: string;
   softChews: string;
   powders: string;
@@ -34,8 +35,8 @@ export default function Footer({ settings, labels: t }: { settings: SiteSettings
       links: [
         { href: "/shop", label: t.productsWholesale },
         { href: "/private-label", label: t.oemOdm },
-        { href: "/factory", label: t.manufacturing },
         { href: "/science", label: t.qualityCompany },
+        { href: "/contact", label: t.contact },
       ],
     },
     {
@@ -50,7 +51,7 @@ export default function Footer({ settings, labels: t }: { settings: SiteSettings
     {
       title: t.businessInfo,
       links: [
-        { href: "/factory#company", label: t.companyProfile },
+        { href: "/science#company", label: t.companyProfile },
         { href: "/science#certificates", label: t.certificates },
         { href: "/news", label: t.newsInsights },
         { href: "/private-label#inquiry", label: t.requestQuote },

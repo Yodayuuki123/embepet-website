@@ -13,6 +13,7 @@ interface HeaderLabels {
   manufacturing: string;
   qualityCompany: string;
   news: string;
+  contact: string;
   getQuote: string;
   tagline: string;
   requestQuote: string;
@@ -36,9 +37,9 @@ export default function Header({
   const links = [
     { href: "/shop", label: t.products },
     { href: "/private-label", label: t.oemOdm },
-    { href: "/factory", label: t.manufacturing },
     { href: "/science", label: t.qualityCompany },
     { href: "/news", label: t.news },
+    { href: "/contact", label: t.contact },
   ];
 
   useEffect(() => {

@@ -246,6 +246,51 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════
+          4  PARTNER BRANDS
+          ═══════════════════════════════════════════════ */}
+      <section className="border-y border-line bg-[#f8f7f2] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+          <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr] lg:items-center">
+            {/* Left: text */}
+            <div>
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-forest-mid">Trusted by leading brands</p>
+              <h2 className="mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
+                OEM Partners &amp; Brand Clients
+              </h2>
+              <p className="mt-4 max-w-md text-[0.95rem] leading-7 text-ink-soft">
+                Trusted by China&apos;s leading pet supplement brands — including NOURSE, Touch&apos;t, Bernate, KERES, Kuanfu, ATSPET and Chongxi — our factory has delivered GMP-certified OEM production across soft chews, tablets, pastes, and liquids since 2016.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {["卫仕 NOURSE", "Touch't", "伯纳天纯", "凯锐思 KERES", "宽福", "ATSPET", "宠熙"].map((brand) => (
+                  <span key={brand} className="rounded-sm border border-line bg-white px-3 py-1 text-[0.78rem] font-medium text-ink-soft">
+                    {brand}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-8">
+                <Link href="/science" className="inline-flex items-center gap-2 text-[0.88rem] font-semibold text-forest hover:underline">
+                  View About Us &amp; Certifications
+                  <ArrowRight className="size-4" />
+                </Link>
+              </div>
+            </div>
+            {/* Right: showcase image */}
+            <div className="overflow-hidden rounded-xl shadow-lg">
+              <Image
+                src="/images/brands/partner-brands-showcase.png"
+                alt="EMBEPET OEM partner brands: NOURSE, Touch't, Bernate, KERES, Kuanfu, ATSPET, Chongxi"
+                width={1448}
+                height={1086}
+                className="w-full h-auto object-cover"
+                sizes="(min-width: 1024px) 55vw, 100vw"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ═══════════════════════════════════════════════
           5  CERTIFICATIONS
           ═══════════════════════════════════════════════ */}
       <section className="overflow-hidden bg-white">
