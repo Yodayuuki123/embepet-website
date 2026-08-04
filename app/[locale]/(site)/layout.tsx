@@ -66,7 +66,7 @@ export default async function SiteLayout({
         <script {...jsonLdScriptProps(websiteJsonLd("EMBEPET"))} />
         <Header
           brandName="EMBEPET"
-          announcement="GMP audit recognition · SQF Pet Food Manufacturing · OEM / ODM · MOQ from 500 units"
+          announcement={(dict.b2bPages.header as Record<string, string>).announcement ?? "GMP audit recognition · SQF Pet Food Manufacturing · OEM / ODM · MOQ from 500 units"}
           locale={locale}
           labels={headerLabels}
         />

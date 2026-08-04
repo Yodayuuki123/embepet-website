@@ -275,12 +275,12 @@ export default async function HomePage({
           <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr] lg:items-center">
             {/* Left: text */}
             <div>
-              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-forest-mid">Trusted by leading brands</p>
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-forest-mid">{t.partnerBrands?.kicker ?? "Trusted by leading brands"}</p>
               <h2 className="mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
-                OEM Partners &amp; Brand Clients
+                {t.partnerBrands?.title ?? "OEM Partners & Brand Clients"}
               </h2>
               <p className="mt-4 max-w-md text-[0.95rem] leading-7 text-ink-soft">
-                Trusted by China&apos;s leading pet supplement brands — including NOURSE, Touch&apos;t, Bernate, KERES, Kuanfu, ATSPET and Chongxi — our factory has delivered GMP-certified OEM production across soft chews, tablets, pastes, and liquids since 2016.
+                {t.partnerBrands?.desc ?? "Trusted by China\u2019s leading pet supplement brands \u2014 including NOURSE, Touch\u2019t, Bernate, KERES, Kuanfu, ATSPET and Chongxi \u2014 our factory has delivered GMP-certified OEM production across soft chews, tablets, pastes, and liquids since 2016."}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 {["卫仕 NOURSE", "Touch't", "伯纳天纯", "凯锐思 KERES", "宽福", "ATSPET", "宠熙"].map((brand) => (
@@ -291,7 +291,7 @@ export default async function HomePage({
               </div>
               <div className="mt-8">
                 <Link href="/science" className="inline-flex items-center gap-2 text-[0.88rem] font-semibold text-forest hover:underline">
-                  View About Us &amp; Certifications
+                  {t.partnerBrands?.cta ?? "View About Us & Certifications"}
                   <ArrowRight className="size-4" />
                 </Link>
               </div>

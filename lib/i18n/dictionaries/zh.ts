@@ -361,6 +361,7 @@ const zh: Dictionary = {
   },
   b2bPages: {
     header: {
+      announcement: "GMP审核认可 · SQF宠物食品生产 · OEM / ODM · 最低起订量 500 瓶",
       products: "产品",
       oemOdm: "OEM / ODM",
       manufacturing: "生产制造",
@@ -437,6 +438,12 @@ const zh: Dictionary = {
         title: "我们最畅销的宠物营养补充剂配方",
         intro:
           "近距离了解品牌商首发量最大的配方——每款都经过市场验证，支持私标，并可进行OEM/ODM定制。",
+      },
+      partnerBrands: {
+        kicker: "合作品牌",
+        title: "OEM 合作品牌与客户",
+        desc: "受中国领先宠物营养品品牌信赖，包括卫仑、Touch’t它时代、伯纳天纯、凯锐思、宽福、ATSPET和宠熙——自2016年起，我们的工厂已为多个品牌提供软嚼片、片剂、膏体和涵体的GMP认证OEM生产。",
+        cta: "查看关于我们与资质证书",
       },
       process: {
         kicker: "如何运作",
