@@ -64,12 +64,12 @@ export default function ServiceOrbit({ items }: { items: OrbitItem[] }) {
       >
         {/* faint outer ring track */}
         <span
-          className="absolute inset-[9%] rounded-full border border-forest-mid/15"
+          className="pointer-events-none absolute inset-[9%] rounded-full border border-forest-mid/15"
           aria-hidden
         />
         {/* progress arc — rotates to the active node */}
         <span
-          className="absolute inset-[9%] rounded-full border-[3px] border-transparent border-t-forest-mid transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="pointer-events-none absolute inset-[9%] rounded-full border-[3px] border-transparent border-t-forest-mid transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style={{ transform: `rotate(${(active / items.length) * 360}deg)` }}
           aria-hidden
         />
