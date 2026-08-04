@@ -46,7 +46,7 @@ export default function LocaleSwitcher({ locale, label }: { locale: Locale; labe
         <ChevronDown size={12} className={`transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       <div
-        className={`absolute right-0 top-full z-50 mt-2 w-44 overflow-hidden rounded-sm border border-line bg-white shadow-[0_24px_60px_-20px_rgba(24,39,32,0.35)] transition-all duration-200 ${
+        className={`absolute right-0 top-full z-50 mt-2 w-44 overflow-hidden rounded-sm border border-line bg-white shadow-[0_24px_60px_-20px_rgba(24,39,32,0.35)] transition-[opacity,transform] duration-200 ${
           open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-1 opacity-0"
         }`}
         role="listbox"

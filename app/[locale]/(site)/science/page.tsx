@@ -307,20 +307,6 @@ export default async function QualityPage({
           </h2>
         </div>
         <div className="relative w-full overflow-hidden">
-          <style dangerouslySetInnerHTML={{ __html: `
-            @keyframes marquee {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .brand-marquee {
-              display: flex;
-              width: max-content;
-              animation: marquee 28s linear infinite;
-            }
-            .brand-marquee:hover {
-              animation-play-state: paused;
-            }
-          ` }} />
           <div className="brand-marquee">
             {[
               { src: "/images/brands/nourse-logo.png", alt: "卫仕 NOURSE" },

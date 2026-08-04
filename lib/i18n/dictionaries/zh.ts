@@ -365,6 +365,7 @@ const zh: Dictionary = {
       oemOdm: "OEM / ODM",
       manufacturing: "生产制造",
       qualityCompany: "关于我们",
+      contact: "联系我们",
       news: "新闻",
       getQuote: "获取报价",
       tagline: "宠物营养品生产制造",
@@ -375,7 +376,7 @@ const zh: Dictionary = {
     footer: {
       tagline: "为品牌商、经销商和全球卖家提供宠物营养补充剂生产制造服务。",
       description:
-        "泰州百诺生物科技有限公司支持库存批发、私标和定制开发，涵盖软嚼片、粉剂、液体、油剂、片剂和膏体。",
+        "泰州百诺生物科技有限公司支持库存批发、私标和定制开发，涵盖软嚼片、粉剂、涵体、油剂、片剂和膏体。",
       primaryPages: "主要页面",
       productRoutes: "产品分类",
       businessInfo: "商业信息",
@@ -383,6 +384,7 @@ const zh: Dictionary = {
       oemOdm: "OEM / ODM",
       manufacturing: "生产制造",
       qualityCompany: "关于我们",
+      contact: "联系我们",
       completeCatalog: "完整目录",
       softChews: "软嚼片",
       powders: "粉剂",

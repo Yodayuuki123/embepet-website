@@ -45,6 +45,14 @@
       transform: translateX(-50%);
     }
   }
+  @keyframes brand-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
   @keyframes float {
     0%,
     100% {
@@ -571,4 +579,17 @@ html.lenis body {
   .b2b-hero-title {
     font-size: clamp(2.45rem, 12.5vw, 4rem);
   }
+}
+
+/* ---------- 品牌横条跑马灯（GPU 加速，避免内联注入） ---------- */
+.brand-marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: brand-scroll 28s linear infinite;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.brand-marquee:hover {
+  animation-play-state: paused;
 }
