@@ -298,6 +298,61 @@ export default async function QualityPage({
         </div>
       </section>
 
+      {/* ─── PARTNER BRANDS MARQUEE ─── */}
+      <section className="border-y border-line bg-[#f8f7f2] py-10 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 mb-6 text-center">
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-forest-mid">Trusted by leading brands</p>
+          <h2 className="mt-2 text-[clamp(1.2rem,2vw,1.6rem)] font-semibold tracking-[-0.02em] text-ink">
+            OEM Partners &amp; Brand Clients
+          </h2>
+        </div>
+        <div className="relative w-full overflow-hidden">
+          <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .brand-marquee {
+              display: flex;
+              width: max-content;
+              animation: marquee 28s linear infinite;
+            }
+            .brand-marquee:hover {
+              animation-play-state: paused;
+            }
+          ` }} />
+          <div className="brand-marquee">
+            {[
+              { src: "/images/brands/nourse-logo.png", alt: "卫仕 NOURSE" },
+              { src: "/images/brands/touchit-logo.png", alt: "Touch't 它时代" },
+              { src: "/images/brands/bernate-logo.png", alt: "伯纳天纯" },
+              { src: "/images/brands/keres-logo.png", alt: "凯锐思 KERES" },
+              { src: "/images/brands/kuanfu-logo.png", alt: "宽福" },
+              { src: "/images/brands/atspet-logo.png", alt: "ATSPET 强生宠儿" },
+              { src: "/images/brands/chongxi-logo.png", alt: "Chongxi 宠熙" },
+              { src: "/images/brands/nourse-logo.png", alt: "卫仕 NOURSE" },
+              { src: "/images/brands/touchit-logo.png", alt: "Touch't 它时代" },
+              { src: "/images/brands/bernate-logo.png", alt: "伯纳天纯" },
+              { src: "/images/brands/keres-logo.png", alt: "凯锐思 KERES" },
+              { src: "/images/brands/kuanfu-logo.png", alt: "宽福" },
+              { src: "/images/brands/atspet-logo.png", alt: "ATSPET 强生宠儿" },
+              { src: "/images/brands/chongxi-logo.png", alt: "Chongxi 宠熙" },
+            ].map(({ src, alt }, i) => (
+              <div key={i} className="flex shrink-0 items-center justify-center mx-10 h-28 w-52">
+                <Image
+                  src={src}
+                  alt={alt}
+                  width={200}
+                  height={100}
+                  className="h-20 w-auto max-w-[190px] object-contain transition-transform duration-300 hover:scale-105"
+                  sizes="190px"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── MODULE 3: CERTIFICATIONS ─── */}
       <section id="certificates" className="scroll-mt-24 border-b border-line bg-white">
         {/* Header */}
@@ -711,25 +766,25 @@ export default async function QualityPage({
         </div>
       </section>
 
-      {/* ─── MODULE 11: FAQ ─── */}
+      {/* ─── MODULE 11: FAQ (merged Science + Factory) ─── */}
       <section className="border-b border-line bg-white">
-        <JsonLd data={faqJsonLd(faqs)} />
+        <JsonLd data={faqJsonLd([...faqs, ...factoryFaqs])} />
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.34fr_0.66fr] lg:px-10">
           <div>
-            <p className="b2b-kicker text-forest-mid">Quality FAQ</p>
+            <p className="b2b-kicker text-forest-mid">FAQ</p>
             <h2 className="mt-3 text-[clamp(1.4rem,2.2vw,1.9rem)] font-semibold tracking-[-0.03em] text-ink">
-              Pet Supplement Quality &amp; Certification FAQ
+              Frequently Asked Questions
             </h2>
             <p className="mt-3 text-[0.88rem] leading-6 text-ink-soft">
               Common questions from procurement managers, regulatory affairs teams, and brand owners evaluating Taizhou Beno Biotech as a manufacturing partner.
             </p>
           </div>
           <div className="border-t border-line">
-            {faqs.map((item, index) => (
+            {[...faqs, ...factoryFaqs].map((item, index) => (
               <details key={item.q} className="group border-b border-line">
                 <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-6 py-3 text-left">
                   <span className="flex items-start gap-4">
-                    <span className="mt-0.5 text-[0.62rem] font-bold uppercase tracking-[0.1em] text-forest-mid">0{index + 1}</span>
+                    <span className="mt-0.5 text-[0.62rem] font-bold uppercase tracking-[0.1em] text-forest-mid">{String(index + 1).padStart(2, "0")}</span>
                     <span className="text-[0.88rem] font-semibold text-ink">{item.q}</span>
                   </span>
                   <span className="text-xl font-light text-forest transition-transform group-open:rotate-45" aria-hidden>
@@ -738,61 +793,6 @@ export default async function QualityPage({
                 </summary>
                 <p className="pb-5 pl-10 pr-8 text-[0.85rem] leading-7 text-ink-soft">{item.a}</p>
               </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── PARTNER BRANDS MARQUEE ─── */}
-      <section className="border-y border-line bg-[#f8f7f2] py-10 overflow-hidden">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 mb-6 text-center">
-          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-forest-mid">Trusted by leading brands</p>
-          <h2 className="mt-2 text-[clamp(1.2rem,2vw,1.6rem)] font-semibold tracking-[-0.02em] text-ink">
-            OEM Partners &amp; Brand Clients
-          </h2>
-        </div>
-        <div className="relative w-full overflow-hidden">
-          <style dangerouslySetInnerHTML={{ __html: `
-            @keyframes marquee {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .brand-marquee {
-              display: flex;
-              width: max-content;
-              animation: marquee 28s linear infinite;
-            }
-            .brand-marquee:hover {
-              animation-play-state: paused;
-            }
-          ` }} />
-          <div className="brand-marquee">
-            {[
-              { src: "/images/brands/nourse-logo.png", alt: "卫仕 NOURSE" },
-              { src: "/images/brands/touchit-logo.png", alt: "Touch't 它时代" },
-              { src: "/images/brands/bernate-logo.png", alt: "伯纳天纯" },
-              { src: "/images/brands/keres-logo.png", alt: "凯锐思 KERES" },
-              { src: "/images/brands/kuanfu-logo.png", alt: "宽福" },
-              { src: "/images/brands/atspet-logo.png", alt: "ATSPET 强生宠儿" },
-              { src: "/images/brands/chongxi-logo.png", alt: "Chongxi 宠熙" },
-              { src: "/images/brands/nourse-logo.png", alt: "卫仕 NOURSE" },
-              { src: "/images/brands/touchit-logo.png", alt: "Touch't 它时代" },
-              { src: "/images/brands/bernate-logo.png", alt: "伯纳天纯" },
-              { src: "/images/brands/keres-logo.png", alt: "凯锐思 KERES" },
-              { src: "/images/brands/kuanfu-logo.png", alt: "宽福" },
-              { src: "/images/brands/atspet-logo.png", alt: "ATSPET 强生宠儿" },
-              { src: "/images/brands/chongxi-logo.png", alt: "Chongxi 宠熙" },
-            ].map(({ src, alt }, i) => (
-              <div key={i} className="flex shrink-0 items-center justify-center mx-10 h-28 w-52">
-                <Image
-                  src={src}
-                  alt={alt}
-                  width={200}
-                  height={100}
-                  className="h-20 w-auto max-w-[190px] object-contain transition-transform duration-300 hover:scale-105"
-                  sizes="190px"
-                />
-              </div>
             ))}
           </div>
         </div>
@@ -867,78 +867,7 @@ export default async function QualityPage({
         </div>
       </section>
 
-      {/* ─── FACTORY: SERVICES ─── */}
-      <section className="border-b border-line bg-[#f5f3ec]">
-        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <div>
-              <p className="b2b-kicker text-forest-mid">{tf.services.kicker}</p>
-              <h2 className="b2b-heading mt-4">{tf.services.title}</h2>
-              <p className="mt-5 text-sm leading-7 text-ink-soft">{tf.services.subtitle}</p>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div className="border border-line bg-white p-6">
-                <h3 className="text-base font-semibold text-ink">{tf.services.formulaCustomization}</h3>
-                <ul className="mt-4 space-y-2 text-sm leading-6 text-ink-soft">
-                  <li>• Customer formula production</li>
-                  <li>• Factory formula development</li>
-                  <li>• Formula adjustment services</li>
-                  <li>• Sample development &amp; testing</li>
-                </ul>
-              </div>
-              <div className="border border-line bg-white p-6">
-                <h3 className="text-base font-semibold text-ink">{tf.services.productionServices}</h3>
-                <ul className="mt-4 space-y-2 text-sm leading-6 text-ink-soft">
-                  <li>• Private label manufacturing</li>
-                  <li>• Small batch trial production</li>
-                  <li>• Bulk production &amp; filling</li>
-                  <li>• Packaging coordination</li>
-                </ul>
-              </div>
-              <div className="border border-line bg-white p-6">
-                <h3 className="text-base font-semibold text-ink">{tf.services.productSpecifications}</h3>
-                <ul className="mt-4 space-y-2 text-sm leading-6 text-ink-soft">
-                  <li>• Dosage form customization</li>
-                  <li>• Flavor development</li>
-                  <li>• Size &amp; count options</li>
-                  <li>• Packaging configuration</li>
-                </ul>
-              </div>
-              <div className="border border-line bg-white p-6">
-                <h3 className="text-base font-semibold text-ink">{tf.services.qualityDocumentation}</h3>
-                <ul className="mt-4 space-y-2 text-sm leading-6 text-ink-soft">
-                  <li>• Batch record keeping</li>
-                  <li>• Product testing &amp; COA</li>
-                  <li>• Stability assessment</li>
-                  <li>• Finished product release</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ─── FACTORY: FAQ ─── */}
-      <section className="border-b border-line bg-white">
-        <JsonLd data={faqJsonLd(factoryFaqs)} />
-        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-[0.36fr_0.64fr]">
-            <div>
-              <p className="b2b-kicker text-forest-mid">{tf.faq.kicker}</p>
-              <h2 className="b2b-heading mt-4">{tf.faq.title}</h2>
-              <p className="mt-5 text-sm leading-7 text-ink-soft">{tf.faq.subtitle}</p>
-            </div>
-            <dl className="border-t border-line">
-              {factoryFaqs.map((item) => (
-                <div key={item.q} className="border-b border-line py-6">
-                  <dt className="text-lg font-semibold text-ink">{item.q}</dt>
-                  <dd className="mt-3 text-sm leading-7 text-ink-soft">{item.a}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </section>
 
       {/* ─── BOTTOM CTA ─── */}
       <section className="border-b border-line bg-white">
