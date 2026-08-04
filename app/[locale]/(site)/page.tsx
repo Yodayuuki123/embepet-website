@@ -213,24 +213,46 @@ export default async function HomePage({
             intro={t.process.intro}
           />
 
-          <div className="mt-16 grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
+          {/* Process cards — Fushou-style: large rounded white card, icon top-center no bg box */}
+          <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {t.process.steps.map((s, idx) => {
-              const icons = [MessageSquare, FlaskConical, Package, Factory, Truck];
-              const Icon = icons[idx] || MessageSquare;
+              const stepIcons = [
+                "/images/process/icons/icon1-consultation.png",
+                "/images/process/icons/icon2-formula.png",
+                "/images/process/icons/icon3-packaging.png",
+                "/images/process/icons/icon4-production.png",
+                "/images/process/icons/icon5-export.png",
+              ];
+              const stepAlts = [
+                "Consultation & Brief",
+                "Formula & Sampling",
+                "Packaging & Design",
+                "Production & QC",
+                "Documentation & Export",
+              ];
               return (
-                <div key={s.title} className="flex flex-col bg-white p-7">
-                  <div className="flex items-center justify-between">
-                    <span className="grid size-11 place-items-center rounded-sm bg-forest/[0.07] text-forest">
-                      <Icon className="size-5" strokeWidth={1.5} />
-                    </span>
-                    <span className="text-2xl font-bold tracking-tight text-line">
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
+                <div
+                  key={s.title}
+                  className="group flex flex-col rounded-[28px] bg-white shadow-[0_2px_16px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_40px_rgba(0,0,0,0.13)] cursor-default overflow-hidden"
+                >
+                  {/* Icon area — 300px, centered, no background box */}
+                  <div className="flex items-center justify-center bg-white pt-4 pb-1">
+                    <Image
+                      src={stepIcons[idx]}
+                      alt={stepAlts[idx]}
+                      width={300}
+                      height={300}
+                      className="h-[300px] w-[300px] object-contain transition-transform duration-300 group-hover:scale-105"
+                      sizes="300px"
+                    />
                   </div>
-                  <h3 className="mt-5 text-[0.98rem] font-semibold leading-snug text-ink">
-                    {s.title}
-                  </h3>
-                  <p className="mt-2 text-[0.82rem] leading-6 text-ink-soft">{s.desc}</p>
+                  {/* Text area — separated, never squeezed */}
+                  <div className="px-7 pt-4 pb-6">
+                    <h3 className="text-[1rem] font-bold leading-snug text-forest">
+                      {s.title}
+                    </h3>
+                    <p className="mt-3 text-[0.82rem] leading-6 text-ink-soft">{s.desc}</p>
+                  </div>
                 </div>
               );
             })}
