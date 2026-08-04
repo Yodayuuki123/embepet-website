@@ -49,14 +49,20 @@ export default async function ContactPage({
             <div className="rounded-2xl bg-white p-8 shadow-sm">
               <h2 className="text-lg font-semibold text-ink">Our Contact</h2>
               <div className="mt-6 space-y-5">
+                {/* Company name */}
+                <div className="pb-4 border-b border-line">
+                  <p className="text-[0.82rem] font-semibold text-ink">恩贝宠生物科技（深圳）有限公司</p>
+                  <p className="text-[0.78rem] text-ink-soft mt-0.5">Embepet Biotech (Shenzhen) Co., Ltd.</p>
+                </div>
+
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-forest/10">
-                    <Mail className="size-5 text-forest" strokeWidth={1.6} />
+                    <Phone className="size-5 text-forest" strokeWidth={1.6} />
                   </div>
                   <div>
-                    <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">Email</p>
-                    <a href="mailto:b2b@embepet.com" className="mt-0.5 text-[0.95rem] font-medium text-ink hover:text-forest transition-colors">
-                      b2b@embepet.com
+                    <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">Phone</p>
+                    <a href="tel:+860766-17818276837" className="mt-0.5 text-[0.95rem] font-medium text-ink hover:text-forest transition-colors">
+                      +86 0766-17818276837
                     </a>
                   </div>
                 </div>
@@ -66,10 +72,11 @@ export default async function ContactPage({
                     <Phone className="size-5 text-forest" strokeWidth={1.6} />
                   </div>
                   <div>
-                    <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">Phone / WhatsApp</p>
-                    <a href="tel:+8613800000000" className="mt-0.5 text-[0.95rem] font-medium text-ink hover:text-forest transition-colors">
-                      +86 138 0000 0000
+                    <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">Mobile / WhatsApp</p>
+                    <a href="tel:+8617818276837" className="mt-0.5 text-[0.95rem] font-medium text-ink hover:text-forest transition-colors">
+                      +86 178 1827 6837
                     </a>
+                    <p className="text-[0.78rem] text-ink-soft mt-0.5">Contact: 杨美丹 (Ms. Yang)</p>
                   </div>
                 </div>
 
@@ -119,9 +126,10 @@ export default async function ContactPage({
                   <div>
                     <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-forest-mid">Factory</p>
                     <p className="mt-0.5 text-[0.88rem] leading-6 text-ink">
-                      Taixing, Jiangsu, China<br />
-                      <span className="text-ink-soft">泰兴市，江苏省</span>
+                      Taizhou Beno Biotech Co., Ltd.<br />
+                      Yaowang Town, Taixing, Taizhou, Jiangsu, China
                     </p>
+                    <p className="text-[0.78rem] text-ink-soft">江苏省泰州市泰兴市姚王镇东林村李空三组</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -131,9 +139,10 @@ export default async function ContactPage({
                   <div>
                     <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-forest-mid">Operations</p>
                     <p className="mt-0.5 text-[0.88rem] leading-6 text-ink">
-                      Shenzhen, Guangdong, China<br />
-                      <span className="text-ink-soft">深圳市，广东省</span>
+                      Embepet Biotech (Shenzhen) Co., Ltd.<br />
+                      Shenzhen, Guangdong, China
                     </p>
+                    <p className="text-[0.78rem] text-ink-soft">深圳市</p>
                   </div>
                 </div>
               </div>
