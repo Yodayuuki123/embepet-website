@@ -11,7 +11,7 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { absoluteUrl, metaWithLocale, faqJsonLd } from "@/lib/seo";
-import { B2B_CATALOG, USD_CNY_RATE } from "@/lib/b2b-catalog";
+import { B2B_CATALOG } from "@/lib/b2b-catalog";
 import B2BProductCard from "@/components/b2b/B2BProductCard";
 import Link from "@/components/site/A";
 import JsonLd from "@/components/site/JsonLd";
@@ -240,9 +240,6 @@ export default async function ProductPortfolioPage({
           <p className="text-sm text-ink-soft">
             <span className="font-semibold text-ink">{filtered.length}</span>{" "}
             {t.catalog.productsShown.replace("${n}", String(filtered.length))}
-          </p>
-          <p className="text-xs leading-5 text-ink-soft">
-            {t.catalog.fxNote.replace("${rate}", USD_CNY_RATE.toFixed(4))}
           </p>
           {(species || format || q) && (
             <Link href="/shop#catalog" className="text-sm font-semibold text-forest hover:underline md:text-right">
