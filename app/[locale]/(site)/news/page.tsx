@@ -59,12 +59,12 @@ export default function NewsPage() {
 
       {/* ===== HERO ===== */}
       <section className="border-b border-line bg-[#f5f3ec]">
-        <div className={`${container} py-12 sm:py-16`}>
+        <div className={`${container} py-12 sm:py-16 text-center`}>
           <p className={`${kicker} text-ink-soft`}>News &amp; Insights</p>
           <h1 className="mt-4 text-[clamp(1.7rem,3vw,2.6rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
             Industry Insights &amp; Manufacturing Updates
           </h1>
-          <p className="mt-4 max-w-2xl text-[0.97rem] leading-7 text-ink-soft">
+          <p className="mt-4 mx-auto max-w-2xl text-[0.97rem] leading-7 text-ink-soft">
             Market trends, formulation guidance and regulatory insights for pet-supplement brand owners — written by our manufacturing and quality teams.
           </p>
         </div>

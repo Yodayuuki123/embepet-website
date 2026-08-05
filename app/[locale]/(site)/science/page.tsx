@@ -228,15 +228,15 @@ export default async function QualityPage({
       {/* ─── HERO ─── */}
       <section className="border-b border-line bg-[#f5f3ec]">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-3 text-forest-mid">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="flex items-center justify-center gap-3 text-forest-mid">
               <ShieldCheck className="size-5" strokeWidth={1.6} aria-hidden />
               <p className="b2b-kicker">{isZh ? "质量与认证证据" : "Quality & certification evidence"}</p>
             </div>
             <h1 className="mt-5 text-[clamp(1.8rem,3.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
               {isZh ? "所有质量声明均有可查证的记录支撑。" : "Quality claims backed by records buyers can verify."}
             </h1>
-            <p className="mt-5 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
+            <p className="mt-5 mx-auto max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
               {isZh ? "Eurofins GMP 审核认可与 SQF 宠物食品制造证书已针对泰州市贝诺生物科技有限公司正式颁发，可通过各发证机构的注册系统独立核实。" : "GMP audit recognition and SQF Pet Food Manufacturing certificate issued for Taizhou Beno Biotech Co., Ltd. — independently verifiable through each issuing body's registry."}
             </p>
           </div>

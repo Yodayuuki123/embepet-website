@@ -165,15 +165,15 @@ export default async function ProductPortfolioPage({
 
       <section className="border-b border-line bg-[#f5f3ec]">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-3 text-forest-mid">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="flex items-center justify-center gap-3 text-forest-mid">
               <ShoppingBag className="size-5" strokeWidth={1.6} aria-hidden />
               <p className="b2b-kicker">{t.hero.kicker}</p>
             </div>
             <h1 className="mt-5 text-[clamp(1.8rem,3.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
               {t.hero.title}
             </h1>
-            <p className="mt-5 max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
+            <p className="mt-5 mx-auto max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
               {t.hero.subtitle}
             </p>
           </div>
