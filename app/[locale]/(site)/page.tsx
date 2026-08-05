@@ -352,6 +352,11 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════
+          6  B2B TESTIMONIALS WALL
+          ═══════════════════════════════════════════════ */}
+      <B2BTestimonialsWall isZh={isZh} />
+
+      {/* ═══════════════════════════════════════════════
           7  DOSAGE FORMS — alternating image + text
           ═══════════════════════════════════════════════ */}
       <section className="bg-white py-20 sm:py-28">
@@ -456,11 +461,6 @@ export default async function HomePage({
           </div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════════
-          9  B2B TESTIMONIALS WALL
-          ═══════════════════════════════════════════════ */}
-      <B2BTestimonialsWall isZh={isZh} />
 
       {/* ═══════════════════════════════════════════════
           10  KNOWLEDGE HUB — thumbnails left for client to fill
