@@ -23,8 +23,6 @@ import {
   Beaker,
   Boxes,
   ScanLine,
-  Warehouse,
-  MapPin,
 } from "lucide-react";
 import { absoluteUrl, metaWithLocale, faqJsonLd } from "@/lib/seo";
 import Link from "@/components/site/A";
@@ -198,7 +196,6 @@ export default async function QualityPage({
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   const dict = getDict(locale);
   const t = dict.b2bPages;
-  const tf = dict.b2bPages.factory;
   const isZh = locale === "zh";
   const faqs = isZh ? faqsZh : faqsEn;
   const factoryFaqs = isZh ? factoryFaqsZh : factoryFaqsEn;
@@ -889,7 +886,28 @@ export default async function QualityPage({
         </div>
       </section>
 
-      {/* ─── MODULE 11: FAQ (merged Science + Factory) ─── */}
+      {/* ─── BOTTOM CTA ─── */}
+      <section className="border-b border-line bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-14 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+          <div className="flex items-start gap-4">
+            <FileText className="mt-1 size-5 shrink-0 text-forest-mid" aria-hidden />
+            <div>
+              <h2 className="text-xl font-semibold tracking-[-0.025em] text-ink">
+                {isZh ? "需要供应商资质文件包？" : "Need a vendor-approval document package?"}
+              </h2>
+              <p className="mt-1.5 max-w-2xl text-[0.88rem] leading-6 text-ink-soft">
+                {isZh ? "请发送产品信息、目标市场、所需证明文件及预期订单量。我们将在 24 小时内回复，提供完整的文件清单和时间安排。可提供文件：CoA · GMP 报告 · SQF 证书 · FDA 注册 · HACCP 摘要 · 过敏原声明。" : "Send the product, target market, requested evidence and expected order volume. We will respond within 24 hours with a complete document checklist and timeline. Available documents: CoA · GMP Report · SQF Certificate · FDA Registration · HACCP Summary · Allergen Statement."}
+              </p>
+            </div>
+          </div>
+          <Link href="/private-label#inquiry" className="b2b-btn-primary shrink-0">
+            {isZh ? "申请项目文件" : "Request project documents"}
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </div>
+      </section>
+
+      {/* ─── FAQ ─── */}
       <section className="border-b border-line bg-white">
         <JsonLd data={faqJsonLd([...faqs, ...factoryFaqs])} />
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.34fr_0.66fr] lg:px-10">
@@ -918,98 +936,6 @@ export default async function QualityPage({
               </details>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ─── FACTORY: PACKAGING ─── */}
-      <section className="border-b border-line bg-[#e9eeea]">
-        <div className="mx-auto grid max-w-[1480px] lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="relative min-h-[560px] border-r border-line">
-            <Image src="/images/b2b/factory-packaging-line.png" alt="Automated pet supplement packaging line" fill className="object-cover" sizes="(min-width: 1024px) 60vw, 100vw" />
-          </div>
-          <div className="px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
-            <p className="b2b-kicker text-forest-mid">{tf.packaging.kicker}</p>
-            <h2 className="mt-4 text-4xl font-medium tracking-[-0.04em] text-ink">{tf.packaging.title}</h2>
-            <p className="mt-5 text-sm leading-7 text-ink-soft">{tf.packaging.body}</p>
-            <div className="mt-9 border-t border-line">
-              {[
-                [tf.packaging.primaryPacks, tf.packaging.primaryPacksValue],
-                [tf.packaging.identification, tf.packaging.identificationValue],
-                [tf.packaging.privateLabel, tf.packaging.privateLabelValue],
-                [tf.packaging.releaseHandoff, tf.packaging.releaseHandoffValue],
-              ].map(([label, value]) => (
-                <div key={label} className="grid grid-cols-[0.34fr_0.66fr] gap-4 border-b border-line py-4">
-                  <p className="text-sm font-semibold text-ink">{label}</p>
-                  <p className="text-sm leading-6 text-ink-soft">{value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── FACTORY: WAREHOUSE ─── */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10">
-        <div className="grid gap-0 border border-line lg:grid-cols-[0.78fr_1.22fr]">
-          <div className="bg-white p-8 sm:p-10 lg:p-12">
-            <Warehouse className="size-7 text-forest-mid" strokeWidth={1.5} aria-hidden />
-            <p className="b2b-kicker mt-10 text-forest-mid">{tf.warehouse.kicker}</p>
-            <h2 className="mt-4 text-3xl font-medium tracking-[-0.035em] text-ink">{tf.warehouse.title}</h2>
-            <p className="mt-5 text-sm leading-7 text-ink-soft">{tf.warehouse.body}</p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <div className="border-l-2 border-forest pl-4">
-                <p className="text-2xl font-semibold text-forest">{tf.warehouse.stat1Value}</p>
-                <p className="mt-1 text-xs leading-5 text-ink-soft">{tf.warehouse.stat1Label}</p>
-              </div>
-              <div className="border-l-2 border-forest pl-4">
-                <p className="text-2xl font-semibold text-forest">{tf.warehouse.stat2Value}</p>
-                <p className="mt-1 text-xs leading-5 text-ink-soft">{tf.warehouse.stat2Label}</p>
-              </div>
-            </div>
-          </div>
-          <div className="relative min-h-[500px] border-l border-line">
-            <Image src="/images/b2b/factory-export-warehouse.png" alt="Finished-goods warehouse for export" fill className="object-cover" sizes="(min-width: 1024px) 60vw, 100vw" />
-          </div>
-        </div>
-      </section>
-
-      {/* ─── FACTORY: LOCATION ─── */}
-      <section className="border-y border-line bg-white">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.3fr_0.7fr] lg:px-10">
-          <div className="flex items-start gap-4">
-            <MapPin className="mt-1 size-6 shrink-0 text-forest-mid" aria-hidden />
-            <div>
-              <p className="b2b-kicker text-forest-mid">{tf.location.kicker}</p>
-              <h2 className="mt-3 text-2xl font-semibold text-ink">{tf.location.title}</h2>
-            </div>
-          </div>
-          <address className="not-italic">
-            <p className="text-lg leading-8 text-ink">{tf.location.address}</p>
-            <p className="mt-4 text-sm leading-6 text-ink-soft">{tf.location.addressZh}</p>
-          </address>
-        </div>
-      </section>
-
-
-
-      {/* ─── BOTTOM CTA ─── */}
-      <section className="border-b border-line bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-14 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-          <div className="flex items-start gap-4">
-            <FileText className="mt-1 size-5 shrink-0 text-forest-mid" aria-hidden />
-            <div>
-              <h2 className="text-xl font-semibold tracking-[-0.025em] text-ink">
-                {isZh ? "需要供应商资质文件包？" : "Need a vendor-approval document package?"}
-              </h2>
-              <p className="mt-1.5 max-w-2xl text-[0.88rem] leading-6 text-ink-soft">
-                {isZh ? "请发送产品信息、目标市场、所需证明文件及预期订单量。我们将在 24 小时内回复，提供完整的文件清单和时间安排。可提供文件：CoA · GMP 报告 · SQF 证书 · FDA 注册 · HACCP 摘要 · 过敏原声明。" : "Send the product, target market, requested evidence and expected order volume. We will respond within 24 hours with a complete document checklist and timeline. Available documents: CoA · GMP Report · SQF Certificate · FDA Registration · HACCP Summary · Allergen Statement."}
-              </p>
-            </div>
-          </div>
-          <Link href="/private-label#inquiry" className="b2b-btn-primary shrink-0">
-            {isZh ? "申请项目文件" : "Request project documents"}
-            <ArrowRight className="size-4" aria-hidden />
-          </Link>
         </div>
       </section>
     </>
