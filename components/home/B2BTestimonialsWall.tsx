@@ -1,18 +1,19 @@
 "use client";
 
+import { useEffect, useRef, useState, useCallback } from "react";
+
 /**
  * B2BTestimonialsWall
- * Pixel-faithful recreation of the reference design:
- * - White background, large rounded cards with drop shadow
- * - Quote text (large, dark) at the top of each card
- * - Circular initial-avatar + name + role at the bottom
- * - Three columns scroll at different speeds (no avatar images needed)
- * - Top & bottom fade mask so cards ghost in/out
- * - Middle column scrolls in reverse
+ * Three independent vertically-scrolling columns:
+ * - Auto-scroll at different speeds
+ * - Hover to pause
+ * - Click-drag (mouse) and touch-drag to manually scroll
+ * - Top & bottom fade mask
+ * - White cards on light-grey background
  */
 
 const testimonials = [
-  // ── Column 1 (fast, 36s) ─────────────────────────────────────────
+  // ── Column 1 ──────────────────────────────────────────────────────
   {
     id: "t01",
     quote:
@@ -68,7 +69,7 @@ const testimonials = [
     color: "#3d6a7a",
   },
 
-  // ── Column 2 (medium, 52s, reverse) ─────────────────────────────
+  // ── Column 2 ──────────────────────────────────────────────────────
   {
     id: "t07",
     quote:
@@ -124,7 +125,7 @@ const testimonials = [
     color: "#6a4a7a",
   },
 
-  // ── Column 3 (slow, 70s) ─────────────────────────────────────────
+  // ── Column 3 ──────────────────────────────────────────────────────
   {
     id: "t13",
     quote:
@@ -185,59 +186,147 @@ const col1 = testimonials.slice(0, 6);
 const col2 = testimonials.slice(6, 12);
 const col3 = testimonials.slice(12, 18);
 
+// ─── Card ─────────────────────────────────────────────────────────────────────
 function Card({ t }: { t: (typeof testimonials)[0] }) {
   return (
-    <div
-      className="mb-6 rounded-[24px] bg-white p-8 shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
-      style={{ minHeight: "220px" }}
-    >
-      {/* Quote body — large, dark, no quote marks */}
-      <p className="text-[1.02rem] leading-[1.65] text-[#1a1a1a]">{t.quote}</p>
-
-      {/* Author row */}
-      <div className="mt-6 flex items-center gap-3">
-        {/* Circular initial avatar */}
+    <div className="mb-5 rounded-[20px] bg-white p-7 shadow-[0_2px_16px_rgba(0,0,0,0.07)] select-none">
+      <p className="text-[0.97rem] leading-[1.7] text-[#1a1a1a]">{t.quote}</p>
+      <div className="mt-5 flex items-center gap-3">
         <div
-          className="flex size-10 shrink-0 items-center justify-center rounded-full text-[0.78rem] font-bold text-white"
+          className="flex size-10 shrink-0 items-center justify-center rounded-full text-[0.75rem] font-bold text-white"
           style={{ backgroundColor: t.color }}
           aria-hidden
         >
           {t.initials}
         </div>
         <div>
-          <p className="text-[0.88rem] font-semibold text-[#1a1a1a]">{t.author}</p>
-          <p className="text-[0.78rem] text-[#888]">{t.role}</p>
+          <p className="text-[0.85rem] font-semibold text-[#1a1a1a]">{t.author}</p>
+          <p className="text-[0.75rem] text-[#999]">{t.role}</p>
         </div>
       </div>
     </div>
   );
 }
 
-interface ColProps {
+// ─── ScrollColumn ─────────────────────────────────────────────────────────────
+interface ScrollColProps {
   cards: typeof col1;
-  duration: string;
+  speed: number; // px per second
   reverse?: boolean;
 }
 
-function ScrollCol({ cards, duration, reverse = false }: ColProps) {
-  const items = [...cards, ...cards];
+function ScrollColumn({ cards, speed, reverse = false }: ScrollColProps) {
+  const outerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const posRef = useRef(0);          // current translateY in px
+  const rafRef = useRef<number>(0);
+  const pausedRef = useRef(false);   // hover pause
+  const draggingRef = useRef(false);
+  const dragStartY = useRef(0);
+  const dragStartPos = useRef(0);
+  const halfHeightRef = useRef(0);
+
+  // Measure half-height (one copy of cards) after mount
+  useEffect(() => {
+    if (innerRef.current) {
+      halfHeightRef.current = innerRef.current.scrollHeight / 2;
+    }
+  }, []);
+
+  // Animation loop
+  useEffect(() => {
+    const direction = reverse ? 1 : -1; // -1 = scroll up, 1 = scroll down
+
+    const tick = () => {
+      if (!pausedRef.current && !draggingRef.current) {
+        posRef.current += direction * (speed / 60);
+
+        const half = halfHeightRef.current;
+        if (half > 0) {
+          // Seamless loop
+          if (posRef.current <= -half) posRef.current += half;
+          if (posRef.current >= 0) posRef.current -= half;
+        }
+      }
+
+      if (innerRef.current) {
+        innerRef.current.style.transform = `translateY(${posRef.current}px)`;
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [speed, reverse]);
+
+  // ── Mouse drag ──────────────────────────────────────────────────
+  const onMouseDown = useCallback((e: React.MouseEvent) => {
+    draggingRef.current = true;
+    dragStartY.current = e.clientY;
+    dragStartPos.current = posRef.current;
+    e.preventDefault();
+  }, []);
+
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!draggingRef.current) return;
+    const delta = e.clientY - dragStartY.current;
+    posRef.current = dragStartPos.current + delta;
+  }, []);
+
+  const onMouseUp = useCallback(() => {
+    draggingRef.current = false;
+  }, []);
+
+  // ── Touch drag ──────────────────────────────────────────────────
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    draggingRef.current = true;
+    dragStartY.current = e.touches[0].clientY;
+    dragStartPos.current = posRef.current;
+  }, []);
+
+  const onTouchMove = useCallback((e: TouchEvent) => {
+    if (!draggingRef.current) return;
+    const delta = e.touches[0].clientY - dragStartY.current;
+    posRef.current = dragStartPos.current + delta;
+  }, []);
+
+  const onTouchEnd = useCallback(() => {
+    draggingRef.current = false;
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  const items = [...cards, ...cards]; // duplicate for seamless loop
+
   return (
     <div
-      className="relative overflow-hidden"
+      ref={outerRef}
+      className="relative overflow-hidden cursor-grab active:cursor-grabbing"
       style={{
+        height: "680px",
         WebkitMaskImage:
-          "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+          "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
         maskImage:
-          "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+          "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
       }}
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; draggingRef.current = false; }}
+      onMouseDown={onMouseDown}
+      onTouchStart={onTouchStart}
     >
-      <div
-        className="flex flex-col will-change-transform"
-        style={{
-          animation: `b2b-scroll-y ${duration} linear infinite`,
-          animationDirection: reverse ? "reverse" : "normal",
-        }}
-      >
+      <div ref={innerRef} className="will-change-transform">
         {items.map((t, i) => (
           <Card key={`${t.id}-${i}`} t={t} />
         ))}
@@ -246,18 +335,18 @@ function ScrollCol({ cards, duration, reverse = false }: ColProps) {
   );
 }
 
+// ─── Main export ──────────────────────────────────────────────────────────────
 export default function B2BTestimonialsWall({ isZh = false }: { isZh?: boolean }) {
   return (
     <section
       className="overflow-hidden bg-[#f7f8fa] py-20 md:py-28"
       aria-labelledby="testimonials-title"
     >
-      {/* ── Header ── */}
+      {/* Header */}
       <div className="mx-auto mb-14 max-w-7xl px-5 text-center sm:px-8 lg:px-10">
         <h2
           id="testimonials-title"
           className="text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.02em] text-[#111]"
-          style={{ fontFamily: "inherit" }}
         >
           {isZh ? "合作伙伴怎么说" : "What our B2B partners say"}
         </h2>
@@ -268,19 +357,16 @@ export default function B2BTestimonialsWall({ isZh = false }: { isZh?: boolean }
         </p>
       </div>
 
-      {/* ── Three scrolling columns ── */}
-      <div
-        className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 sm:px-8 md:grid-cols-3 lg:px-12"
-        style={{ height: "720px" }}
-      >
-        {/* Left — fast (36s, up) */}
-        <ScrollCol cards={col1} duration="36s" />
+      {/* Three columns */}
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-5 sm:px-8 md:grid-cols-3 lg:px-12">
+        {/* Left — fast (60 px/s, up) */}
+        <ScrollColumn cards={col1} speed={60} />
 
-        {/* Middle — medium (52s, down) */}
-        <ScrollCol cards={col2} duration="52s" reverse />
+        {/* Middle — medium (42 px/s, down) */}
+        <ScrollColumn cards={col2} speed={42} reverse />
 
-        {/* Right — slow (70s, up) */}
-        <ScrollCol cards={col3} duration="70s" />
+        {/* Right — slow (28 px/s, up) */}
+        <ScrollColumn cards={col3} speed={28} />
       </div>
     </section>
   );
