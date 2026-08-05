@@ -17,7 +17,6 @@ import {
   Users,
   Star,
   Clock,
-  FileText,
   Download,
   ChevronRight,
   Beaker,
@@ -883,27 +882,6 @@ export default async function QualityPage({
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ─── BOTTOM CTA ─── */}
-      <section className="border-b border-line bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-14 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-          <div className="flex items-start gap-4">
-            <FileText className="mt-1 size-5 shrink-0 text-forest-mid" aria-hidden />
-            <div>
-              <h2 className="text-xl font-semibold tracking-[-0.025em] text-ink">
-                {isZh ? "需要供应商资质文件包？" : "Need a vendor-approval document package?"}
-              </h2>
-              <p className="mt-1.5 max-w-2xl text-[0.88rem] leading-6 text-ink-soft">
-                {isZh ? "请发送产品信息、目标市场、所需证明文件及预期订单量。我们将在 24 小时内回复，提供完整的文件清单和时间安排。可提供文件：CoA · GMP 报告 · SQF 证书 · FDA 注册 · HACCP 摘要 · 过敏原声明。" : "Send the product, target market, requested evidence and expected order volume. We will respond within 24 hours with a complete document checklist and timeline. Available documents: CoA · GMP Report · SQF Certificate · FDA Registration · HACCP Summary · Allergen Statement."}
-              </p>
-            </div>
-          </div>
-          <Link href="/private-label#inquiry" className="b2b-btn-primary shrink-0">
-            {isZh ? "申请项目文件" : "Request project documents"}
-            <ArrowRight className="size-4" aria-hidden />
-          </Link>
         </div>
       </section>
 
