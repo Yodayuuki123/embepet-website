@@ -13,6 +13,7 @@ import {
 import Link from "@/components/site/A";
 import JsonLd from "@/components/site/JsonLd";
 import FeaturedProductsCarousel from "@/components/b2b/FeaturedProductsCarousel";
+import B2BTestimonialsWall from "@/components/home/B2BTestimonialsWall";
 import VideoPlayer from "@/components/b2b/VideoPlayer";
 import { buildMetadata, absoluteUrl } from "@/lib/seo";
 import { isLocale } from "@/lib/i18n/locales";
@@ -55,6 +56,7 @@ export default async function HomePage({
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   const dict = getDict(locale);
   const t = dict.b2bPages.home;
+  const isZh = locale === "zh";
 
   return (
     <>
@@ -456,7 +458,12 @@ export default async function HomePage({
       </section>
 
       {/* ═══════════════════════════════════════════════
-          9  KNOWLEDGE HUB — thumbnails left for client to fill
+          9  B2B TESTIMONIALS WALL
+          ═══════════════════════════════════════════════ */}
+      <B2BTestimonialsWall isZh={isZh} />
+
+      {/* ═══════════════════════════════════════════════
+          10  KNOWLEDGE HUB — thumbnails left for client to fill
           ═══════════════════════════════════════════════ */}
       <section className={`${section} border-t border-line bg-[#f4f5f1]`}>
         <div className={container}>

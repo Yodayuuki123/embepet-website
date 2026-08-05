@@ -30,6 +30,7 @@
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 
   --animate-marquee: marquee 42s linear infinite;
+  --animate-b2b-scroll-y: b2b-scroll-y 38s linear infinite;
   --animate-marquee-slow: marquee 70s linear infinite;
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-late: float 8.5s ease-in-out -3s infinite;
@@ -45,6 +46,15 @@
       transform: translateX(-50%);
     }
   }
+  @keyframes b2b-scroll-y {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+
   @keyframes brand-scroll {
     from {
       transform: translateX(0);
