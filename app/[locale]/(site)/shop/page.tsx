@@ -82,28 +82,6 @@ export default async function ProductPortfolioPage({
     { value: "paste", label: t.catalog.pastes },
   ];
 
-  const commercialFramework = [
-    {
-      label: t.framework.items[0].label,
-      value: t.framework.items[0].value,
-      detail: t.framework.items[0].detail,
-    },
-    {
-      label: t.framework.items[1].label,
-      value: t.framework.items[1].value,
-      detail: t.framework.items[1].detail,
-    },
-    {
-      label: t.framework.items[2].label,
-      value: t.framework.items[2].value,
-      detail: t.framework.items[2].detail,
-    },
-    {
-      label: t.framework.items[3].label,
-      value: t.framework.items[3].value,
-      detail: t.framework.items[3].detail,
-    },
-  ];
 
   const wholesaleFaqs = [
     {
@@ -176,37 +154,6 @@ export default async function ProductPortfolioPage({
             <p className="mt-5 mx-auto max-w-2xl text-[1.02rem] leading-8 text-ink-soft">
               {t.hero.subtitle}
             </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="wholesale" className="scroll-mt-24 border-b border-line bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10">
-          <div className="grid gap-10 lg:grid-cols-[0.32fr_0.68fr]">
-            <div>
-              <p className="b2b-kicker text-forest-mid">{t.framework.kicker}</p>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.035em] text-ink">
-                {t.framework.title}
-              </h2>
-              <p className="mt-4 text-sm leading-7 text-ink-soft">
-                {t.framework.subtitle}
-              </p>
-            </div>
-            <dl className="border-l border-t border-line">
-              {commercialFramework.map((item, index) => (
-                <div
-                  key={item.label}
-                  className="grid gap-4 border-b border-r border-line p-5 sm:grid-cols-[0.24fr_0.24fr_0.52fr] sm:p-6"
-                >
-                  <dt className="flex items-center gap-3 text-sm font-semibold text-ink">
-                    <span className="text-[0.65rem] text-forest-mid">0{index + 1}</span>
-                    {item.label}
-                  </dt>
-                  <dd className="text-sm font-semibold text-forest">{item.value}</dd>
-                  <dd className="text-sm leading-6 text-ink-soft">{item.detail}</dd>
-                </div>
-              ))}
-            </dl>
           </div>
         </div>
       </section>
