@@ -6,6 +6,7 @@ import { metaWithLocale, breadcrumbJsonLd, absoluteUrl } from "@/lib/seo";
 import JsonLd from "@/components/site/JsonLd";
 import { articlesByDate } from "@/lib/news";
 import { container, section, kicker, btn } from "@/components/b2b/kit";
+import { isLocale } from "@/lib/i18n/locales";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   return metaWithLocale(params, {
@@ -30,12 +31,22 @@ const COVER_IMAGES: Record<string, string> = {
   "gmp-sqf-certification": "/images/b2b/news/news-gmp-sqf.png",
 };
 
-export default function NewsPage() {
+export default async function NewsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : "en";
+  const isZh = locale === "zh";
   const articles = articlesByDate();
 
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "News", path: "/news" }])} />
+      <JsonLd data={breadcrumbJsonLd([
+        { name: isZh ? "首页" : "Home", path: "/" },
+        { name: isZh ? "新闻" : "News", path: "/news" }
+      ])} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -60,12 +71,16 @@ export default function NewsPage() {
       {/* ===== HERO ===== */}
       <section className="border-b border-line bg-[#f5f3ec]">
         <div className={`${container} py-12 sm:py-16 text-center`}>
-          <p className={`${kicker} text-ink-soft`}>News &amp; Insights</p>
+          <p className={`${kicker} text-ink-soft`}>
+            {isZh ? "新闻与洞察" : "News & Insights"}
+          </p>
           <h1 className="mt-4 text-[clamp(1.7rem,3vw,2.6rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
-            Industry Insights &amp; Manufacturing Updates
+            {isZh ? "行业洞察与生产动态" : "Industry Insights & Manufacturing Updates"}
           </h1>
           <p className="mt-4 mx-auto max-w-2xl text-[0.97rem] leading-7 text-ink-soft">
-            Market trends, formulation guidance and regulatory insights for pet-supplement brand owners — written by our manufacturing and quality teams.
+            {isZh
+              ? "市场趋势、配方指导与法规洞察——专为宠物营养品品牌主撰写，来自我们的生产与质控团队。"
+              : "Market trends, formulation guidance and regulatory insights for pet-supplement brand owners — written by our manufacturing and quality teams."}
           </p>
         </div>
       </section>
@@ -80,7 +95,7 @@ export default function NewsPage() {
                 href={`/news/${a.slug}`}
                 className="group flex flex-col"
               >
-                {/* Cover image — square-ish, no border radius */}
+                {/* Cover image */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#eaeee5]">
                   {COVER_IMAGES[a.slug] && (
                     <Image
@@ -114,7 +129,9 @@ export default function NewsPage() {
             ))}
           </div>
         ) : (
-          <div className="py-24 text-center text-ink-soft">No articles published yet.</div>
+          <div className="py-24 text-center text-ink-soft">
+            {isZh ? "暂无已发布的文章。" : "No articles published yet."}
+          </div>
         )}
       </section>
 
@@ -122,13 +139,17 @@ export default function NewsPage() {
       <section className="border-t border-line bg-forest-deep text-white">
         <div className={`${container} flex flex-col gap-8 py-16 lg:flex-row lg:items-center lg:justify-between`}>
           <div className="max-w-2xl">
-            <h2 className="text-[1.7rem] font-semibold tracking-[-0.03em]">Ready to turn insight into a product?</h2>
+            <h2 className="text-[1.7rem] font-semibold tracking-[-0.03em]">
+              {isZh ? "准备好将洞察转化为产品了吗？" : "Ready to turn insight into a product?"}
+            </h2>
             <p className="mt-3 text-sm leading-6 text-white/65">
-              Send a product brief — market, species, target benefit, format and volume — and our OEM/ODM team confirms the practical route.
+              {isZh
+                ? "发送产品简介——市场、物种、目标功效、剂型和数量——我们的 OEM/ODM 团队将确认最优合作路径。"
+                : "Send a product brief — market, species, target benefit, format and volume — and our OEM/ODM team confirms the practical route."}
             </p>
           </div>
           <Link href="/private-label#inquiry" className={`${btn.light} shrink-0`}>
-            Start a product brief
+            {isZh ? "开始产品简介" : "Start a product brief"}
             <ArrowRight className="size-4" aria-hidden />
           </Link>
         </div>

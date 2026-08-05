@@ -53,6 +53,7 @@ export default async function ProductPortfolioPage({
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   const dict = getDict(locale);
   const t = dict.b2bPages.shop;
+  const isZh = locale === "zh";
 
   const sp = await searchParams;
   const species = first(sp.species);
@@ -83,28 +84,51 @@ export default async function ProductPortfolioPage({
   ];
 
 
-  const wholesaleFaqs = [
-    {
-      q: "What is the minimum order quantity for wholesale pet supplements?",
-      a: "Starting MOQ is shown per SKU in the catalog and used for initial comparison. The confirmed MOQ depends on the formula, dosage form and packaging configuration, and is stated in your quotation.",
-    },
-    {
-      q: "How are wholesale pet supplement prices calculated?",
-      a: "Catalog prices are USD reference figures converted from the supplied RMB materials for early comparison. A purchase-ready quote is issued after packaging, label work, testing, order volume, Incoterm and destination market are aligned.",
-    },
-    {
-      q: "Can I order wholesale pet supplements for both dogs and cats?",
-      a: "Yes. The catalog can be filtered by species and format. Many formulas are available for dogs, cats or both, across soft chews, powders, drops, oils, tablets and pastes.",
-    },
-    {
-      q: "Do you offer private label and OEM on wholesale catalog products?",
-      a: "Yes. Any catalog product can be taken as a stock-formula private-label program or adapted through OEM/ODM development. Share a shortlist to confirm the route, MOQ basis and sample path.",
-    },
-    {
-      q: "How do I request a wholesale pet supplement quotation?",
-      a: "Send the selected product names or screenshots with your destination market, sales channel, expected volume, packaging direction and preferred Incoterm. The B2B team confirms what is fixed, what is optional and what must be quoted.",
-    },
-  ];
+  const wholesaleFaqs = isZh
+    ? [
+        {
+          q: "宠物营养品批发的最低起订量是多少？",
+          a: "目录中每个 SKU 均标注了起始起订量，仅供初步参考。最终确认的起订量取决于配方、剂型和包装配置，并在正式报价中注明。",
+        },
+        {
+          q: "宠物营养品的批发价格是如何计算的？",
+          a: "目录价格为美元参考价，由所提供的人民币原材料成本换算而来，仅供早期比较使用。正式采购报价将在包装、标签、测试、订单量、贸易术语和目标市场确认后出具。",
+        },
+        {
+          q: "我可以同时订购犬用和猫用宠物营养品吗？",
+          a: "可以。目录支持按物种和剂型筛选。许多配方适用于犬、猫或两者，涵盖软咀嚼、粉剂、滴剂、鱼油、片剂和膏剂等多种形式。",
+        },
+        {
+          q: "目录产品是否支持贴牌和 OEM 定制？",
+          a: "支持。任何目录产品均可作为现有配方的贴牌项目，或通过 OEM/ODM 开发进行定制。请提供候选产品清单，以确认合作路径、起订量基准和打样流程。",
+        },
+        {
+          q: "如何申请宠物营养品批发报价？",
+          a: "请发送所选产品名称或截图，并注明目标市场、销售渠道、预期订单量、包装方向和首选贸易术语。B2B 团队将确认固定项、可选项及需报价的内容。",
+        },
+      ]
+    : [
+        {
+          q: "What is the minimum order quantity for wholesale pet supplements?",
+          a: "Starting MOQ is shown per SKU in the catalog and used for initial comparison. The confirmed MOQ depends on the formula, dosage form and packaging configuration, and is stated in your quotation.",
+        },
+        {
+          q: "How are wholesale pet supplement prices calculated?",
+          a: "Catalog prices are USD reference figures converted from the supplied RMB materials for early comparison. A purchase-ready quote is issued after packaging, label work, testing, order volume, Incoterm and destination market are aligned.",
+        },
+        {
+          q: "Can I order wholesale pet supplements for both dogs and cats?",
+          a: "Yes. The catalog can be filtered by species and format. Many formulas are available for dogs, cats or both, across soft chews, powders, drops, oils, tablets and pastes.",
+        },
+        {
+          q: "Do you offer private label and OEM on wholesale catalog products?",
+          a: "Yes. Any catalog product can be taken as a stock-formula private-label program or adapted through OEM/ODM development. Share a shortlist to confirm the route, MOQ basis and sample path.",
+        },
+        {
+          q: "How do I request a wholesale pet supplement quotation?",
+          a: "Send the selected product names or screenshots with your destination market, sales channel, expected volume, packaging direction and preferred Incoterm. The B2B team confirms what is fixed, what is optional and what must be quoted.",
+        },
+      ];
 
   return (
     <>
@@ -251,7 +275,7 @@ export default async function ProductPortfolioPage({
         {filtered.length ? (
           <div className="mt-8 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filtered.map((product) => (
-              <B2BProductCard key={product.id} product={product} />
+              <B2BProductCard key={product.id} product={product} isZh={isZh} />
             ))}
           </div>
         ) : (

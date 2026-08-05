@@ -200,7 +200,7 @@ export default async function HomePage({
           />
         </div>
         <div className={`${container} mt-14`}>
-          <FeaturedProductsCarousel />
+          <FeaturedProductsCarousel isZh={isZh} />
         </div>
       </section>
 
@@ -483,32 +483,59 @@ export default async function HomePage({
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {(
-              [
-                {
-                  title: "Pet Supplement OEM: A Complete Guide from Formula to Market Launch",
-                  desc: "Contract-manufacturing timelines, MOQs, and the regulatory steps every brand owner should plan for.",
-                  date: "2025-06-15",
-                  cat: "OEM Guide",
-                  href: "/news/pet-supplement-oem-guide",
-                  image: "/images/b2b/news/news-oem-guide.png",
-                },
-                {
-                  title: "Soft Chews vs Powders vs Drops: Choosing the Right Format",
-                  desc: "A data-driven comparison of dosage forms — palatability, stability, and consumer preference.",
-                  date: "2025-05-22",
-                  cat: "Product Development",
-                  href: "/news/dosage-form-comparison",
-                  image: "/images/b2b/news/news-dosage-form.png",
-                },
-                {
-                  title: "Understanding GMP & SQF Certification for Pet Supplements",
-                  desc: "Why certifications matter for market access, retailer acceptance, and brand credibility.",
-                  date: "2025-04-10",
-                  cat: "Quality",
-                  href: "/news/gmp-sqf-certification",
-                  image: "/images/b2b/news/news-gmp-sqf.png",
-                },
-              ] as const
+              isZh
+                ? [
+                    {
+                      title: "宠物营养品 OEM 完全指南：从配方到市场上市",
+                      desc: "代工生产时间线、最低起订量，以及每位品牌主都应提前规划的法规步骤。",
+                      date: "2025-06-15",
+                      cat: "OEM 指南",
+                      href: "/news/pet-supplement-oem-guide",
+                      image: "/images/b2b/news/news-oem-guide.png",
+                    },
+                    {
+                      title: "软咀嚼 vs 粉剂 vs 滴剂：如何选择正确的剂型",
+                      desc: "基于数据的剂型对比——适口性、稳定性与消费者偏好分析。",
+                      date: "2025-05-22",
+                      cat: "产品开发",
+                      href: "/news/dosage-form-comparison",
+                      image: "/images/b2b/news/news-dosage-form.png",
+                    },
+                    {
+                      title: "读懂宠物营养品的 GMP 与 SQF 认证",
+                      desc: "认证为何对市场准入、零售商接受度和品牌公信力至关重要。",
+                      date: "2025-04-10",
+                      cat: "质量",
+                      href: "/news/gmp-sqf-certification",
+                      image: "/images/b2b/news/news-gmp-sqf.png",
+                    },
+                  ]
+                : [
+                    {
+                      title: "Pet Supplement OEM: A Complete Guide from Formula to Market Launch",
+                      desc: "Contract-manufacturing timelines, MOQs, and the regulatory steps every brand owner should plan for.",
+                      date: "2025-06-15",
+                      cat: "OEM Guide",
+                      href: "/news/pet-supplement-oem-guide",
+                      image: "/images/b2b/news/news-oem-guide.png",
+                    },
+                    {
+                      title: "Soft Chews vs Powders vs Drops: Choosing the Right Format",
+                      desc: "A data-driven comparison of dosage forms — palatability, stability, and consumer preference.",
+                      date: "2025-05-22",
+                      cat: "Product Development",
+                      href: "/news/dosage-form-comparison",
+                      image: "/images/b2b/news/news-dosage-form.png",
+                    },
+                    {
+                      title: "Understanding GMP & SQF Certification for Pet Supplements",
+                      desc: "Why certifications matter for market access, retailer acceptance, and brand credibility.",
+                      date: "2025-04-10",
+                      cat: "Quality",
+                      href: "/news/gmp-sqf-certification",
+                      image: "/images/b2b/news/news-gmp-sqf.png",
+                    },
+                  ]
             ).map((a) => (
               <Link
                 key={a.title}

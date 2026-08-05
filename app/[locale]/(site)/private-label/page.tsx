@@ -38,6 +38,7 @@ export default async function PrivateLabelPage({
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   const dict = getDict(locale);
   const t = dict.b2bPages.privateLabel;
+  const isZh = locale === "zh";
   const settings = await getSettings();
 
   const dosageForms = [
@@ -423,7 +424,7 @@ export default async function PrivateLabelPage({
             </div>
           </div>
           <div className="border border-line bg-white p-6 sm:p-9">
-            <InquiryForm defaultType="private_label" />
+            <InquiryForm defaultType="private_label" locale={locale} />
           </div>
         </div>
       </section>

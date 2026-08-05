@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 /**
  * B2BTestimonialsWall
@@ -12,7 +12,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
  * - White cards on light-grey background
  */
 
-const testimonials = [
+const testimonialsEn = [
   // ── Column 1 ──────────────────────────────────────────────────────
   {
     id: "t01",
@@ -182,12 +182,178 @@ const testimonials = [
   },
 ];
 
-const col1 = testimonials.slice(0, 6);
-const col2 = testimonials.slice(6, 12);
-const col3 = testimonials.slice(12, 18);
+const testimonialsZh = [
+  // ── 第一列 ──────────────────────────────────────────────────────
+  {
+    id: "t01",
+    quote:
+      "我们在不到90天内推出了关节支持软咀嚼产品线。EMBEPET 从配方筛选到出口文件全程跟进——这是我们经历过最顺畅的 OEM 项目。",
+    author: "Marcus T.",
+    role: "创始人 · NovaPaw Nutrition（美国）",
+    initials: "MT",
+    color: "#4a7c59",
+  },
+  {
+    id: "t02",
+    quote:
+      "GMP 和 SQF 证书正是我们零售买家所要求的。拥有可核实的第三方资质档案，让供应商审批流程变得毫不费力。",
+    author: "Sophie L.",
+    role: "采购经理 · PetVital Europe（德国）",
+    initials: "SL",
+    color: "#3d6b8a",
+  },
+  {
+    id: "t03",
+    quote:
+      "500件起订量对新品牌来说是颠覆性的。我们在全面量产前测试了三个 SKU——没有其他工厂能提供这样的灵活性。",
+    author: "Kenji M.",
+    role: "品牌总监 · Wanpaku Pet（日本）",
+    initials: "KM",
+    color: "#7a5c8a",
+  },
+  {
+    id: "t04",
+    quote:
+      "我们的镇静咀嚼配方需要精确添加 L-茶氨酸。研发团队在两周内提供了经过验证的规格表和稳定性数据，效率令人印象深刻。",
+    author: "Priya S.",
+    role: "产品负责人 · ZenPet Labs（澳大利亚）",
+    initials: "PS",
+    color: "#8a6a3d",
+  },
+  {
+    id: "t05",
+    quote:
+      "我们合作过三家中国代工厂。EMBEPET 是唯一一家在问题出现之前就主动提示原料替代风险的工厂。",
+    author: "Carlos R.",
+    role: "运营总监 · Salud Animal MX（墨西哥）",
+    initials: "CR",
+    color: "#5a7a3d",
+  },
+  {
+    id: "t06",
+    quote:
+      "批次追溯记录在我们提出审计请求后24小时内送达。这种文件透明度在行业内实属罕见。",
+    author: "Annika B.",
+    role: "质量保证负责人 · Nordic Pet Co.（瑞典）",
+    initials: "AB",
+    color: "#3d6a7a",
+  },
+
+  // ── 第二列 ──────────────────────────────────────────────────────
+  {
+    id: "t07",
+    quote:
+      "冻干拌粮产品线在消费者测试中超出了我们的适口性目标。配方调整只用了一次迭代——团队从第一天起就完全理解了我们的需求。",
+    author: "Liam O.",
+    role: "新品开发经理 · Canine Craft AU（澳大利亚）",
+    initials: "LO",
+    color: "#6a5a8a",
+  },
+  {
+    id: "t08",
+    quote:
+      "我们需要为美国经销商提供 FDA 食品设施注册文件。EMBEPET 将所有文件整合成一个完整包——无需来回沟通。",
+    author: "Hannah K.",
+    role: "法规事务 · PureBreed Supplements（美国）",
+    initials: "HK",
+    color: "#4a6a5a",
+  },
+  {
+    id: "t09",
+    quote:
+      "我们的自有品牌 Omega-3 鱼油同时在四个市场上市。多语言标签设计服务为我们节省了数周与本地印刷商的协调时间。",
+    author: "Fatima A.",
+    role: "国际销售 · Gulf Pet Health（阿联酋）",
+    initials: "FA",
+    color: "#7a4a5a",
+  },
+  {
+    id: "t10",
+    quote:
+      "生产团队在不延误发货日期的情况下配合了临时包装变更。这种响应速度正是建立长期合作关系的基础。",
+    author: "Thomas W.",
+    role: "供应链经理 · BioBalance Pet（加拿大）",
+    initials: "TW",
+    color: "#4a5a7a",
+  },
+  {
+    id: "t11",
+    quote:
+      "六种剂型在同一屋檐下意味着我们可以扩展 SKU 范围而无需认证第二家供应商。这种简便性具有真实的商业价值。",
+    author: "Yuki H.",
+    role: "品类经理 · PetPlus Japan（日本）",
+    initials: "YH",
+    color: "#5a7a6a",
+  },
+  {
+    id: "t12",
+    quote:
+      "益生菌粉配方在18个月稳定性测试后，CFU 数量仍远高于标签声称值。我们立即续签了合同。",
+    author: "Elena V.",
+    role: "技术总监 · VitaPet Polska（波兰）",
+    initials: "EV",
+    color: "#6a4a7a",
+  },
+
+  // ── 第三列 ──────────────────────────────────────────────────────
+  {
+    id: "t13",
+    quote:
+      "我们周一提交了需求简报，周三就收到了包含样品交期的商业路线建议。2个工作日响应的承诺是真实的。",
+    author: "David C.",
+    role: "首席执行官 · Pawsome Brands（英国）",
+    initials: "DC",
+    color: "#3d7a5a",
+  },
+  {
+    id: "t14",
+    quote:
+      "EMBEPET 的 HACCP 文件详尽程度足以在首次提交时就通过我们欧盟食品安全审计员的审核，无需任何纠正措施。",
+    author: "Marie-Claire D.",
+    role: "食品安全经理 · Naturel Animal FR（法国）",
+    initials: "MD",
+    color: "#7a5a3d",
+  },
+  {
+    id: "t15",
+    quote:
+      "定制心形软咀嚼模具成为了我们品牌的核心差异化要素。消费者在货架上就能认出这个形状——它已成为我们品牌识别的一部分。",
+    author: "Isabella M.",
+    role: "市场总监 · Cuore Pet Italia（意大利）",
+    initials: "IM",
+    color: "#5a3d7a",
+  },
+  {
+    id: "t16",
+    quote:
+      "我们与 EMBEPET 研发团队共同开发了一款新型蘑菇复合粉。配方有同行评审研究支撑，COA 与每项规格完全吻合。",
+    author: "Dr. James P.",
+    role: "首席科学官 · FungalPet Biotech（美国）",
+    initials: "JP",
+    color: "#3d5a7a",
+  },
+  {
+    id: "t17",
+    quote:
+      "从上一家制造商切换后，交货周期缩短了30%，单位成本降低了18%。质量审计结果也更好了。",
+    author: "Ravi N.",
+    role: "采购总监 · IndoPet Ventures（印度）",
+    initials: "RN",
+    color: "#6a7a3d",
+  },
+  {
+    id: "t18",
+    quote:
+      "出口文件包——COA、MSDS、植物检疫证书和海关 HS 编码——在首次提交时就完整准确。清关零延误。",
+    author: "Nadia F.",
+    role: "物流经理 · PetCare MENA（沙特阿拉伯）",
+    initials: "NF",
+    color: "#7a3d5a",
+  },
+];
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
-function Card({ t }: { t: (typeof testimonials)[0] }) {
+function Card({ t }: { t: (typeof testimonialsEn)[0] }) {
   return (
     <div className="mb-5 rounded-[20px] bg-white p-7 shadow-[0_2px_16px_rgba(0,0,0,0.07)] select-none">
       <p className="text-[0.97rem] leading-[1.7] text-[#1a1a1a]">{t.quote}</p>
@@ -210,7 +376,7 @@ function Card({ t }: { t: (typeof testimonials)[0] }) {
 
 // ─── ScrollColumn ─────────────────────────────────────────────────────────────
 interface ScrollColProps {
-  cards: typeof col1;
+  cards: typeof testimonialsEn;
   speed: number; // px per second
   reverse?: boolean;
 }
@@ -218,41 +384,35 @@ interface ScrollColProps {
 function ScrollColumn({ cards, speed, reverse = false }: ScrollColProps) {
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
-  const posRef = useRef(0);          // current translateY in px
+  const posRef = useRef(0);
   const rafRef = useRef<number>(0);
-  const pausedRef = useRef(false);   // hover pause
+  const pausedRef = useRef(false);
   const draggingRef = useRef(false);
   const dragStartY = useRef(0);
   const dragStartPos = useRef(0);
   const halfHeightRef = useRef(0);
 
-  // Measure half-height (one copy of cards) after mount
   useEffect(() => {
     if (innerRef.current) {
       halfHeightRef.current = innerRef.current.scrollHeight / 2;
     }
   }, []);
 
-  // Animation loop
   useEffect(() => {
-    const direction = reverse ? 1 : -1; // -1 = scroll up, 1 = scroll down
+    const direction = reverse ? 1 : -1;
 
     const tick = () => {
       if (!pausedRef.current && !draggingRef.current) {
         posRef.current += direction * (speed / 60);
-
         const half = halfHeightRef.current;
         if (half > 0) {
-          // Seamless loop
           if (posRef.current <= -half) posRef.current += half;
           if (posRef.current >= 0) posRef.current -= half;
         }
       }
-
       if (innerRef.current) {
         innerRef.current.style.transform = `translateY(${posRef.current}px)`;
       }
-
       rafRef.current = requestAnimationFrame(tick);
     };
 
@@ -260,7 +420,6 @@ function ScrollColumn({ cards, speed, reverse = false }: ScrollColProps) {
     return () => cancelAnimationFrame(rafRef.current);
   }, [speed, reverse]);
 
-  // ── Mouse drag ──────────────────────────────────────────────────
   const onMouseDown = useCallback((e: React.MouseEvent) => {
     draggingRef.current = true;
     dragStartY.current = e.clientY;
@@ -270,15 +429,11 @@ function ScrollColumn({ cards, speed, reverse = false }: ScrollColProps) {
 
   const onMouseMove = useCallback((e: MouseEvent) => {
     if (!draggingRef.current) return;
-    const delta = e.clientY - dragStartY.current;
-    posRef.current = dragStartPos.current + delta;
+    posRef.current = dragStartPos.current + (e.clientY - dragStartY.current);
   }, []);
 
-  const onMouseUp = useCallback(() => {
-    draggingRef.current = false;
-  }, []);
+  const onMouseUp = useCallback(() => { draggingRef.current = false; }, []);
 
-  // ── Touch drag ──────────────────────────────────────────────────
   const onTouchStart = useCallback((e: React.TouchEvent) => {
     draggingRef.current = true;
     dragStartY.current = e.touches[0].clientY;
@@ -287,13 +442,10 @@ function ScrollColumn({ cards, speed, reverse = false }: ScrollColProps) {
 
   const onTouchMove = useCallback((e: TouchEvent) => {
     if (!draggingRef.current) return;
-    const delta = e.touches[0].clientY - dragStartY.current;
-    posRef.current = dragStartPos.current + delta;
+    posRef.current = dragStartPos.current + (e.touches[0].clientY - dragStartY.current);
   }, []);
 
-  const onTouchEnd = useCallback(() => {
-    draggingRef.current = false;
-  }, []);
+  const onTouchEnd = useCallback(() => { draggingRef.current = false; }, []);
 
   useEffect(() => {
     window.addEventListener("mousemove", onMouseMove);
@@ -308,7 +460,7 @@ function ScrollColumn({ cards, speed, reverse = false }: ScrollColProps) {
     };
   }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
 
-  const items = [...cards, ...cards]; // duplicate for seamless loop
+  const items = [...cards, ...cards];
 
   return (
     <div
@@ -337,6 +489,11 @@ function ScrollColumn({ cards, speed, reverse = false }: ScrollColProps) {
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 export default function B2BTestimonialsWall({ isZh = false }: { isZh?: boolean }) {
+  const testimonials = isZh ? testimonialsZh : testimonialsEn;
+  const col1 = testimonials.slice(0, 6);
+  const col2 = testimonials.slice(6, 12);
+  const col3 = testimonials.slice(12, 18);
+
   return (
     <section
       className="overflow-hidden bg-[#f7f8fa] py-20 md:py-28"
@@ -359,13 +516,8 @@ export default function B2BTestimonialsWall({ isZh = false }: { isZh?: boolean }
 
       {/* Three columns */}
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-5 sm:px-8 md:grid-cols-3 lg:px-12">
-        {/* Left — fast (60 px/s, up) */}
         <ScrollColumn cards={col1} speed={60} />
-
-        {/* Middle — medium (42 px/s, down) */}
         <ScrollColumn cards={col2} speed={42} reverse />
-
-        {/* Right — slow (28 px/s, up) */}
         <ScrollColumn cards={col3} speed={28} />
       </div>
     </section>
