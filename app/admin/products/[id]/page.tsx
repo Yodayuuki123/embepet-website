@@ -42,7 +42,7 @@ export default async function AdminProductEditPage({ params }: { params: Promise
             status: product.status,
             seoTitle: product.seoTitle,
             seoDescription: product.seoDescription,
-            variants: product.variants.map((v) => ({
+            variants: product.variants.map((v: any) => ({
               id: v.id,
               name: v.name,
               sku: v.sku,
@@ -51,7 +51,7 @@ export default async function AdminProductEditPage({ params }: { params: Promise
               stock: v.stock,
               isDefault: v.isDefault,
             })),
-            collectionIds: product.collections.map((c) => c.collectionId),
+            collectionIds: product.collections.map((c: any) => c.collectionId),
           }}
           collections={collections}
         />

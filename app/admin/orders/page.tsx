@@ -81,7 +81,7 @@ export default async function AdminOrdersPage({
             {orders.length === 0 ? (
               <tr><td colSpan={7} className="px-5 py-10 text-center text-black/40">没有符合条件的订单</td></tr>
             ) : null}
-            {orders.map((o) => (
+            {orders.map((o: any) => (
               <tr key={o.id} className="border-b border-black/4 last:border-0 hover:bg-black/2">
                 <td className="px-5 py-3.5">
                   <Link href={`/admin/orders/${o.id}`} className="font-medium text-[#1d3f2f] hover:underline">

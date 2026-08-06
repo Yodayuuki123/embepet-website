@@ -28,8 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/", 1, "weekly"],
     ["/shop", 0.95, "weekly"],
     ["/private-label", 0.95, "monthly"],
-    ["/factory", 0.9, "monthly"],
     ["/science", 0.9, "monthly"],
+    ["/contact", 0.9, "monthly"],
     ["/news", 0.85, "weekly"],
   ];
 

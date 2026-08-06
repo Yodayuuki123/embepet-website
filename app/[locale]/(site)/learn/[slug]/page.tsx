@@ -13,7 +13,7 @@ import FaqAccordion from "@/components/site/FaqAccordion";
 
 export async function generateStaticParams() {
   const posts = await db.post.findMany({ where: { published: true }, select: { slug: true } });
-  return posts.map((p) => ({ slug: p.slug }));
+  return posts.map((p: any) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -157,7 +157,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <div className="mx-auto max-w-3xl px-5 py-14 sm:px-8">
             <h2 className="text-lg font-semibold tracking-[-0.02em] text-ink">Keep reading</h2>
             <ul className="mt-5 border-y border-line">
-              {related.map((r) => (
+              {related.map((r: any) => (
                 <li key={r.slug} className="border-b border-line last:border-b-0">
                   <Link href={`/learn/${r.slug}`} className="group flex items-center justify-between gap-4 py-4">
                     <span>

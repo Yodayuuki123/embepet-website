@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  ArrowRight,
   Factory,
   FlaskConical,
   Layers,
@@ -11,20 +10,20 @@ import {
   Phone,
   TestTube,
 } from "lucide-react";
-import { absoluteUrl, metaWithLocale } from "@/lib/seo";
+import { absoluteUrl, metaWithLocale, breadcrumbJsonLd } from "@/lib/seo";
 import { getSettings } from "@/lib/settings";
 import InquiryForm from "@/components/site/InquiryForm";
 import Link from "@/components/site/A";
 import JsonLd from "@/components/site/JsonLd";
-import ServiceOrbit, { type OrbitItem } from "@/components/b2b/ServiceOrbit";
+import ServiceOrbit from "@/components/b2b/ServiceOrbit";
 import { isLocale } from "@/lib/i18n/locales";
 import { getDict } from "@/lib/i18n";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   return metaWithLocale(params, {
-    title: "Private Label Pet Supplements & OEM/ODM Manufacturing",
+    title: "Private Label Pet Supplements: OEM & ODM Manufacturing | EMBEPET",
     description:
-      "Build private-label and OEM/ODM pet supplements with stock-formula or custom-development routes, sampling, packaging configuration, controlled production and export coordination.",
+      "Launch your private label pet supplement brand with EMBEPET. Custom formula development, stock formulas, packaging design, GMP production. MOQ 500 bottles. Request samples and quotation.",
     path: "/private-label",
   });
 }
@@ -58,7 +57,7 @@ export default async function PrivateLabelPage({
           "@type": "Service",
           name: "Private label and OEM/ODM pet supplement manufacturing",
           serviceType: "Pet supplement contract manufacturing",
-          url: absoluteUrl("/en/private-label"),
+          url: absoluteUrl(`/${locale}/private-label`),
           provider: { "@id": `${absoluteUrl("/")}#manufacturer` },
           areaServed: "Worldwide",
           audience: {
@@ -67,7 +66,95 @@ export default async function PrivateLabelPage({
           },
           description:
             "Stock-formula and custom-formula pet supplement manufacturing with sampling, packaging, production, quality review and export coordination.",
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            itemCondition: "https://schema.org/NewCondition",
+            seller: { "@id": `${absoluteUrl("/")}#manufacturer` },
+            offerCount: "3",
+            offers: [
+              {
+                "@type": "Offer",
+                name: "Private Label Manufacturing",
+                description: "Use our stock formulas with your brand label. MOQ 500 bottles for soft chews.",
+              },
+              {
+                "@type": "Offer",
+                name: "OEM Manufacturing",
+                description: "Manufacture your formula to your specifications. Full quality control and GMP production.",
+              },
+              {
+                "@type": "Offer",
+                name: "ODM Development",
+                description: "Custom formula development, packaging design, and complete product creation from concept to delivery.",
+              },
+            ],
+          },
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Dosage forms available",
+            itemListElement: [
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Product",
+                  name: "Soft Chews",
+                  description: "Heart, bone, paw and custom shapes. 1 tonne/hour production capacity.",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Product",
+                  name: "Tablets",
+                  description: "Compressed tablets with controlled weight and hardness uniformity.",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Product",
+                  name: "Pastes & Gels",
+                  description: "Tube-filled paste supplements with controlled viscosity.",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Product",
+                  name: "Drops & Oils",
+                  description: "Liquid supplements in dropper bottles.",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Product",
+                  name: "Powders",
+                  description: "Blended powder supplements with uniform mixing.",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Product",
+                  name: "Freeze-Dried",
+                  description: "Freeze-dried supplements with extended shelf life.",
+                },
+              },
+            ],
+          },
         }}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd(
+          [
+            { name: "Home", path: "/" },
+            { name: "Private Label", path: "/private-label" },
+          ],
+          locale
+        )}
       />
 
       <section className="border-b border-line bg-[#f5f3ec]">
@@ -332,7 +419,7 @@ export default async function PrivateLabelPage({
               className="absolute left-6 top-2 bottom-2 w-px bg-line lg:left-1/2 lg:-translate-x-1/2"
               aria-hidden
             />
-            {t.process.steps.map((step, index) => {
+            {t.process.steps.map((step: { title: string; body: string }, index: number) => {
               const icons = [MessageSquare, FlaskConical, TestTube, Factory, PackageCheck];
               const Icon = icons[index] || MessageSquare;
               const left = index % 2 === 0;
@@ -405,6 +492,16 @@ export default async function PrivateLabelPage({
             <h2 className="b2b-heading mt-4">{t.inquiry.title}</h2>
             <p className="mt-5 text-sm leading-7 text-ink-soft">
               {t.inquiry.subtitle}
+            </p>
+            <p className="mt-4 text-sm leading-7 text-ink-soft">
+              Need wholesale pricing first?{" "}
+              <Link href="/shop" className="font-semibold text-forest hover:underline">
+                Browse our 30-product catalog
+              </Link>{" "}
+              or{" "}
+              <Link href="/science" className="font-semibold text-forest hover:underline">
+                review our GMP & SQF certifications
+              </Link>.
             </p>
             <div className="mt-8 border-t border-line">
               <a

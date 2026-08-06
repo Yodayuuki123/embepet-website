@@ -43,7 +43,7 @@ const DEFAULTS: SiteSettings = {
 
 export const getSettings = cache(async (): Promise<SiteSettings> => {
   const rows = await db.siteSetting.findMany();
-  const map = Object.fromEntries(rows.map((r) => [r.key, r.value]));
+  const map = Object.fromEntries(rows.map((r: any) => [r.key, r.value]));
   // 兼容旧键名
   if (map.tagline && !map.brandTagline) map.brandTagline = map.tagline;
   if (map.contactEmail && !map.supportEmail) map.supportEmail = map.contactEmail;

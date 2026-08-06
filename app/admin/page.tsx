@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 const PAID_STATUSES = ["PAID", "FULFILLED", "SHIPPED", "DELIVERED"];
 
 export default async function AdminDashboard() {
-  const since30 = new Date(Date.now() - 30 * 24 * 3600 * 1000);
+  const since30 = new Date(new Date().getTime() - 30 * 24 * 3600 * 1000);
 
   const [revenueAgg, orderCount, pendingInquiries, pendingReviews, recentOrders, paidOrders, topItems] =
     await Promise.all([
@@ -87,7 +87,7 @@ export default async function AdminDashboard() {
           <h2 className="mb-4 font-semibold">热销产品 Top 5</h2>
           <ul className="space-y-3">
             {topItems.length === 0 ? <li className="text-[0.85rem] text-black/40">暂无销售数据</li> : null}
-            {topItems.map((item, i) => (
+            {topItems.map((item: any, i: number) => (
               <li key={item.productName} className="flex items-center gap-3">
                 <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-[#1d3f2f]/8 text-[0.8rem] font-bold text-[#1d3f2f]">
                   {i + 1}
@@ -121,7 +121,7 @@ export default async function AdminDashboard() {
             {recentOrders.length === 0 ? (
               <tr><td colSpan={5} className="px-5 py-8 text-center text-black/40">暂无订单</td></tr>
             ) : null}
-            {recentOrders.map((o) => (
+            {recentOrders.map((o: any) => (
               <tr key={o.id} className="border-b border-black/4 last:border-0 hover:bg-black/2">
                 <td className="px-5 py-3">
                   <Link href={`/admin/orders/${o.id}`} className="font-medium text-[#1d3f2f] hover:underline">

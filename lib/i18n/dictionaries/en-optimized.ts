@@ -901,5 +901,4 @@ const en = {
   },
 };
 
-export type Dictionary = typeof en;
 export default en;

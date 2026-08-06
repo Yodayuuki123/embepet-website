@@ -1,29 +1,21 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  ArrowRight,
   Check,
   ShieldCheck,
-  ExternalLink,
   FlaskConical,
   TestTube,
   ClipboardCheck,
   PackageCheck,
   Award,
-  Factory,
   Microscope,
   Layers,
   TrendingUp,
   Users,
-  Star,
   Clock,
-  Download,
   ChevronRight,
-  Beaker,
-  Boxes,
-  ScanLine,
 } from "lucide-react";
-import { absoluteUrl, metaWithLocale, faqJsonLd } from "@/lib/seo";
+import { absoluteUrl, metaWithLocale, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import Link from "@/components/site/A";
 import JsonLd from "@/components/site/JsonLd";
 import { isLocale } from "@/lib/i18n/locales";
@@ -31,9 +23,9 @@ import { getDict } from "@/lib/i18n";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   return metaWithLocale(params, {
-    title: "Pet Supplement Quality, GMP & SQF Certificates",
+    title: "GMP & SQF Certified Pet Supplement Factory | Taizhou Beno Biotech",
     description:
-      "Verify Taizhou Beno Biotech's Eurofins GMP audit recognition and SQF Food Safety Code: Pet Food Manufacturing certificate, with IDs, audit dates, scope and validity.",
+      "Verify GMP, SQF and Feed License certifications for Taizhou Beno Biotech pet supplement factory. Download certificates, view quality control processes. 3,000㎡ facility in Jiangsu, China.",
     path: "/science",
   });
 }
@@ -194,7 +186,6 @@ export default async function QualityPage({
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   const dict = getDict(locale);
-  const t = dict.b2bPages;
   const isZh = locale === "zh";
   const faqs = isZh ? faqsZh : faqsEn;
   const factoryFaqs = isZh ? factoryFaqsZh : factoryFaqsEn;
@@ -206,7 +197,7 @@ export default async function QualityPage({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           name: "Taizhou Beno Biotech quality certificates",
-          url: absoluteUrl("/en/science"),
+          url: absoluteUrl(`/${locale}/science`),
           about: { "@id": `${absoluteUrl("/")}#manufacturer` },
           description:
             "GMP audit recognition, SQF Pet Food Manufacturing certification and buyer-oriented quality evidence for Taizhou Beno Biotech Co., Ltd.",
@@ -219,6 +210,16 @@ export default async function QualityPage({
             about: { "@id": `${absoluteUrl("/")}#manufacturer` },
           })),
         }}
+      />
+      <JsonLd data={faqJsonLd([...faqs, ...factoryFaqs])} />
+      <JsonLd
+        data={breadcrumbJsonLd(
+          [
+            { name: "Home", path: "/" },
+            { name: isZh ? "质量与认证" : "Quality & Certifications", path: "/science" },
+          ],
+          locale
+        )}
       />
 
       {/* ─── HERO ─── */}
@@ -504,6 +505,16 @@ export default async function QualityPage({
             </h2>
             <p className="mt-4 text-[0.93rem] leading-7 text-ink-soft">
               {isZh ? "全部六种剂型均在同一 GMP 和 SQF 认证的质量体系下生产，每种剂型配备专用设备和经验证的 SOP。" : "All six dosage forms are produced under the same GMP and SQF-certified quality system, with dedicated equipment and validated SOPs for each format."}
+            </p>
+            <p className="mt-4 text-sm leading-7 text-ink-soft">
+              {isZh ? "需要配方开发或包装定制支持?" : "Need formulation support or packaging customization?"}{" "}
+              <Link href="/private-label" className="font-semibold text-forest hover:underline">
+                {isZh ? "了解我们的 OEM/ODM 服务" : "Explore our OEM/ODM services"}
+              </Link>{" "}
+              {isZh ? "或" : "or"}{" "}
+              <Link href="/shop" className="font-semibold text-forest hover:underline">
+                {isZh ? "浏览 30 款现货产品目录" : "browse our 30-product wholesale catalog"}
+              </Link>.
             </p>
               {/* Dosage form table */}
               <div className="mt-8 border border-line">
@@ -887,7 +898,6 @@ export default async function QualityPage({
 
       {/* ─── FAQ ─── */}
       <section className="border-b border-line bg-white">
-        <JsonLd data={faqJsonLd([...faqs, ...factoryFaqs])} />
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.34fr_0.66fr] lg:px-10">
           <div>
             <p className="b2b-kicker text-forest-mid">{isZh ? "常见问题" : "FAQ"}</p>

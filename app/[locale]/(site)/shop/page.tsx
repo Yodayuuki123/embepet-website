@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import {
   ArrowRight,
   Boxes,
@@ -10,7 +9,7 @@ import {
   Search,
   ShoppingBag,
 } from "lucide-react";
-import { absoluteUrl, metaWithLocale, faqJsonLd } from "@/lib/seo";
+import { absoluteUrl, metaWithLocale, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { B2B_CATALOG } from "@/lib/b2b-catalog";
 import B2BProductCard from "@/components/b2b/B2BProductCard";
 import Link from "@/components/site/A";
@@ -20,9 +19,9 @@ import { getDict } from "@/lib/i18n";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   return metaWithLocale(params, {
-    title: "Wholesale Pet Supplements: 30-Product B2B Catalog",
+    title: "Wholesale Pet Supplements Catalog: 30+ Stock Formulas | EMBEPET",
     description:
-      "Compare 30 wholesale pet supplements for dogs and cats by format, category, USD reference price and starting MOQ. Request specifications and a formal B2B quotation.",
+      "Browse 30+ wholesale pet supplement formulas for dogs and cats. Soft chews, tablets, powders, liquids. Compare MOQ, formats and pricing. Request B2B quotation and product specifications.",
     path: "/shop",
   });
 }
@@ -138,8 +137,8 @@ export default async function ProductPortfolioPage({
           "@type": "CollectionPage",
           name: "Beno Bio wholesale pet supplement catalog",
           description:
-            "B2B catalog of 30 pet supplement products available for wholesale, private label and OEM/ODM inquiry.",
-          url: absoluteUrl("/en/shop"),
+            "B2B catalog of 30+ pet supplement products available for wholesale, private label and OEM/ODM inquiry.",
+          url: absoluteUrl(`/${locale}/shop`),
           about: { "@id": `${absoluteUrl("/")}#manufacturer` },
           mainEntity: {
             "@type": "ItemList",
@@ -159,10 +158,28 @@ export default async function ProductPortfolioPage({
                   "@type": "BusinessAudience",
                   audienceType: "Pet brands, distributors and global sellers",
                 },
+                offers: {
+                  "@type": "Offer",
+                  availability: "https://schema.org/InStock",
+                  priceCurrency: "USD",
+                  seller: { "@id": `${absoluteUrl("/")}#manufacturer` },
+                  businessFunction: "http://purl.org/goodrelations/v1#Sell",
+                  eligibleCustomerType: "http://purl.org/goodrelations/v1#Business",
+                },
               },
             })),
           },
         }}
+      />
+      <JsonLd data={faqJsonLd(wholesaleFaqs)} />
+      <JsonLd
+        data={breadcrumbJsonLd(
+          [
+            { name: "Home", path: "/" },
+            { name: locale === "zh" ? "产品目录" : "Product Catalog", path: "/shop" },
+          ],
+          locale
+        )}
       />
 
       <section className="border-b border-line bg-[#f5f3ec]">
@@ -187,6 +204,16 @@ export default async function ProductPortfolioPage({
           <div>
             <p className="b2b-kicker text-forest-mid">{t.catalog.kicker}</p>
             <h2 className="b2b-heading mt-4">{t.catalog.title}</h2>
+            <p className="mt-3 text-sm leading-7 text-ink-soft">
+              Need custom formulation, packaging design, or regulatory support?{" "}
+              <Link href="/private-label" className="font-semibold text-forest hover:underline">
+                Explore OEM/ODM services
+              </Link>{" "}
+              or{" "}
+              <Link href="/science" className="font-semibold text-forest hover:underline">
+                view our GMP & SQF certifications
+              </Link>.
+            </p>
           </div>
           <p className="max-w-xl text-sm leading-7 text-ink-soft">
             {t.catalog.subtitle}
@@ -299,7 +326,7 @@ export default async function ProductPortfolioPage({
               </p>
             </div>
             <div className="grid border-l border-t border-line sm:grid-cols-2">
-              {t.quotation.steps.map((step, idx) => {
+              {t.quotation.steps.map((step: { title: string; body: string }, idx: number) => {
                 const icons = [FileInput, Boxes, PackageCheck, Calculator];
                 const Icon = icons[idx] || FileInput;
                 return (
@@ -316,7 +343,6 @@ export default async function ProductPortfolioPage({
       </section>
 
       <section className="border-t border-line bg-white">
-        <JsonLd data={faqJsonLd(wholesaleFaqs)} />
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[0.36fr_0.64fr]">
             <div>

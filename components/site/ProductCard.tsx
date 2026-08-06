@@ -1,10 +1,12 @@
 import Link from "@/components/site/A";
-import type { Product, Variant } from "@prisma/client";
 import ProductVisual from "./ProductVisual";
 import Stars from "./Stars";
 import AddToCartButton from "./AddToCartButton";
 import { money, parseJson } from "@/lib/format";
 import { tone, speciesLabel } from "@/lib/palette";
+
+type Product = any;
+type Variant = any;
 
 type Props = {
   product: Product & { variants: Variant[] };
@@ -13,7 +15,7 @@ type Props = {
 
 export default function ProductCard({ product }: Props) {
   const t = tone(product.colorKey);
-  const defaultVariant = product.variants.find((v) => v.isDefault) ?? product.variants[0];
+  const defaultVariant = product.variants.find((v: any) => v.isDefault) ?? product.variants[0];
   const images = parseJson<string[]>(product.images, []);
   const badges = product.badges.split(",").filter(Boolean);
 

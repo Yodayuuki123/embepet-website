@@ -38,7 +38,7 @@ export default async function OrdersPage() {
         </div>
       ) : (
         <ul className="mt-10 space-y-4">
-          {orders.map((order) => (
+          {orders.map((order: any) => (
             <li key={order.id}>
               <Link
                 href={`/account/orders/${order.number}`}
@@ -47,7 +47,7 @@ export default async function OrdersPage() {
                 <div>
                   <p className="font-semibold">{order.number}</p>
                   <p className="mt-1 text-[0.85rem] text-ink-soft">
-                    {dateLong(order.createdAt)} · {order.items.reduce((s, i) => s + i.qty, 0)} item(s)
+                    {dateLong(order.createdAt)} · {order.items.reduce((s: number, i: any) => s + i.qty, 0)} item(s)
                   </p>
                 </div>
                 <div className="flex items-center gap-4">

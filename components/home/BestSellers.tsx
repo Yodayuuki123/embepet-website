@@ -3,12 +3,12 @@
 import Link from "@/components/site/A";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
-import type { Product, Variant } from "@prisma/client";
+type Product = any;
 import { gsap, useGSAP, prefersReducedMotion } from "@/components/motion/gsap";
 import ProductCard from "@/components/site/ProductCard";
 
 type Props = {
-  products: (Product & { variants: Variant[] })[];
+  products: Product[];
 };
 
 /** 水平滚动的明星产品区：桌面端 pin + 横移，移动端原生横滑 */

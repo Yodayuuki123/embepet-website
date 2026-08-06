@@ -1,7 +1,7 @@
-export const ALL_LOCALES = ["zh", "en", "es", "fr", "de", "ja"] as const;
+export const ALL_LOCALES = ["en", "zh", "es", "fr", "de", "ja"] as const;
 export type Locale = (typeof ALL_LOCALES)[number];
-export const LOCALES = ["zh", "en", "es", "fr", "de", "ja"] as const satisfies readonly Locale[];
-export const DEFAULT_LOCALE: Locale = "zh";
+export const LOCALES = ["en", "zh", "es", "fr", "de", "ja"] as const satisfies readonly Locale[];
+export const DEFAULT_LOCALE: Locale = "en";
 
 export const LOCALE_LABELS: Record<Locale, string> = {
   zh: "中文",

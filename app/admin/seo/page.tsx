@@ -40,7 +40,7 @@ export default async function AdminSeoPage() {
         </p>
         <div className="mt-4">
           <RedirectManager
-            redirects={redirects.map((r) => ({ id: r.id, fromPath: r.fromPath, toPath: r.toPath, permanent: r.permanent }))}
+            redirects={redirects.map((r: any) => ({ id: r.id, fromPath: r.fromPath, toPath: r.toPath, permanent: r.permanent }))}
           />
         </div>
       </div>

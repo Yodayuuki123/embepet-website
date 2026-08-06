@@ -9,7 +9,7 @@ export async function GET() {
   const subscribers = await db.subscriber.findMany({ orderBy: { createdAt: "desc" } });
   const rows = [
     "email,source,subscribed_at",
-    ...subscribers.map((s) => `${s.email},${s.source},${s.createdAt.toISOString()}`),
+    ...subscribers.map((s: any) => `${s.email},${s.source},${s.createdAt.toISOString()}`),
   ];
   return new Response(rows.join("\n"), {
     headers: {

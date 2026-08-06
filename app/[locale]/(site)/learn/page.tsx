@@ -78,8 +78,8 @@ export default async function LearnPage({
     where: { published: true, ...(category !== "all" ? { category } : {}) },
     orderBy: [{ pillar: "desc" }, { publishedAt: "desc" }],
   });
-  const pillars = posts.filter((p) => p.pillar);
-  const rest = posts.filter((p) => !p.pillar);
+  const pillars = posts.filter((p: any) => p.pillar);
+  const rest = posts.filter((p: any) => !p.pillar);
 
   return (
     <>
@@ -157,7 +157,7 @@ export default async function LearnPage({
 
           {pillars.length > 0 ? (
             <div className="mt-10 grid gap-px border border-line bg-line lg:grid-cols-3">
-              {pillars.map((post) => (
+              {pillars.map((post: any) => (
                 <Link
                   key={post.id}
                   href={`/learn/${post.slug}`}
@@ -179,7 +179,7 @@ export default async function LearnPage({
 
           {rest.length > 0 ? (
             <div className="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-              {rest.map((post) => (
+              {rest.map((post: any) => (
                 <Link
                   key={post.id}
                   href={`/learn/${post.slug}`}

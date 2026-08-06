@@ -51,7 +51,7 @@ export default async function AdminInquiriesPage({
             没有符合条件的询盘
           </p>
         ) : null}
-        {inquiries.map((inq) => (
+        {inquiries.map((inq: any) => (
           <InquiryCard
             key={inq.id}
             inquiry={{

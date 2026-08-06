@@ -11,8 +11,8 @@ export default async function AdminReviewsPage() {
     take: 100,
   });
 
-  const pending = reviews.filter((r) => r.status === "PENDING");
-  const others = reviews.filter((r) => r.status !== "PENDING");
+  const pending = reviews.filter((r: any) => r.status === "PENDING");
+  const others = reviews.filter((r: any) => r.status !== "PENDING");
 
   return (
     <div>

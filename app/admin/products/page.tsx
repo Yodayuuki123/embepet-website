@@ -39,9 +39,9 @@ export default async function AdminProductsPage() {
             </tr>
           </thead>
           <tbody>
-            {products.map((p) => {
-              const defaultVariant = p.variants.find((v) => v.isDefault) ?? p.variants[0];
-              const stockSum = p.variants.reduce((s, v) => s + v.stock, 0);
+            {products.map((p: any) => {
+              const defaultVariant = p.variants.find((v: any) => v.isDefault) ?? p.variants[0];
+              const stockSum = p.variants.reduce((s: any, v: any) => s + v.stock, 0);
               return (
                 <tr key={p.id} className="border-b border-black/4 last:border-0 hover:bg-black/2">
                   <td className="px-5 py-3.5">

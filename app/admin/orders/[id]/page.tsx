@@ -44,7 +44,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
             <p className="border-b border-black/8 px-5 py-3.5 font-semibold">商品明细</p>
             <table className="w-full text-[0.88rem]">
               <tbody>
-                {order.items.map((item) => (
+                {order.items.map((item: any) => (
                   <tr key={item.id} className="border-b border-black/4 last:border-0">
                     <td className="px-5 py-3.5">
                       <p className="font-medium">{item.productName}</p>

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { LOCALES, type Locale } from "@/lib/i18n/locales";
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
+).replace(/\/$/, "");
 
 export function absoluteUrl(path: string): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
@@ -97,30 +100,44 @@ export function organizationJsonLd(s: {
         "@type": "Organization",
         "@id": `${SITE_URL}/#organization`,
         name: s.brandName,
+        alternateName: "EMBEPET",
         legalName: s.companyLegalName ?? "Embepet Biotech (Shenzhen) Co., Ltd.",
         url: SITE_URL,
         logo: absoluteUrl(`/api/og?title=${encodeURIComponent(s.brandName)}&kind=logo`),
         email: s.b2bEmail ?? s.supportEmail,
         telephone: s.phone,
         description:
-          "EMBEPET supports pet supplement wholesale, private label and OEM/ODM projects for brand owners, distributors and global sellers.",
+          "EMBEPET provides B2B pet supplement manufacturing services including wholesale, private label and OEM/ODM for global pet brands, distributors and retailers. GMP and SQF certified manufacturing by Taizhou Beno Biotech.",
         areaServed: "Worldwide",
         knowsAbout: [
           "pet supplement manufacturing",
+          "pet supplement OEM",
+          "pet supplement ODM",
           "private label pet supplements",
-          "pet supplement OEM and ODM",
           "wholesale pet supplements",
+          "pet soft chew manufacturing",
+          "GMP pet supplement factory",
+          "SQF certified pet supplement manufacturer",
         ],
+        sameAs: [
+          s.instagram,
+          s.facebook,
+          s.youtube,
+          s.tiktok,
+        ].filter(Boolean),
       },
       {
-        "@type": "Organization",
+        "@type": ["Organization", "Manufacturer"],
         "@id": `${SITE_URL}/#manufacturer`,
         name: "Taizhou Beno Biotech Co., Ltd.",
-        url: absoluteUrl("/en/factory"),
+        alternateName: "泰州市贝诺生物科技有限公司",
+        legalName: "Taizhou Beno Biotech Co., Ltd.",
+        url: absoluteUrl("/en/science"),
         email: s.b2bEmail ?? s.supportEmail,
-        telephone: s.phone,
+        telephone: "+86 523 8766 9599",
+        foundingDate: "2016-08-11",
         description:
-          "Pet supplement manufacturing entity in Taixing City, Jiangsu, China, supporting soft chews, powders, liquids, oils, tablets and pastes.",
+          "GMP and SQF certified pet supplement manufacturing facility in Taixing City, Jiangsu, China. Produces soft chews, tablets, pastes, liquids, powders and granules for global pet supplement brands.",
         address: {
           "@type": "PostalAddress",
           streetAddress: "Li Kong Group 3, Donglin Village, Yaowang Street",
@@ -129,19 +146,68 @@ export function organizationJsonLd(s: {
           postalCode: "225400",
           addressCountry: "CN",
         },
+        areaServed: "Worldwide",
+        makesOffer: {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            serviceType: "Pet supplement contract manufacturing",
+            name: "Pet Supplement OEM/ODM Manufacturing",
+          },
+        },
         brand: { "@type": "Brand", name: "EMBEPET" },
+        parentOrganization: { "@id": `${SITE_URL}/#organization` },
         hasCredential: [
           {
             "@type": "EducationalOccupationalCredential",
             name: "Eurofins GMP Audit Recognition",
             credentialCategory: "Good Manufacturing Practice audit recognition",
+            recognizedBy: { "@type": "Organization", name: "Eurofins Food Assurance Certification US, LLC" },
+            validFrom: "2026-06-14",
+            validUntil: "2027-06-14",
+            identifier: "ACCB8AAA422_1",
             url: absoluteUrl("/certificates/taizhou-beno-gmp-2026.pdf"),
           },
           {
             "@type": "EducationalOccupationalCredential",
             name: "SQF Food Safety Code: Pet Food Manufacturing, Edition 9",
-            credentialCategory: "Food safety certification",
+            credentialCategory: "Food safety certification - GFSI recognized",
+            recognizedBy: { "@type": "Organization", name: "SQFI" },
+            validFrom: "2026-07-20",
+            validUntil: "2027-08-28",
+            identifier: "105690",
             url: absoluteUrl("/certificates/taizhou-beno-sqf-2026.pdf"),
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            name: "SQF Quality Code, Edition 9",
+            credentialCategory: "Quality management system certification",
+            recognizedBy: { "@type": "Organization", name: "SQFI" },
+            validFrom: "2026-07-20",
+            validUntil: "2027-08-28",
+            identifier: "105690",
+            url: absoluteUrl("/certificates/taizhou-beno-sqf-quality-2026.pdf"),
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            name: "Feed Production License",
+            credentialCategory: "Feed manufacturing license",
+            recognizedBy: { "@type": "Organization", name: "Jiangsu Provincial Department of Agriculture and Rural Affairs" },
+            identifier: "苏饲预（2026）12006",
+            validFrom: "2026-04-26",
+            validUntil: "2031-04-25",
+          },
+        ],
+        identifier: [
+          {
+            "@type": "PropertyValue",
+            propertyID: "D-U-N-S",
+            value: "404129816",
+          },
+          {
+            "@type": "PropertyValue",
+            propertyID: "FDA Registration Number",
+            value: "10222600768",
           },
         ],
       },

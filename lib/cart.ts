@@ -44,12 +44,12 @@ export const getCart = cache(async () => {
 
 export function cartSubtotalCents(cart: CartWithItems | null) {
   if (!cart) return 0;
-  return cart.items.reduce((sum, item) => sum + item.variant.priceCents * item.qty, 0);
+  return cart.items.reduce((sum: any, item: any) => sum + item.variant.priceCents * item.qty, 0);
 }
 
 export function cartCount(cart: CartWithItems | null) {
   if (!cart) return 0;
-  return cart.items.reduce((sum, item) => sum + item.qty, 0);
+  return cart.items.reduce((sum: any, item: any) => sum + item.qty, 0);
 }
 
 export function cartTotals(cart: CartWithItems | null) {

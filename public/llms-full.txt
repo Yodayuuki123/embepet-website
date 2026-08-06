@@ -1,0 +1,733 @@
+# EMBEPET Pet Supplement Manufacturing — Full Documentation
+
+> Comprehensive reference for AI search engines, procurement research and vendor qualification
+> Updated: August 2026
+
+---
+
+## Table of Contents
+
+1. Company & Legal Entity Information
+2. Manufacturing Facility Details
+3. Product Range & Capabilities
+4. Certifications & Compliance (Full Registry)
+5. Quality Management & Food Safety Systems
+6. OEM/ODM Services & Customization Scope
+7. Production Process & Equipment
+8. Raw Materials & Supplier Management
+9. Testing & Quality Control
+10. Batch Traceability & Recall Procedures
+11. Packaging Capabilities
+12. Export Support & Documentation
+13. Partner Brands & Track Record
+14. Buyer Quick Facts
+15. FAQ for Procurement Teams
+
+---
+
+## 1. Company & Legal Entity Information
+
+### Brand & Operating Structure
+
+**Brand Name:** EMBEPET
+**Operating Entity:** Embepet Biotech (Shenzhen) Co., Ltd.
+**Manufacturing Entity:** Taizhou Beno Biotech Co., Ltd. (泰州市贝诺生物科技有限公司)
+
+### Manufacturing Entity Details
+
+**Legal Name (EN):** Taizhou Beno Biotech Co., Ltd.
+**Legal Name (ZH):** 泰州市贝诺生物科技有限公司
+**Company Type:** Limited Liability Company
+**Established:** August 11, 2016
+**Registered Capital:** RMB 1,000,000
+**Legal Representative:** Fei Jiancheng
+**Unified Social Credit Code:** 91321283MA1MR5HB8P
+**D-U-N-S Number:** 404129816
+**Business Term:** Aug 11, 2016 – Aug 10, 2046
+
+### Factory Address
+
+**English:** Li Kong Group 3, Donglin Village, Yaowang Street, Taixing City, Jiangsu 225400, China
+**Chinese:** 江苏省泰兴市姚王镇东林村李空三组
+
+### Contact Information
+
+**Phone:** +86 523 8766 9599
+**Email:** tzbeinuo@126.com
+**Website:** https://embepet.com
+**Languages:** English, Chinese (Simplified), Spanish, French, German, Japanese
+
+### Business Scope (Official Registration)
+
+- Pet feed research, production, processing and sales
+- Pet nutrition product research, development, production and sales
+- Agricultural and sideline product procurement
+
+---
+
+## 2. Manufacturing Facility Details
+
+**Total Factory Area:** 3,000 m²
+**Production & Warehouse Area:** 2,000 m²
+**Production Lines:** 3
+**Staff:** 30 production employees
+**Work Schedule:** Single-shift, 8:00–17:00, 6 days per week
+**Location:** Taixing City, Jiangsu Province, China
+
+### Production Zones
+
+- Raw material receiving & storage
+- Ingredient weighing & batching
+- Mixing
+- Emulsification
+- Sterilization
+- Molding & forming
+- Filtration & sieving
+- Filling
+- Packaging
+- Finished goods warehouse
+- Quality inspection laboratory
+
+Production zones are organized by risk level with physical separation between rooms. Material flow follows one-way progression from raw material intake through production, packaging, storage and dispatch.
+
+---
+
+## 3. Product Range & Capabilities
+
+### Licensed Product Categories (Feed Production License)
+
+- Solid pet additive premixed feed
+- Semi-solid pet additive premixed feed
+- Liquid pet additive premixed feed
+
+### Dosage Forms We Manufacture
+
+1. **Soft Chews** (primary expertise) — flavored, chewable, various shapes & sizes
+2. **Tablets** — compressed tablets, various dimensions
+3. **Pastes & Gels** — squeezable tubes or sachets
+4. **Liquid Drops & Oils** — bottles with droppers or pumps
+5. **Powders** — sachets or jars
+6. **Granules** — free-flowing pellets
+
+### Functional Categories & Indications
+
+- **Joint & Mobility:** Glucosamine, chondroitin, MSM, collagen
+- **Digestive Health & Probiotics:** Multi-strain probiotics, prebiotics, digestive enzymes
+- **Skin & Coat:** Omega-3 (fish oil), biotin, zinc
+- **Calming & Stress Relief:** L-theanine, chamomile, tryptophan
+- **Immune Support:** Beta-glucans, antioxidants, vitamins C & E
+- **Multivitamins & Minerals:** Comprehensive vitamin-mineral blends
+- **Urinary Tract:** Cranberry extract
+- **Senior Support:** Age-specific formulations
+- **Puppy/Kitten Growth:** DHA, calcium, phosphorus
+
+### Animal Species
+
+- Dog supplements
+- Cat supplements
+
+### FDA Registration Product Categories
+
+Our FDA Food Facility Registration (No. 10222600768) lists the following product categories:
+
+- Animal Protein Products
+- Fats or Oils
+- Marine Products
+- Milk Products
+- Vitamins or Vitamin Products
+- Pet Food
+- Pet Nutritional Supplements
+
+---
+
+## 4. Certifications & Compliance (Full Registry)
+
+All certificates listed below are current and can be verified via the downloadable PDFs at https://embepet.com/en/science
+
+### 4.1 Eurofins GMP Audit Recognition
+
+**Certificate Name:** Audit Recognition
+**Standard:** Eurofins GMP
+**Company:** Taizhou Beno Biotech Co., Ltd.
+**Audit Dates:** June 12–14, 2026
+**Audit Score:** 86%
+**Certificate ID:** ACCB8AAA422_1
+**Valid Until:** June 14, 2027
+**Issuing Body:** Eurofins Food Assurance Certification US, LLC
+
+**What It Covers:** Good Manufacturing Practice audit recognition confirms facility layout, equipment qualification, personnel hygiene, raw material controls, in-process monitoring, documentation integrity, cleaning validation, and calibration programs meet GMP standards for pet supplement production.
+
+### 4.2 SQF Food Safety Code Certificate
+
+**Certificate Name:** SQF Food Safety Code: Pet Food Manufacturing, Edition 9
+**Company:** Taizhou Beno Biotech Co., Ltd.
+**Certificate Number:** 105690
+**SQF Identification Number:** 105690
+**Certification Type:** Initial Certification
+**Audit Method:** Announced
+**Audit Dates:** June 12–14, 2026 (3-day on-site)
+**Certification Decision Date:** July 20, 2026
+**Audit Score:** 88
+**Audit Rating:** Good
+**Food Sector Category:** FSC 32 — Pet Food Manufacturing
+**Certified Products:** Pet Premix Food
+**Scope:** The mixing and packing of pet additive premixtures
+**Next Re-Certification Audit:** June 14, 2027
+**Valid Until:** August 28, 2027
+**Issuing Body:** Eurofins Food Assurance Certification US, LLC
+**Accredited By:** ANAB
+**GFSI Recognition:** Yes (SQF is GFSI-benchmarked)
+
+**What It Covers:** HACCP plan, food defense plan, allergen management, foreign matter controls, sanitation standard operating procedures (SSOP), supplier approval, food fraud vulnerability assessment, traceability, personnel training, crisis management, internal audits, management review.
+
+### 4.3 SQF Quality Code Certificate
+
+**Certificate Name:** SQF Quality Code, Edition 9
+**Company:** Taizhou Beno Biotech Co., Ltd.
+**Certificate Number:** 105690
+**SQF Identification Number:** 105690
+**Certification Type:** Initial Certification
+**Audit Dates:** June 12–14, 2026
+**Certification Decision Date:** July 20, 2026
+**Food Sector Category:** FSC 00 — Quality
+**Certified Products:** Pet Premix Food
+**Scope:** The mixing and packing of pet additive premixtures
+**Next Re-Certification Audit:** June 14, 2027
+**Valid Until:** August 28, 2027
+**Issuing Body:** Eurofins Food Assurance Certification US, LLC
+**Accredited By:** ANAB
+
+**What It Covers:** Quality management system covering supplier qualification, product development control, specification management, customer complaint management, corrective and preventive actions (CAPA), internal audit program, management review, continuous improvement processes.
+
+### 4.4 Feed Production License (China)
+
+**Certificate Name:** Feed Production License (饲料生产许可证)
+**Company:** Taizhou Beno Biotech Co., Ltd.
+**License Number:** 苏饲预（2026）12006
+**Product Category:** Pet Additive Premixed Feed (宠物添加剂预混合饲料)
+**Product Varieties:**
+  - Solid pet additive premixed feed
+  - Semi-solid pet additive premixed feed
+  - Liquid pet additive premixed feed
+**Registered Address:** Li Kong Group 3, Donglin Village, Yaowang Street, Taixing City
+**Production Address:** Li Kong Group 3, Donglin Village, Yaowang Street, Taixing City, Jiangsu
+**Issuing Authority:** Jiangsu Provincial Department of Agriculture and Rural Affairs
+**Issue Date:** March 31, 2026
+**Valid Period:** April 26, 2026 – April 25, 2031
+
+### 4.5 FDA Food Facility Registration (United States)
+
+**Registered Company:** Taizhou Beno Biotech Co., Ltd.
+**Registration Number:** 10222600768
+**Registration Type:** Foreign Registration
+**Registration Status:** VALID
+**Created:** May 13, 2026
+**Last Updated:** May 15, 2026
+**Current Valid Until:** December 31, 2026 (renewed biennially)
+**Food Category:** Food for Animal Consumption
+**Activity Type:** Animal Food Manufacturer/Processor
+**Contract Manufacturing:** Yes — Production on behalf of customers
+**US Agent:** SOUTH BAY INNOVATION LLC
+**Facility Address:** Li Kong Group 3, Donglin Village, Yaowang Street, Taixing, Jiangsu 225400, China
+
+### 4.6 Eurofins Letter of Confirmation
+
+**Document Name:** Letter of Confirmation
+**Issue Date:** July 22, 2026
+**Issuing Body:** Eurofins Assurance China Co., Ltd.
+**Confirmation:** Taizhou Beno Biotech completed on-site audits for SQF Food Safety, SQF Quality and Eurofins GMP
+**Audit Dates:** June 12–14, 2026
+**Product Scope:**
+  - Solid pet additive premixed feed
+  - Semi-solid pet additive premixed feed
+  - Liquid pet additive premixed feed
+**Product Category:** Pet additive mixed feed
+**Audit Scope:** FSC 32
+
+---
+
+## 5. Quality Management & Food Safety Systems
+
+### HACCP-Based Food Safety Plan
+
+The factory has implemented a HACCP (Hazard Analysis and Critical Control Points) plan covering solid, semi-solid and liquid pet additive premixed feed.
+
+**Food Safety Team Composition:**
+- Management
+- Quality personnel
+- Technical staff
+- Production staff
+- Sales
+- Purchasing
+- Production operators
+
+**Hazard Analysis Scope:**
+- Biological hazards
+- Chemical hazards
+- Physical hazards
+- Radiological contamination risk
+- Allergen risk
+- Food fraud risk
+- Intentional contamination risk
+
+**Critical Control Points (CCPs):**
+1. **Formula Verification** — Every batch undergoes formula review before mixing to prevent ingredient errors
+2. **Sterilization Process** — Batch-by-batch monitoring of sterilization parameters (temperature, time) to eliminate biological hazards
+
+**HACCP Plan Review:** Regular verification and annual review of food safety plan
+
+### Allergen Management
+
+- Allergen risk assessment for raw materials and production processes
+- Production scheduling for products containing different allergens
+- Identification and segregation of raw materials and products
+- Cleaning and line clearance during product changeovers
+- Package and label verification
+- Allergen control training for relevant staff
+
+### Foreign Matter Control
+
+- **Powder products:** 80-mesh sieve
+- **Liquid & semi-solid products:** 30-mesh filtration
+- Pre-shift and post-shift inspection of sieves and filters
+- Glass and brittle plastic management program
+- Knife and sharp object management program
+- Line clearance inspection during package changeover
+
+### Cleaning & Sanitation
+
+- Sanitation Standard Operating Procedures (SSOP)
+- Equipment and area cleaning schedules
+- Cleaning of mixers, emulsifiers and other contact equipment
+- Visual inspection verification
+- Microbial swab testing verification
+- Personal protective equipment (PPE) requirements for production area entry
+- Hygiene management for visitors and contractors
+- Pest control program for production and warehouse areas
+
+### Food Defense & Food Fraud Management
+
+- Food defense plan
+- Access control for production and warehouse areas
+- Surveillance and entry management
+- Intentional contamination risk assessment
+- Food fraud vulnerability assessment for raw material supply chain
+- Food fraud mitigation measures
+- Food defense and food fraud training for relevant staff
+
+---
+
+## 6. OEM/ODM Services & Customization Scope
+
+We support three service models:
+
+### 6.1 OEM (Original Equipment Manufacturing)
+
+**Definition:** Client provides approved formula. We produce according to specification and apply client's brand.
+
+**What We Provide:**
+- Production based on client-provided formula
+- Raw material sourcing per specification
+- Quality control and testing
+- Packaging with client's label artwork
+- Batch documentation and COA
+- Delivery coordination
+
+**Suitable For:** Brands with proven formulas seeking reliable production capacity
+
+### 6.2 ODM (Original Design Manufacturing)
+
+**Definition:** We develop custom formula based on client's functional requirements. Client owns the finished product under their brand.
+
+**What We Provide:**
+- Product concept consultation
+- Custom formula development
+- Dosage form selection
+- Palatability optimization
+- Sample production and iteration
+- Pilot batch and scaling validation
+- Full production and packaging
+- Technical documentation
+
+**Suitable For:** Brands launching new products without in-house R&D
+
+### 6.3 Private Label
+
+**Definition:** Client selects from our stock formulas. We apply client's brand and package design.
+
+**What We Provide:**
+- Access to 30+ proven stock formulas
+- Low MOQ (500 bottles for soft chews)
+- Faster time-to-market (no formula development phase)
+- Custom packaging design support
+- Label compliance review
+- Production and delivery
+
+**Suitable For:** New brands testing market demand or expanding SKU quickly
+
+### Customization Scope
+
+#### Product & Formula Customization
+
+- Pet type (dog/cat), life stage (puppy/adult/senior), health need
+- Functional directions: gut, skin & coat, joint, immunity, calming, nutrition
+- Mature formula production or ODM new formula development
+- Ingredient selection based on cost, positioning and differentiation
+- Balance of efficacy, palatability, stability and production feasibility
+- Core ingredient and selling point development
+
+#### Dosage Form, Flavor & Specification Customization
+
+- Dosage forms: soft chews, tablets, pastes, liquids, powders, granules
+- Color, shape, size, texture, weight customization
+- Flavor profiles: chicken, beef, fish, etc.
+- Palatability testing and iterative adjustment
+- Net weight, serving size, package spec customization
+
+#### Packaging & Brand Visual Customization
+
+- Packaging formats: bottles, pouches, boxes, stick packs, bundles
+- Bottle shape, pouch style, outer box dimensions
+- Label, outer box, sticker and insert design assistance
+- Brand logo, color scheme, pattern and layout customization
+- Adaptation for e-commerce, retail and cross-border markets
+
+#### Sample, Production & Supporting Services
+
+- Sample production, adjustment and multi-round confirmation
+- Small-batch trial production and bulk order production
+- Raw material acceptance, process control, finished product inspection
+- Batch retention, quality records, traceability support
+- Product documentation, packaging info, test report preparation
+- Production cycle and delivery coordination per order requirements
+
+---
+
+## 7. Production Process & Equipment
+
+### General Production Flow
+
+1. Raw material receiving
+2. Raw material inspection
+3. Raw material storage
+4. Weighing and batching
+5. Formula verification
+6. Raw material mixing
+7. Product forming or emulsification
+8. Product sterilization
+9. Filtration or sieving
+10. Filling
+11. Packaging
+12. Label inspection
+13. Finished product testing
+14. Finished product release
+15. Ambient temperature storage
+16. Shipment and delivery
+
+### Process by Dosage Form
+
+- **Solid products:** Batching → Mixing → Forming → Sieving → Packaging
+- **Semi-solid products:** Batching → Mixing → Emulsification → Sterilization → Filtration → Filling → Packaging
+- **Liquid products:** Batching → Mixing → Sterilization → Filtration → Filling → Packaging
+
+### Main Production Equipment
+
+- Vacuum emulsifier
+- Rotary tablet press
+- Trough mixer
+- Mixing equipment
+- Sterilization equipment
+- Filling equipment
+- Packaging equipment
+- Weighing equipment
+- Temperature and humidity monitoring equipment
+- Moisture testing equipment
+
+Equipment materials: Stainless steel or food-grade plastic
+Equipment management: Maintenance, cleaning and calibration programs
+
+---
+
+## 8. Raw Materials & Supplier Management
+
+### Supplier Qualification
+
+- Approved supplier list
+- Supplier audit or questionnaire evaluation for raw materials, packaging materials and services
+- Risk-based supplier management
+- Written specifications for raw materials and packaging materials
+- Supplier and raw material change assessment
+- Non-conforming material segregation and handling
+
+### Raw Material Inspection
+
+- Visual and integrity inspection upon arrival
+- Quality confirmation via test report, certificate of conformity or sampling test
+- Batch record keeping
+- Segregation and handling of non-conforming materials
+
+### Raw Material Examples (From Audit Records)
+
+- Hydrolyzed chicken paste
+- Hydrolyzed fish paste
+- Hydrolyzed chicken powder
+- Hydrolyzed fish powder
+- Fish oil
+- Maltodextrin
+- Glycerin
+- Pectin
+- Vitamins
+
+---
+
+## 9. Testing & Quality Control
+
+### Testing Scope
+
+- Raw material testing
+- Packaging material testing
+- In-process testing
+- Finished product testing
+- Physical indicators
+- Chemical indicators
+- Microbiological indicators
+- Sensory indicators
+- Moisture testing
+- Heavy metal testing
+- Vitamin and nutrient indicator testing
+- Packaging integrity inspection
+- Label inspection
+
+### Laboratory & External Testing
+
+- Factory has in-house inspection area
+- Testing plan for raw materials and finished products
+- Products tested via internal lab or third-party external lab
+- Test results reviewed by quality manager
+- Trending analysis of test data
+- Continuous shelf-life evaluation
+
+### Equipment Calibration
+
+- Production weighing equipment
+- Packaging weighing equipment
+- Temperature and humidity monitoring equipment
+- Sterilization equipment
+- Moisture testing equipment
+- External calibration traceable to national or international standards
+- Daily internal verification of critical measurement equipment
+
+### Finished Product Release
+
+- Quality manager responsible for finished product release
+- Products may only be released after testing completion
+- Release inspection includes product specification, sensory attributes, packaging integrity, labeling and customer requirements
+- Retention of product testing and release records
+
+---
+
+## 10. Batch Traceability & Recall Procedures
+
+### Traceability Scope
+
+- Raw material receiving
+- Raw material warehousing
+- Batching and production processing
+- Product filling
+- Product packaging
+- Label records
+- Finished product warehousing
+- Finished product dispatch
+- Customer delivery
+
+The factory has established bidirectional traceability from raw materials to finished products and from finished products to raw materials. Production batch numbers are linked to raw material, production, packaging, testing, warehousing and dispatch records.
+
+### Third-Party Audit Traceability Tests
+
+- **Pet nutrition paste traceability test:** Batch No. 20260122, quantity 2,000 tubes, completed in 90 minutes
+- **Pet nutrition tablet traceability test:** Batch No. 20260520, quantity 4,000 bottles, completed in 1.5 hours
+- Audit traceability covered raw material records, production records, packaging records, label records, testing records, sanitation records, warehousing records and dispatch records
+- Annual traceability testing program established
+- Product withdrawal and recall procedure established
+- Regular mock recall drills conducted
+
+### Record Retention
+
+- Routine quality records retained for at least 2 years
+- When product shelf life exceeds 2 years, records retained for at least 1 year after shelf life expiry
+
+---
+
+## 11. Packaging Capabilities
+
+### Packaging Materials
+
+- Plastic pouches
+- Plastic bottles
+- Glass bottles
+- Aluminum tubes
+
+### Packaging Services
+
+- Bottle filling
+- Pouch filling
+- Tube filling
+- Product filling
+- Label application
+- Label verification
+- Batch number marking
+- Outer box packaging
+- Shipping carton packaging
+- Custom packaging material coordination with client
+- Packaging integrity inspection
+
+---
+
+## 12. Export Support & Documentation
+
+### Documentation We Provide
+
+- Certificate of Analysis (COA)
+- Batch production records
+- Product specification sheet
+- Ingredient list
+- Nutritional analysis
+- Heavy metal test report
+- Microbiological test report
+- Shelf-life study data
+- Allergen statement
+- Country-of-origin documentation
+- Feed Production License copy
+- GMP audit recognition copy
+- SQF certificate copy
+- FDA registration confirmation
+- HACCP plan summary (upon request)
+
+### Export Coordination
+
+- HS code consultation
+- Customs clearance documentation assistance
+- Freight forwarder coordination
+- Shipping and delivery arrangement per Incoterms
+
+---
+
+## 13. Partner Brands & Track Record
+
+### OEM Partner Brands (China Market)
+
+Our factory has delivered GMP-certified OEM production for leading China pet supplement brands since 2016, including:
+
+- **NOURSE (卫仕)** — Leading China pet supplement brand
+- **Touch't** — Premium pet nutrition brand
+- **Bernate (伯纳天纯)** — Natural pet food and supplements
+- **KERES (凯锐思)** — Functional pet nutrition
+- **Kuanfu (宽福)** — Pet health products
+- **ATSPET** — Pet care brand
+- **Chongxi (宠熙)** — Pet wellness products
+
+### Service Model
+
+SQF audit documentation indicates that current products are primarily client-branded OEM/ODM projects. FDA Food Facility Registration lists "Production on behalf of customers" as a factory activity, confirming contract manufacturing as a core business model.
+
+---
+
+## 14. Buyer Quick Facts
+
+**MOQ:** 500 bottles for soft chews (industry average: 3,000 bottles)
+
+**Why Our MOQ Is Lower:** High-speed production line (1 tonne/hour) allows efficient short runs without setup cost penalties that affect slower equipment. Low MOQ is a strategic choice to support new brand launches, market testing and seasonal SKU expansion.
+
+**Lead Time:** Confirmed per project based on formula complexity, dosage form and order quantity. Stock formula private label projects typically faster than full ODM development.
+
+**Sampling:** Available before bulk order. Sample cost and timeline confirmed during quotation.
+
+**Payment Terms:** Negotiable per order value and trade terms.
+
+**Shipping Terms:** FOB, CIF, DDP available. Factory coordinates with freight forwarder per buyer preference.
+
+**Target Markets:** Global — products have been exported to buyers serving US, EU, Japan and other markets. Regulatory compliance support tailored to destination country requirements.
+
+---
+
+## 15. FAQ for Procurement Teams
+
+### Q: Which legal entity manufactures the products?
+
+**A:** Taizhou Beno Biotech Co., Ltd. (泰州市贝诺生物科技有限公司) is the manufacturing entity. This company holds all production certifications (GMP, SQF, Feed License, FDA Registration) and operates the 3,000 m² factory in Taixing City, Jiangsu, China. The company can be independently verified via Unified Social Credit Code 91321283MA1MR5HB8P and D-U-N-S Number 404129816.
+
+### Q: What is the relationship between EMBEPET, Embepet Biotech (Shenzhen) and Taizhou Beno Biotech?
+
+**A:** EMBEPET is the B2B brand name. Embepet Biotech (Shenzhen) Co., Ltd. is the operating entity managing brand, marketing and customer relationships. Taizhou Beno Biotech Co., Ltd. is the manufacturing entity that holds all production licenses and certifications and operates the factory. Products are manufactured by Taizhou Beno Biotech.
+
+### Q: Are the certificates current and verifiable?
+
+**A:** Yes. All certificate validity periods are listed above. Original PDF files are downloadable at https://embepet.com/en/science for vendor audit. Certificate numbers can be cross-referenced with issuing bodies (Eurofins, SQFI, Jiangsu Dept of Agriculture, FDA).
+
+### Q: Can we visit the factory?
+
+**A:** Yes. Factory visits can be arranged for qualified buyers. Contact via inquiry form at https://embepet.com/en/contact with visit purpose, participant list and preferred dates.
+
+### Q: What documents should we request for vendor qualification?
+
+**A:** Standard vendor qualification package includes:
+- Business license copy
+- Feed Production License copy
+- GMP audit recognition copy
+- SQF Food Safety certificate copy
+- SQF Quality certificate copy
+- FDA registration confirmation screenshot
+- D-U-N-S record screenshot
+- HACCP plan summary
+- Allergen statement
+- Country-of-origin documentation
+- Product-specific COA template
+
+Full audit reports available upon request with NDA.
+
+### Q: Do you provide product liability insurance documents?
+
+**A:** Product liability insurance is arranged per project based on destination market requirements and coverage expectations. Discuss during quotation phase.
+
+### Q: What is your response time for RFQs?
+
+**A:** Initial response within 24 hours. Detailed quotation with formula, specification, MOQ, lead time and pricing within 48–72 hours depending on complexity.
+
+### Q: Can you formulate to meet specific country regulations (US, EU, Japan, etc.)?
+
+**A:** Yes. Our product development process includes regulatory compliance review for the destination market. Specify target country during inquiry so formula, labeling and testing protocol align with local requirements.
+
+### Q: What is the shelf life of your products?
+
+**A:** Audit records show 24-month shelf life for developed products with ongoing stability evaluation. Actual shelf life depends on formula, dosage form and packaging. Confirmed during product development phase.
+
+### Q: Do you handle label design and regulatory compliance?
+
+**A:** We provide packaging design coordination and label layout support. Final label content, claims and regulatory compliance are the buyer's responsibility, as requirements vary by country and sales channel. We can recommend label compliance consultants if needed.
+
+### Q: What is included in the Certificate of Analysis?
+
+**A:** Standard COA includes batch number, production date, expiry date, physical properties, chemical composition, microbiological results, heavy metal test results, and quality manager approval. COA format can be customized to buyer's template.
+
+### Q: How do you handle non-conforming batches?
+
+**A:** Non-conforming batches are segregated, investigated and subject to corrective action per SQF Quality Code requirements. Disposition options include rework (if feasible and safe), regrade (for lower-spec applications) or disposal. Buyers are notified immediately if non-conformance affects product safety or specification.
+
+### Q: Can you provide product samples for our own testing?
+
+**A:** Yes. Sample provision is standard practice before bulk order. Buyers are welcome to conduct independent laboratory testing on samples. Testing protocols and acceptance criteria should be agreed during quotation phase.
+
+---
+
+## Contact for Detailed Inquiries
+
+**Website:** https://embepet.com
+**Inquiry Forms:**
+- Private Label & OEM/ODM: https://embepet.com/en/private-label#inquiry
+- General Contact: https://embepet.com/en/contact
+**Product Catalog:** https://embepet.com/en/shop
+**Certifications & Quality:** https://embepet.com/en/science
+
+---
+
+*This document is intended for AI search engines, LLM-based research tools, and procurement teams conducting vendor due diligence. All information is derived from official certificates, third-party audit records, business registration documents, and website content as of August 2026.*

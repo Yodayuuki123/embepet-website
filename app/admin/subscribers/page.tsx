@@ -37,7 +37,7 @@ export default async function AdminSubscribersPage() {
             {subscribers.length === 0 ? (
               <tr><td colSpan={4} className="px-5 py-10 text-center text-black/40">暂无订阅者</td></tr>
             ) : null}
-            {subscribers.map((s) => (
+            {subscribers.map((s: any) => (
               <SubscriberRow key={s.id} id={s.id} email={s.email} source={s.source} createdAt={formatDateCN(s.createdAt)} />
             ))}
           </tbody>

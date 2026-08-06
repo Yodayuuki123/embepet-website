@@ -10,9 +10,9 @@ import { isLocale } from "@/lib/i18n/locales";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   return metaWithLocale(params, {
-    title: "Pet Supplement News & Insights for Brands | EMBEPET",
+    title: "Pet Supplement Manufacturing News & Insights | EMBEPET",
     description:
-      "News, market trends and formulation insights for pet supplement brands — OEM guidance, dosage-form comparisons and GMP/SQF compliance from EMBEPET's manufacturing team.",
+      "Industry insights for pet supplement brands: OEM manufacturing guides, dosage form comparisons, GMP/SQF compliance, formulation trends. Expert advice from EMBEPET's production team.",
     path: "/news",
   });
 }
@@ -46,7 +46,7 @@ export default async function NewsPage({
       <JsonLd data={breadcrumbJsonLd([
         { name: isZh ? "首页" : "Home", path: "/" },
         { name: isZh ? "新闻" : "News", path: "/news" }
-      ])} />
+      ], locale)} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -54,15 +54,35 @@ export default async function NewsPage({
           name: "EMBEPET — Pet Supplement News & Insights",
           description:
             "News, market trends and formulation insights for pet supplement brand owners, distributors and retailers.",
-          url: absoluteUrl("/en/news"),
+          url: absoluteUrl(`/${locale}/news`),
           mainEntity: {
             "@type": "ItemList",
             numberOfItems: articles.length,
             itemListElement: articles.map((a, i) => ({
               "@type": "ListItem",
               position: i + 1,
-              url: absoluteUrl(`/en/news/${a.slug}`),
-              name: a.title,
+              item: {
+                "@type": "Article",
+                "@id": absoluteUrl(`/${locale}/news/${a.slug}`),
+                headline: a.title,
+                description: a.excerpt,
+                datePublished: a.date,
+                author: {
+                  "@type": "Organization",
+                  name: "EMBEPET",
+                  url: absoluteUrl("/"),
+                },
+                publisher: {
+                  "@type": "Organization",
+                  name: "EMBEPET",
+                  logo: {
+                    "@type": "ImageObject",
+                    url: absoluteUrl("/images/logo.png"),
+                  },
+                },
+                image: COVER_IMAGES[a.slug] ? absoluteUrl(COVER_IMAGES[a.slug]) : undefined,
+                url: absoluteUrl(`/${locale}/news/${a.slug}`),
+              },
             })),
           },
         }}

@@ -29,7 +29,7 @@ export default async function AdminCouponsPage() {
               {coupons.length === 0 ? (
                 <tr><td colSpan={6} className="px-5 py-10 text-center text-black/40">还没有优惠券</td></tr>
               ) : null}
-              {coupons.map((c) => (
+              {coupons.map((c: any) => (
                 <tr key={c.id} className="border-b border-black/4 last:border-0">
                   <td className="px-5 py-3.5 font-mono font-semibold">{c.code}</td>
                   <td className="px-5 py-3.5">{c.kind === "percent" ? `${c.value}% off` : `${money(c.value)} off`}</td>

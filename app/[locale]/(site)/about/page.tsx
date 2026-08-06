@@ -1,4 +1,14 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
+}
 
 export default async function AboutRedirect({
   params,
@@ -6,5 +16,5 @@ export default async function AboutRedirect({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  redirect(`/${locale}/factory#company`);
+  permanentRedirect(`/${locale}/science#company`);
 }

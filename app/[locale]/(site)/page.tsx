@@ -4,20 +4,16 @@ import {
   ArrowRight,
   Check,
   ClipboardCheck,
-  Factory,
-  FlaskConical,
-  MessageSquare,
-  Package,
-  Truck,
 } from "lucide-react";
 import Link from "@/components/site/A";
 import JsonLd from "@/components/site/JsonLd";
 import FeaturedProductsCarousel from "@/components/b2b/FeaturedProductsCarousel";
 import B2BTestimonialsWall from "@/components/home/B2BTestimonialsWall";
 import VideoPlayer from "@/components/b2b/VideoPlayer";
-import { buildMetadata, absoluteUrl } from "@/lib/seo";
+import { buildMetadata, absoluteUrl, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { isLocale } from "@/lib/i18n/locales";
 import { getDict } from "@/lib/i18n";
+import { getSettings } from "@/lib/settings";
 import {
   SectionHeading,
   container,
@@ -39,9 +35,9 @@ export async function generateMetadata({
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   return buildMetadata({
-    title: "Pet Supplement OEM, Private Label & Wholesale Manufacturer | EMBEPET",
+    title: "Pet Supplement Manufacturer: OEM, ODM & Private Label | EMBEPET",
     description:
-      "EMBEPET and Beno Bio support global pet supplement brands with wholesale, private label, OEM/ODM development. GMP & SQF certified manufacturing by Taizhou Beno Biotech.",
+      "GMP & SQF certified pet supplement manufacturer in China. Wholesale, private label and custom OEM/ODM for global brands. Soft chews, tablets, powders, liquids. MOQ 500 bottles. Taizhou Beno Biotech.",
     path: "/",
     locale,
   });
@@ -57,17 +53,78 @@ export default async function HomePage({
   const dict = getDict(locale);
   const t = dict.b2bPages.home;
   const isZh = locale === "zh";
+  const settings = await getSettings();
 
   return (
     <>
+      <JsonLd data={organizationJsonLd({
+        brandName: settings.brandName,
+        companyLegalName: "Embepet Biotech (Shenzhen) Co., Ltd.",
+        supportEmail: settings.supportEmail,
+        b2bEmail: settings.b2bEmail,
+        phone: settings.phone,
+        instagram: settings.instagram,
+        facebook: settings.facebook,
+        tiktok: settings.tiktok,
+        youtube: settings.youtube,
+      })} />
+      <JsonLd data={websiteJsonLd(settings.brandName)} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "WebPage",
           name: "EMBEPET — Pet Supplement Manufacturing",
-          url: absoluteUrl("/en"),
+          url: absoluteUrl(`/${locale}`),
           description:
             "B2B pet supplement manufacturing: wholesale, private label and OEM/ODM. GMP & SQF certified by Taizhou Beno Biotech.",
+          breadcrumb: {
+            "@type": "BreadcrumbList",
+            itemListElement: [{
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: absoluteUrl(`/${locale}`),
+            }],
+          },
+          mainEntity: {
+            "@type": "Service",
+            serviceType: "Pet supplement manufacturing",
+            provider: { "@id": `${absoluteUrl("/")}#manufacturer` },
+            areaServed: {
+              "@type": "Place",
+              name: "Worldwide",
+            },
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "Pet supplement manufacturing services",
+              itemListElement: [
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Private Label Pet Supplements",
+                    description: "Stock-formula private label manufacturing with your brand",
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "OEM Manufacturing",
+                    description: "Manufacture according to your provided formula and specifications",
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "ODM Development",
+                    description: "Custom formula development and complete product design",
+                  },
+                },
+              ],
+            },
+          },
         }}
       />
 
@@ -217,7 +274,7 @@ export default async function HomePage({
 
           {/* Process cards — Fushou-style: large rounded white card, icon top-center no bg box */}
           <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {t.process.steps.map((s, idx) => {
+            {t.process.steps.map((s: { title: string; desc: string }, idx: number) => {
               const stepIcons = [
                 "/images/process/icons/icon1-consultation.png",
                 "/images/process/icons/icon2-formula.png",
@@ -277,12 +334,12 @@ export default async function HomePage({
           <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr] lg:items-center">
             {/* Left: text */}
             <div>
-              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-forest-mid">{t.partnerBrands?.kicker ?? "Trusted by leading brands"}</p>
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-forest-mid">Trusted by leading brands</p>
               <h2 className="mt-3 text-[clamp(1.6rem,2.8vw,2.4rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
-                {t.partnerBrands?.title ?? "OEM Partners & Brand Clients"}
+                OEM Partners & Brand Clients
               </h2>
               <p className="mt-4 max-w-md text-[0.95rem] leading-7 text-ink-soft">
-                {t.partnerBrands?.desc ?? "Trusted by China\u2019s leading pet supplement brands \u2014 including NOURSE, Touch\u2019t, Bernate, KERES, Kuanfu, ATSPET and Chongxi \u2014 our factory has delivered GMP-certified OEM production across soft chews, tablets, pastes, and liquids since 2016."}
+                Trusted by China's leading pet supplement brands \u2014 including NOURSE, Touch't, Bernate, KERES, Kuanfu, ATSPET and Chongxi \u2014 our factory has delivered GMP-certified OEM production across soft chews, tablets, pastes, and liquids since 2016.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 {["卫仕 NOURSE", "Touch't", "伯纳天纯", "凯锐思 KERES", "宽福", "ATSPET", "宠熙"].map((brand) => (
@@ -293,7 +350,7 @@ export default async function HomePage({
               </div>
               <div className="mt-8">
                 <Link href="/science" className="inline-flex items-center gap-2 text-[0.88rem] font-semibold text-forest hover:underline">
-                  {t.partnerBrands?.cta ?? "View About Us & Certifications"}
+                  View About Us & Certifications
                   <ArrowRight className="size-4" />
                 </Link>
               </div>
@@ -372,7 +429,7 @@ export default async function HomePage({
           </div>
 
           <div className="mt-20 space-y-24">
-            {t.dosageForms.items.map((format, index) => {
+            {t.dosageForms.items.map((format: { title: string; desc: string; benefits: string[] }, index: number) => {
               const isEven = index % 2 === 0;
               const images = [
                 "/images/b2b/dosage-forms/01-soft-chews.png",
@@ -596,7 +653,7 @@ export default async function HomePage({
             </p>
 
             <ul className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-3 text-left text-[0.9rem] text-white/70">
-              {t.contactCta.items.map((item) => (
+              {t.contactCta.items.map((item: string) => (
                 <li key={item} className="flex items-center gap-2.5">
                   <ClipboardCheck className="size-4 shrink-0 text-amber-soft" strokeWidth={2} />
                   {item}

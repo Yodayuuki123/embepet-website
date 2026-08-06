@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import { metaWithLocale } from "@/lib/seo";
+import { Phone, MapPin, Clock } from "lucide-react";
+import { metaWithLocale, breadcrumbJsonLd, absoluteUrl } from "@/lib/seo";
+import JsonLd from "@/components/site/JsonLd";
 import InquiryForm from "@/components/site/InquiryForm";
 import { isLocale } from "@/lib/i18n/locales";
-import { getDict } from "@/lib/i18n";
 import { getSettings } from "@/lib/settings";
 
 export function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   return metaWithLocale(params, {
-    title: "Contact Us | EMBEPET — Pet Supplement Manufacturer",
+    title: "Contact EMBEPET: Pet Supplement OEM/ODM Inquiries | Taizhou Beno Biotech",
     description:
-      "Get in touch with Taizhou Beno Biotech Co., Ltd. for OEM/ODM inquiries, wholesale pricing, or factory audit requests. We respond within 24 hours.",
+      "Contact Taizhou Beno Biotech for pet supplement OEM/ODM inquiries, wholesale pricing, private label projects or factory audit requests. 24-hour response time for B2B inquiries.",
     path: "/contact",
   });
 }
@@ -22,11 +22,57 @@ export default async function ContactPage({
 }) {
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : "en";
-  const dict = getDict(locale);
   const settings = await getSettings();
   const isZh = locale === "zh";
 
   return (
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd(
+          [
+            { name: "Home", path: "/" },
+            { name: locale === "zh" ? "联系我们" : "Contact Us", path: "/contact" },
+          ],
+          locale
+        )}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          name: locale === "zh" ? "联系我们" : "Contact EMBEPET",
+          url: absoluteUrl(`/${locale}/contact`),
+          description: locale === "zh"
+            ? "联系泰州市贝诺生物科技有限公司，获取宠物营养品OEM/ODM报价、批发价格、私人品牌项目或工厂审核请求。24小时内回复B2B咨询。"
+            : "Contact Taizhou Beno Biotech for pet supplement OEM/ODM inquiries, wholesale pricing, private label projects or factory audit requests. 24-hour response time for B2B inquiries.",
+          mainEntity: {
+            "@type": "Organization",
+            "@id": `${absoluteUrl("/")}#manufacturer`,
+            contactPoint: [
+              {
+                "@type": "ContactPoint",
+                telephone: settings.phone,
+                contactType: "Customer Service",
+                areaServed: "Worldwide",
+                availableLanguage: ["English", "Chinese"],
+                hoursAvailable: {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                  opens: "09:00",
+                  closes: "18:00",
+                },
+              },
+              {
+                "@type": "ContactPoint",
+                email: settings.b2bEmail,
+                contactType: "Sales",
+                areaServed: "Worldwide",
+                availableLanguage: ["English", "Chinese"],
+              },
+            ],
+          },
+        }}
+      />
     <section className="min-h-screen bg-[#f8f7f2] py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
 
@@ -185,5 +231,6 @@ export default async function ContactPage({
         </div>
       </div>
     </section>
+    </>
   );
 }

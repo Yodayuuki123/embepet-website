@@ -42,7 +42,7 @@ export default async function AdminPostsPage() {
             </tr>
           </thead>
           <tbody>
-            {posts.map((post) => (
+            {posts.map((post: any) => (
               <tr key={post.id} className="border-b border-black/4 last:border-0 hover:bg-black/2">
                 <td className="max-w-md px-5 py-3.5">
                   <Link href={`/admin/posts/${post.id}`} className="font-medium text-[#1d3f2f] hover:underline">

@@ -43,7 +43,7 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ nu
 
       <div className="mt-8 rounded-3xl border border-line bg-white/70 p-6">
         <ul className="divide-y divide-line">
-          {order.items.map((item) => (
+          {order.items.map((item: any) => (
             <li key={item.id} className="flex items-center justify-between gap-4 py-3.5">
               <div className="min-w-0">
                 <Link href={`/products/${item.productSlug}`} className="font-medium hover:text-forest-mid">

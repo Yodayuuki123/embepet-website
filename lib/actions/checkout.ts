@@ -74,7 +74,7 @@ export async function placeOrder(_prev: CheckoutState, formData: FormData): Prom
       shippingAddress: JSON.stringify(address),
       paymentMethod: process.env.STRIPE_SECRET_KEY ? "stripe" : "dev_mock",
       items: {
-        create: cart.items.map((item) => ({
+        create: cart.items.map((item: any) => ({
           variantId: item.variantId,
           productSlug: item.variant.product.slug,
           productName: item.variant.product.name,
@@ -95,7 +95,7 @@ export async function placeOrder(_prev: CheckoutState, formData: FormData): Prom
     const checkout = await stripe.checkout.sessions.create({
       mode: "payment",
       customer_email: address.email,
-      line_items: cart.items.map((item) => ({
+      line_items: cart.items.map((item: any) => ({
         quantity: item.qty,
         price_data: {
           currency: "usd",
@@ -173,7 +173,7 @@ export async function finalizePaidOrder(orderId: string) {
   const order = await db.order.findUnique({ where: { id: orderId }, include: { items: true } });
   if (!order || order.status !== "PENDING") return;
 
-  await db.$transaction(async (tx) => {
+  await db.$transaction(async (tx: any) => {
     await tx.order.update({ where: { id: orderId }, data: { status: "PAID" } });
     for (const item of order.items) {
       if (item.variantId) {
