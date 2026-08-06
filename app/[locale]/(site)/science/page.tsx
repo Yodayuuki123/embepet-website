@@ -730,7 +730,7 @@ export default async function QualityPage({
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {(isZh ? [
               {
-                name: "王莉",
+                name: "李旺",
                 title: "总经理",
                 desc: "拥有 10 年以上宠物营养品制造经验，曾主管山山屋、伯纳天纯、凯锐思等品牌的 OEM 生产。供应商资质审核的主要联系人。",
               },
@@ -740,7 +740,7 @@ export default async function QualityPage({
                 desc: "中国农业科学院研究员、博士生导师、国家优秀青年基金获得者。主管配方开发与科学性对齐。",
               },
               {
-                name: "杭晋",
+                name: "景行",
                 title: "运营总监",
                 desc: "前阿里巴巴国际区域总经理，拥有 12 年 B2B 企业服务经验。主导深圳运营中心的跨境物流与合作伙伴入驻工作。",
               },
@@ -756,7 +756,7 @@ export default async function QualityPage({
                 desc: "Researcher at the Chinese Academy of Agricultural Sciences, doctoral supervisor, National Outstanding Youth Fund recipient. Oversees formulation development and scientific alignment.",
               },
               {
-                name: "Jing Hang",
+                name: "Jing Xing",
                 title: "Operations Director",
                 desc: "Former City GM at Alibaba International, 12 years of B2B enterprise experience. Leads the Shenzhen operations center for cross-border logistics and partner onboarding.",
               },
