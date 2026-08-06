@@ -275,8 +275,8 @@ export default async function QualityPage({
           <div className="px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
             {/* ABOUT heading — two-tone style */}
             <h2 className="text-[clamp(1.8rem,3vw,2.6rem)] font-extrabold leading-[1.1] tracking-[-0.02em]">
-              <span className="text-ink">ABOUT </span>
-              <span className="text-forest">EMBEPET</span>
+              <span className="text-ink">{isZh ? "关于" : "ABOUT"} </span>
+              <span className="text-forest">{isZh ? "贝诺" : "BENO"}</span>
             </h2>
 
             <p className="mt-5 text-[0.93rem] leading-7 text-ink-soft">
